@@ -48,9 +48,9 @@
   function check() {
       var f = document.photoForm;
 
-  	var str = f.subject.value;
+  	var str = f.shopName.value;
       if(!str) {
-          f.subject.focus();
+          f.shopName.focus();
           return false;
       }
 
@@ -103,7 +103,7 @@
 			style="float: none; margin-left: auto; margin-right: auto;">
 			<div class="body-title">
 				<h4>
-					<span class="glyphicon glyphicon-cutlery"></span> 메뉴등록
+					<span class="glyphicon glyphicon-cutlery"></span> 매장등록
 				</h4>
 			</div>
 			<div>
@@ -118,7 +118,7 @@
 								</tr>
 								<tr>
 									<th>매장분류<th>
-									<label><input TYPE='radio' name='group1' value='kor'/>한식</label>
+									<label><input TYPE='radio' name='group1' value='kor' checked="checked"/>한식</label>
 									<label><input TYPE='radio' name='group1' value='japan'/>일식</label>
 									<label><input TYPE='radio' name='group1' value='western'/>양식</label>
 									<label><input TYPE='radio' name='group1' value='chinese'/>중식</label>
@@ -126,8 +126,8 @@
 									<label><input TYPE='radio' name='group1' value='chicken'/>치킨</label>									
 								</tr>
 								<tr>
-									<th>메뉴이름</th>
-									<th colspan="3"><input type="text" name="subject"
+									<th>매장이름</th>
+									<th colspan="3"><input type="text" name="shopName"
 										class="form-control input-sm" required="required" value="${dto.shopName}"></th>
 								</tr>
 								<tr>
@@ -141,7 +141,7 @@
 								</tr>
 
 								<tr>
-									<th>메뉴 이미지</th>
+									<th>매장 이미지</th>
 									<td colspan="3"><input type="file" name="upload"
 										accept="image/*" class="form-control input-sm"></td>
 								</tr>
@@ -159,22 +159,24 @@
 								<tr>
 									<th>주소</th>
 									<td>우편번호
-									<input type="text" name="zip1" style="width:60px;" value="${dto.shopZip1}"> -
-									<input type="text" name="zip2" style="width:60px;" value="${dto.shopZip2}"><br>
-									주소 <input type="text" name="addr1" style="margin:5px 5px;" value="${dto.shopAddr1}">
-									 <br><input type="text" name="addr2" style="width:200px; font-size:15px;" value="${dto.shopAddr2}">상세주소</td>
+									<input type="text" name="shopZip1" style="width:60px;" value="${dto.shopZip1}"> -
+									<input type="text" name="shopZip2" style="width:60px;" value="${dto.shopZip2}"><br>
+									주소 <input type="text" name="shopAddr1" style="margin:5px 5px;" value="${dto.shopAddr1}">
+									 <br><input type="text" name="shopAddr2" style="width:200px; font-size:15px;" value="${dto.shopAddr2}">상세주소</td>
 								</tr>
 
 								<tr>
-									<th>핸드폰 번호</th>
+									<th>매장 번호</th>
 									<td>
 									<select name="argency" style="margin:0px 0px 5px;">
   								    <option value="SKO">SKO</option>
   									<option value="KM">KM</option>
    									<option value="LF">LF</option>
+   									<option value="없음" selected="selected">없음</option>
    									</select>
    									<br>
 									<select name="tel1">
+									<option value="02">02</option>
   								    <option value="010">010</option>
   									<option value="011">011</option>
    									<option value="016">016</option>
@@ -182,23 +184,30 @@
    									<option value="018">018</option>
    									<option value="019">019</option>
    									</select> - 
-									<input type="text" name="tel2" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel1}"> - 
-									<input type="text" name="tel3" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel2}">
+									<input type="text" name="shopTel1" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel1}"> - 
+									<input type="text" name="shopTel2" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel2}">
 									</td>
 								</tr>
 								<tr>
 								<tr>
 									<th>배달 최소 비용</th>
-									<td><input type="text" name="price" class="shopnumber" value="${dto.shopPrice}">원</td>
+									<td><input type="text" name="shopPrice" value="${dto.shopPrice}">원</td>
 								</tr>
 								<tr>
 									<th>배달 소요 시간</th>
-									<td><input type="text" name="shoptime" value="${dto.shopTime}">분</td>
+									<td><input type="text" name="shopTime" value="${dto.shopTime}">분</td>
 								</tr>
 								<tr>
 									<th>영업 시간</th>
-									<td><input type="text" name="timepicker" class="timepicker" value="${dto.shopStart}"/> ~ 
-									<input type="text" name="timepicker" class="timepicker"value="${dto.shopEnd}"/></td>
+									<td><input type="text" name="shopStart" class="timepicker" value="${dto.shopStart}"/> ~ 
+									<input type="text" name="shopEnd" class="timepicker"value="${dto.shopEnd}"/></td>
+								</tr>
+								<tr>
+									<th>매장 위치</th>
+									<td>
+										<input type="number" name="latitude" value="${dto.latitude}">위도
+										<input type="number" name="longitude" value="${dto.longitude}">경도
+									</td>
 								</tr>
 							</tbody>
 							<tfoot>
@@ -208,12 +217,9 @@
 											등록 <span class="glyphicon glyphicon-ok"></span>
 										</button>
 										<button type="button" class="btn btn-danger"
-											onclick="javascript:location.href='<%=cp%>/photo/list.do';">
+											onclick="javascript:location.href='<%=cp%>/shop/shopmenu.do';">
 											취소</button> <c:if test="${mode=='update'}">
 											<input type="hidden" name="shopNum" value="${dto.shopNum}">
-											<input type="hidden" name="userId" value="${dto.userId}">
-											<input type="hidden" name="imageFilename"
-												value="${dto.imageFilename}">
 											<input type="hidden" name="page" value="${page}">
 										</c:if>
 									</td>

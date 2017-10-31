@@ -32,32 +32,32 @@
 <div style="height: 200px; width: 100%;">
 <ul class="nav">
 	<li>
-		<a href="<%=cp%>/shop/menulist.do" class="main-a">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a">
 		<img src="<%=cp%>/resource/images/1.png" width="200" height="200">
 		 </a>
 	 </li>
 	<li>
-		<a href="#" class="main-a" style="width: 210px;">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a" style="width: 210px;">
 		<img src="<%=cp%>/resource/images/2.png" width="200" height="200">
 		 </a>
 	 </li>
 	<li>
-		<a href="#" class="main-a" style="width: 210px;">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a" style="width: 210px;">
 		<img src="<%=cp%>/resource/images/6.png" width="200" height="200">
 		 </a>
 	</li>
 	<li>
-		<a href="#" class="main-a" style="width: 210px;">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a" style="width: 210px;">
 		<img src="<%=cp%>/resource/images/3.png" width="200" height="200">
 		 </a>
 	 </li>
 	<li>
-		<a href="#" class="main-a" style="width: 210px;">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a" style="width: 210px;">
 		<img src="<%=cp%>/resource/images/5.png" width="200" height="200">
 		 </a>
 	 </li>
 	<li>
-		<a href="#" class="main-a" style="width: 210px;">
+		<a href="<%=cp%>/shop/shopmenu.do" class="main-a" style="width: 210px;">
 		<img src="<%=cp%>/resource/images/4.png" width="200" height="200">
 		</a>
 	</li>

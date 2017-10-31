@@ -73,26 +73,21 @@ function article(num) {
 	          <h3><img src="<%=cp%>/resource/images/food.png" style="width: 40px; height: 40px;"> 한식 </h3>
 	    </div>
 
-	<c:if test="${dataCount!=0}">    
+	  
 	        <div style="clear: both; height: 30px; line-height: 30px;">
 	            <div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
 	            <div style="float: right;">&nbsp;</div>
 	        </div>
 	        <div style="clear: both;">
 	        
-	                 <c:if test="${status.index==0}">
-	                       <c:out value="<div style='clear: both; max-width:1100px; margin: 0px auto;'>" escapeXml="false"/>
-	                 </c:if>
-	                 <c:if test="${status.index!=0 && status.index%3==0}">
-	                        <c:out value="</div><div style='clear: both; max-width:1100px; margin: 0px auto;'>" escapeXml="false"/>
-	                 </c:if>
+	            
 	        <div class="row">
 	                <div class="col-sm-6">
 				      <div class="imgLayout" >
 		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
-		                     	<a href="#">
-		                     	<img src="<%=cp%>/resource/images/1.png" style="width: 33%; height: 70px; float:left;">
-		                     	</a>
+		                     	
+		                     	<img src="<%=cp%>/uplodes/shop/${dto.saveFilename}" style="width: 33%; height: 70px; float:left;">
+		                     	
 		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
 		                     	${dto.shopName}
 		                     	</span>
@@ -125,27 +120,16 @@ function article(num) {
 				       </div>
 				     </div>
 				       
-
-	    <c:set var="n" value="${list.size()}"/>
-	    <c:if test="${n>0&&n%3!=0}">
-			        <c:forEach var="i" begin="${n%3+1}" end="3" step="1">
-				             <div class="imgLayout">&nbsp;</div>
-			        </c:forEach>
-	    </c:if>
-		
-	    <c:if test="${n!=0 }">
-			       <c:out value="</div>" escapeXml="false"/>
-	    </c:if>
 	        </div>
-	</c:if>
+
 	
 	        <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-	            <c:if test="${dataCount==0}">
+	           
 	                  등록된 게시물이 없습니다.
-	            </c:if>
-	            <c:if test="${dataCount!=0}">
+	         
+	         
 	                ${paging}
-	            </c:if>
+	         
 	        </div>        
 	        
 	        <div style="clear: both;">
