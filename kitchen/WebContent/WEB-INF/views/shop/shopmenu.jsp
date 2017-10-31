@@ -82,12 +82,11 @@ function article(num) {
 	        
 	            
 	        <div class="row">
+	        	<c:forEach var="dto" items="${list}">
 	                <div class="col-sm-6">
 				      <div class="imgLayout" >
 		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
-		                     	
 		                     	<img src="<%=cp%>/uplodes/shop/${dto.saveFilename}" style="width: 33%; height: 70px; float:left;">
-		                     	
 		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
 		                     	${dto.shopName}
 		                     	</span>
@@ -100,34 +99,17 @@ function article(num) {
 		                     </div>
 	               		 </div>
 				       </div>
-	               <div class="col-sm-6">
-				      <div class="imgLayout" >
-		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
-		                     	<a href="#">
-		                     	<img src="<%=cp%>/resource/images/1.png" style="width: 33%; height: 70px; float:left;">
-		                     	</a>
-		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
-		                     	${dto.shopName}
-		                     	</span>
-		                     	<div style="color: #FF6C6C;" align="right">
-		                     	${dto.shopStart}~${dto.shopEnd}
-		                     	<hr></div>
-		                     	<div style="clear: both;"></div>
-		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}-${dto.shopZip2} ${dto.shopAddr1} - ${dto.shopAddr2}</div>
-		                     	<div align="center">배달 소요시간: | ${dto.shopTime}  </div>
-		                     </div>
-	               		 </div>
-				       </div>
+				  </c:forEach>
+	               
 				     </div>
 				       
 	        </div>
 
 	
 	        <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-	           
+				<c:if test="${dataCount==0 }">
 	                  등록된 게시물이 없습니다.
-	         
-	         
+	            </c:if>
 	                ${paging}
 	         
 	        </div>        
