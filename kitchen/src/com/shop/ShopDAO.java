@@ -13,7 +13,7 @@ public class ShopDAO {
 		int result=0;
 		PreparedStatement pstmt=null;
 		String sql;
-		sql="INSERT INTO shop (shopNum, shopName, shopZip1, shopZip2, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, saveFilename, originalFilename) VALUES (shop_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql="INSERT INTO shop (shopNum, shopName, shopZip1, shopZip2, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content) VALUES (shop_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -46,14 +46,14 @@ public class ShopDAO {
 		
 	}
 	
-	public int updateHitCount(int shopnum){
+	public int updateHitCount(int shopNum){
 			PreparedStatement pstmt=null;
 			String sql;
 			int result=0;
 			try{
-				sql="UPDATE shop SET hitCount=hitCount+1 WHERE shopnum=?";
+				sql="UPDATE shop SET hitCount=hitCount+1 WHERE shopNum=?";
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, shopnum);
+				pstmt.setInt(1, shopNum);
 				result=pstmt.executeUpdate();
 				pstmt.close();
 				
@@ -84,6 +84,18 @@ public class ShopDAO {
 			System.out.println(e.toString());
 		}
 		return result;
+	}
+	
+	public ShopDTO readShop(int ShopNum) {
+		ShopDTO dto=null;
+		String sql;
+		
+		try {
+			sql="SELECT shopNum, m.userId, ";
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 	
 }

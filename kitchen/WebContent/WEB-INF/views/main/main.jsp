@@ -32,7 +32,7 @@
 <div style="height: 200px; width: 100%;">
 <ul class="nav">
 	<li>
-		<a href="<%=cp%>/shop/created.do" class="main-a">
+		<a href="<%=cp%>/shop/menulist.do" class="main-a">
 		<img src="<%=cp%>/resource/images/1.png" width="200" height="200">
 		 </a>
 	 </li>

@@ -19,11 +19,12 @@ public class ShopServlet extends MyServlet{
 		process(req,resp);
 	}
 
+		
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req,resp);
 	}
-
+ 
 	@Override
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path)
 			throws ServletException, IOException {
@@ -44,9 +45,9 @@ public class ShopServlet extends MyServlet{
 		}else if(uri.indexOf("created_ok.do")!=-1) {
 			//글 저장
 			createdSubmit(req, resp);
-		}else if(uri.indexOf("article.do")!=-1) {
+		}else if(uri.indexOf("menulist.do")!=-1) {
 			//글 보기
-			article(req, resp);
+			menulist(req, resp);
 		}else if(uri.indexOf("update.do")!=-1) {
 			//글 수정 폼
 			updateForm(req, resp);
@@ -69,7 +70,7 @@ public class ShopServlet extends MyServlet{
 		ShopDTO dto =new ShopDTO();
 
 
-		dto.setShopName(req.getParameter("shopname"));
+		dto.setShopName(req.getParameter("shopName"));
 		dto.setCategoryname(req.getParameter("categoryname"));
 		dto.setContent(req.getParameter("content"));
 		dto.setShopZip1(req.getParameter("shopzip1"));
@@ -92,8 +93,16 @@ public class ShopServlet extends MyServlet{
 		
 	}
 	
-	private void article(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
+	private void menulist(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
+		String page = req.getParameter("page");
+		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
+		ShopDAO dao = new ShopDAO();
+		ShopDTO dto = dao.readShop(shopNum);
+		dao.updateHitCount(shopNum);
 		
+		req.setAttribute("dto", dto);
+		req.setAttribute("page", page);
+		forward(req, resp, "/WEB-INF/views/shop/menulist.jsp");
 	}
 	
 	private void updateForm(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{

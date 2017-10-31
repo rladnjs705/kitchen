@@ -360,17 +360,18 @@ function article(num) {
 		                     	<img src="<%=cp%>/resource/images/1.png" style="width: 33%; height: 70px; float:left;">
 		                     	</a>
 		                     	<span class="subject" onclick="javascript:article('${dto.num}');" style="float:left; font-size: 18px;  font-weight: bold; ">
-		                     	백반전문점-도봉쌍문점
+		                     	${dto.shopName}
 		                     	</span>
 		                     	<div style="color: #FF6C6C;" align="right">
-		                     	10:00~20:00
+		                     	${dto.shopStart}~${dto.shopEnd}
 		                     	<hr></div>
 		                     	<div style="clear: both;"></div>
-		                     	<div style="float:left; color: #6B66FF; padding:5px;">서울시 도봉구 방학동413-1</div>
-		                     	<div align="center">배달 소요시간: |  </div>
+		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}-${dto.shopZip2} ${dto.shopAddr1} - ${dto.shopAddr2}</div>
+		                     	<div align="center">배달 소요시간: | ${dto.shopTime}  </div>
 		                     </div>
 	               		 </div>
 				       </div>
+				       
 	               <div class="col-sm-6">
 				      <div class="imgLayout" >
 		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
