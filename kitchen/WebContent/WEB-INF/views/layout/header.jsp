@@ -5,6 +5,7 @@
 <%
    String cp = request.getContextPath();
 %>
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 <script type="text/javascript">
 //엔터 처리
 $(function(){

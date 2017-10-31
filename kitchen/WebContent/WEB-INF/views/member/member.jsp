@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 
 <style type="text/css">
 @charset "UTF-8";
@@ -221,6 +222,7 @@ function memberOk() {
 
     str = f.birth.value;
 	str = str.trim();
+	console.log(str);
     if(!str || !isValidDateFormat(str)) {
         alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
         f.birth.focus();
@@ -340,18 +342,10 @@ function userIdCheck() {
 			      <td style="padding: 0 0 15px 15px;">
 			      
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
-			            <input type="text" name="userId" id="userId"
-                         onchange="userIdCheck();" style="width: 30%;"
-                         maxlength="15" placeholder="아이디"> 아이디를 입력해주세요
-			        	
-			        	<c:if test="${mode1=='check'}">
 			            <input type="text" name="userId" id="userId" value="${userId}"
                          onchange="userIdCheck();" style="width: 30%;"
-                         maxlength="15" placeholder="아이디">
-                         ${userId!=null ? (userIdCheck>=1 ? '<span style="color: red;">중복된 아이디 입니다.</span>' : '사용 가능 합니다.') : '아이디를 입력해 주세요.' }
-			        	</c:if>
+                         maxlength="15" placeholder="아이디"> ${userId!=null ? (userIdCheck>=1 ? '<span style="color: red;">중복된 아이디 입니다.</span>' : '사용 가능 합니다.') : '아이디를 입력해 주세요.' }
 			        </p>
-			       
 			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
 			      </td>
 			  </tr>
