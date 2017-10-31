@@ -52,7 +52,8 @@ public class MemberServlet extends MyServlet{
 		dto.setBirth(req.getParameter("birth"));
 		//이메일 합치기
 		String email = null;
-		email+=req.getParameter("email1");
+		email=req.getParameter("email1");
+		email+="@";
 		email+=req.getParameter("email2");
 		dto.setEmail(email);
 		String tel=req.getParameter("tel1");

@@ -11,10 +11,12 @@
 <head>
 <meta charset="UTF-8">
 <title>spring</title>
-
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-ui.min.js" type="text/js">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js" type="text/js">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
+
 
 <style type="text/css">
 @charset "UTF-8";
@@ -173,6 +175,16 @@ body .tabs .tab.active {
 
 
 <script type="text/javascript">
+
+function isValidDateFormat(str){
+	var n=str.match(/-/g);
+	if(n==2 && str.length==10){
+		return true;
+	}
+	return false;
+}
+
+
 function memberOk() {
 	var f = document.memberForm;
 	var str;
@@ -222,12 +234,14 @@ function memberOk() {
 
     str = f.birth.value;
 	str = str.trim();
-	console.log(str);
-    if(!str || !isValidDateFormat(str)) {
-        alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
-        f.birth.focus();
-        return;
-    }
+	if(str != ""){
+		if(isValidDateFormat(str)){
+			alert("생년월일을 정확히 입력하세요 YYYY-MM-DD");
+			
+			f.birth.focus();
+			return;
+		}
+	}
     
     str = f.tel1.value;
 	str = str.trim();
@@ -658,9 +672,6 @@ function userIdCheck() {
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
-
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
 
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
