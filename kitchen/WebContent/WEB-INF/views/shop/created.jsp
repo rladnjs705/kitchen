@@ -70,7 +70,7 @@
   	  }
       
   	  if(mode=="created")
-  		f.action="<%=cp%>/photo/created_ok.do";
+  		f.action="<%=cp%>/shop/created_ok.do";
   	  else if(mode=="update")
   		f.action="<%=cp%>/photo/update_ok.do";
 
@@ -89,19 +89,7 @@
 		return Number(data_value).toLocaleString('en').split;
 		}
 </script>
-<script type="text/javascript">
-$('.timepicker').timepicker({
-    timeFormat: 'h:mm p',
-    interval: 60,
-    minTime: '10',
-    maxTime: '6:00pm',
-    defaultTime: '11',
-    startTime: '10:00',
-    dynamic: false,
-    dropdown: true,
-    scrollbar: true
-});
-</script>
+
 
 </head>
 <body>
@@ -138,9 +126,9 @@ $('.timepicker').timepicker({
 									<label><input TYPE='radio' name='group1' value='chicken'/>치킨</label>									
 								</tr>
 								<tr>
-									<th>메뉴이름 </th>
+									<th>메뉴이름</th>
 									<th colspan="3"><input type="text" name="subject"
-										class="form-control input-sm" required="required"></th>
+										class="form-control input-sm" required="required" value="${dto.shopName}"></th>
 								</tr>
 								<tr>
 									<th colspan="4" style="padding-bottom: 0px;">설명</th>
@@ -153,7 +141,7 @@ $('.timepicker').timepicker({
 								</tr>
 
 								<tr>
-									<th>메뉴이미지</th>
+									<th>메뉴 이미지</th>
 									<td colspan="3"><input type="file" name="upload"
 										accept="image/*" class="form-control input-sm"></td>
 								</tr>
@@ -171,10 +159,10 @@ $('.timepicker').timepicker({
 								<tr>
 									<th>주소</th>
 									<td>우편번호
-									<input type="text" name="zip1" style="width:60px;"> -
-									<input type="text" name="zip2" style="width:60px;"><br>
-									주소 <input type="text" name="addr1" style="margin:5px 5px;">
-									 <br><input type="text" name="addr2" style="width:200px; font-size:15px;">상세주소</td>
+									<input type="text" name="zip1" style="width:60px;" value="${dto.shopZip1}"> -
+									<input type="text" name="zip2" style="width:60px;" value="${dto.shopZip2}"><br>
+									주소 <input type="text" name="addr1" style="margin:5px 5px;" value="${dto.shopAddr1}">
+									 <br><input type="text" name="addr2" style="width:200px; font-size:15px;" value="${dto.shopAddr2}">상세주소</td>
 								</tr>
 
 								<tr>
@@ -194,23 +182,23 @@ $('.timepicker').timepicker({
    									<option value="018">018</option>
    									<option value="019">019</option>
    									</select> - 
-									<input type="text" name="tel2" style="text-align: right; padding-left: 1px; width:50px;"> - 
-									<input type="text" name="tel3" style="text-align: right; padding-left: 1px; width:50px;">
+									<input type="text" name="tel2" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel1}"> - 
+									<input type="text" name="tel3" style="text-align: right; padding-left: 1px; width:50px;" value="${dto.shopTel2}">
 									</td>
 								</tr>
 								<tr>
 								<tr>
 									<th>배달 최소 비용</th>
-									<td><input type="text" name="price" class="shopnumber">원</td>
+									<td><input type="text" name="price" class="shopnumber" value="${dto.shopPrice}">원</td>
 								</tr>
 								<tr>
 									<th>배달 소요 시간</th>
-									<td><input type="text" name="shoptime">분</td>
+									<td><input type="text" name="shoptime" value="${dto.shopTime}">분</td>
 								</tr>
 								<tr>
 									<th>영업 시간</th>
-									<td><input type="text" name="timepicker" class="timepicker"/> ~ 
-									<input type="text" name="timepicker" class="timepicker"/></td>
+									<td><input type="text" name="timepicker" class="timepicker" value="${dto.shopStart}"/> ~ 
+									<input type="text" name="timepicker" class="timepicker"value="${dto.shopEnd}"/></td>
 								</tr>
 							</tbody>
 							<tfoot>
@@ -249,7 +237,7 @@ $('.timepicker').timepicker({
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						aria-label="Close" onclick="check();">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="imageViewModalLabel"
