@@ -344,17 +344,11 @@ function userIdCheck() {
                          onchange="userIdCheck();" style="width: 30%;"
                          maxlength="15" placeholder="아이디"> 아이디를 입력해주세요
 			        	
-			        	 <c:if test="${mode1=='check'}">
+			        	<c:if test="${mode1=='check'}">
 			            <input type="text" name="userId" id="userId" value="${userId}"
                          onchange="userIdCheck();" style="width: 30%;"
                          maxlength="15" placeholder="아이디">
                          ${userId!=null ? (userIdCheck>=1 ? '<span style="color: red;">중복된 아이디 입니다.</span>' : '사용 가능 합니다.') : '아이디를 입력해 주세요.' }
-			        	</c:if>
-			        	<c:if test="${mode=='update'}">
-			            <input type="text" name="userId" id="userId" value="${dto.userId}"
-                         style="width: 30%;"
-                         readonly='readonly'
-                         maxlength="15" placeholder="아이디">
 			        	</c:if>
 			        </p>
 			       
@@ -396,7 +390,6 @@ function userIdCheck() {
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="userName" value="${dto.userName}" maxlength="30"
 		                      style="width: 40%;"
-		                      ${mode=="update" ? "readonly='readonly' ":""}
 		                      placeholder="이름">
 			        </p>
 			      </td>
@@ -472,7 +465,6 @@ function userIdCheck() {
 			  			</p>
 			  		</td>
 			  </tr>
-			  <c:if test="${mode=='created'}">
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 				            <label style="font-weight: 900;">약관동의</label>
@@ -485,15 +477,14 @@ function userIdCheck() {
 					      	</p>
 				      </td>
 				  </tr>
-			  </c:if>
 			  </table>
 			
 			  <table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
 			     <tr height="45"> 
 			      <td align="center">
 			        <button type="reset" class="submit">다시입력</button>
-			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/';" style="margin-left: 10px; margin-right: 10px;">${mode=="update" ? "수정취소" : "가입취소"}</button>
-			        <button type="button" name="sendButton" class="submit" onclick="memberOk();">${mode=="update" ? "정보수정" : "회원가입"}</button>
+			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/';" style="margin-left: 10px; margin-right: 10px;">가입취소</button>
+			        <button type="button" name="sendButton" class="submit" onclick="memberOk();">회원가입</button>
 			      </td>
 			    </tr>
 			    <tr height="30">
