@@ -1,0 +1,246 @@
+@CHARSET "UTF-8";
+
+.header {
+    width:100%;
+    text-align:left;
+}
+
+
+body {
+	width : 1900px;
+	position: absolute;
+	min-height: 900px;
+  	background-color: #ffffff;
+}
+
+.container {
+	margin-top: 5px;
+    clear:both;
+    width:100%;
+    text-align:left;
+}
+
+.body-container {
+    clear:both;
+    margin: 0px auto 15px;
+    min-height: 400px;
+}
+
+.body-title {
+    color: #424951;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    margin: 0 0 25px 0;
+    border-bottom: 1px solid #dddddd;
+}
+.body-title h3 {
+    font-size: 23px;
+    min-width: 300px;
+    font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+    font-weight: bold;
+    margin: 0 0 -5px 0;
+    padding-bottom: 5px;
+    display: inline-block;
+    border-bottom: 3px solid #424951;
+}
+
+.footer {
+    clear:both;
+    width:100%;
+}
+
+/* header */
+.main-header{
+	width: 100%;
+	height: 600px;
+	background-repeat: no-repeat;
+	background-size: 500px 500px;
+	background-position: center bottom;
+}
+
+.header {
+    margin:0px auto;
+    width: 100%;
+    clear: both;
+}
+.header-top a:hover{
+	color: #000000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.header-top {
+    width: 100%;
+    height: 20px;
+    float: right;
+    margin-right: 400px;
+}
+
+.header-bottom {
+	float: left; 
+	width: 100%; 
+	padding-right: 20px; 
+	padding-left: 25px; 
+	margin: 0 auto; 
+	text-align: center; 
+	}
+
+
+/* footer */
+.footer {
+    width:100%;
+    height:50px;
+    margin:5px auto;
+    text-align:center;
+    background-color: #ffffff;
+    line-height: 50px;
+    border-top:1px solid #cccccc;
+}
+
+/* menu */
+.menu {
+    margin:0px auto;
+    width: 980px;
+    clear: both;
+    height: 40px;
+    /*border-radius: 1px;*/
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    background-color: #c0c0c0;
+    border: 1px solid #f8f8f8;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    
+}
+
+ul.nav {
+  width:100%;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+ul.nav li { 
+  display: inline-block;
+}
+
+ul.nav li a {
+	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+	font-size: 20px;
+  float: left;
+  line-height: 18px;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 10px;
+}
+
+ul.nav-main li a {
+  float: left;
+  line-height: 40px;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 10px;
+}
+
+ul.nav .current a, ul.nav li:hover > a {
+  color: #ffffff;
+  font-weight : 900;
+  text-decoration: none;
+  background: #ffffff;
+}
+
+ul.nav ul {
+  display: none;
+}
+
+ul.nav li:hover > ul {
+  position: absolute;
+  display: block;
+  height: 40px;
+  margin: 40px 0 0 -1px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  z-index: 101;
+  box-sizing: border-box;
+}
+ul.nav ul li > ul li img a{
+	max-height: 150px;
+	max-width: 150px;
+	border-radius: 5pt;
+}
+ul.nav li:hover > ul li a {
+  float: left;
+  line-height: 39px;
+  color: #000000;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 20px 0 20px;
+  background: #ffffff;
+}
+
+ul.nav li:hover > ul li a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+ul.nav-main .current a, ul.nav li:hover > a {
+  color: #000000;
+  font-weight : 900;
+  text-decoration: none;
+  background: #ffffff;
+}
+
+ul.nav-main ul {
+  display: none;
+}
+
+ul.nav-main li:hover > ul {
+  position: absolute;
+  display: block;
+  height: 40px;
+  margin: 40px 0 0 -1px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  z-index: 101;
+  box-sizing: border-box;
+}
+ul.nav-main ul li > ul li img a{
+	max-height: 150px;
+	max-width: 150px;
+	border-radius: 5pt;
+}
+ul.nav-main li:hover > ul li a {
+  float: left;
+  line-height: 39px;
+  color: #000000;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 20px 0 20px;
+  background: #ffffff;
+}
+
+ul.nav-main li:hover > ul li a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* navigation */
+.navigation {
+    width:980px;
+    height: 40px;
+    clear: both;
+    background: #ffffff;
+    border-bottom: 1px solid #cccccc;
+}
+
+.nav-bar {
+    width:960px;
+    height: 40px;
+    clear: both;
+    margin:0px auto;
+    line-height:40px;
+    text-align:right;
+    background: #ffffff;
+}
