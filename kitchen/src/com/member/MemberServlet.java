@@ -34,47 +34,15 @@ public class MemberServlet extends MyServlet{
 			memberCreated(req, resp);
 		} else if(uri.indexOf("memberCreatedSubmit.do")!=-1) {
 			memberCreatedSubmit(req, resp);
-		} else if(uri.indexOf("mypage.do")!=-1) {
+		} else if(uri.indexOf("memberUpdate.do")!=-1) {
+			memberUpdate(req,resp);
+		}else if(uri.indexOf("memberUpdateSubmit.do")!=-1) {
+			memberUpdateSubmit(req, resp);
+		}else if(uri.indexOf("mypage.do")!=-1) {
 			mypage(req,resp);
 		}
 	}
-	private void memberCreated(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("mode", "created");
-		forward(req, resp, "/WEB-INF/views/member/member.jsp");
-	}
 	
-	private void memberCreatedSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		
-		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = new MemberDTO();
-		dto.setUserId(req.getParameter("userId"));
-		dto.setUserPwd(req.getParameter("userPwd"));
-		dto.setUserName(req.getParameter("userName"));
-		dto.setBirth(req.getParameter("birth"));
-		//이메일 합치기
-		String email = null;
-		email=req.getParameter("email1");
-		email+="@";
-		email+=req.getParameter("email2");
-		dto.setEmail(email);
-		String tel=req.getParameter("tel1");
-		tel+="-";
-		tel+=req.getParameter("tel2");
-		tel+="-";
-		tel+=req.getParameter("tel3");
-		dto.setTel(tel);
-		dto.setZip(req.getParameter("zip"));
-		dto.setAddr_1(req.getParameter("addr_1"));
-		dto.setAddr_2(req.getParameter("addr_2"));
-		int check=dao.insertMember(dto);
-		if(check!=0) {
-			req.setAttribute("userId", dto.getUserId());
-			forward(req, resp, "/WEB-INF/views/member/succeed.jsp");
-		}else {
-			forward(req, resp, "/WEB-INF/views/member/fail.jsp");
-		}
-	}
 	
 
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
@@ -131,14 +99,108 @@ public class MemberServlet extends MyServlet{
 		String cp = req.getContextPath();
 		resp.sendRedirect(cp);
 	}
+	
+	private void memberCreated(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("mode", "created");
+		forward(req, resp, "/WEB-INF/views/member/member.jsp");
+	}
+	
+	private void memberCreatedSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = new MemberDTO();
+		dto.setUserId(req.getParameter("userId"));
+		dto.setUserPwd(req.getParameter("userPwd"));
+		dto.setUserName(req.getParameter("userName"));
+		dto.setBirth(req.getParameter("birth"));
+		//이메일 합치기
+		String email = null;
+		email=req.getParameter("email1");
+		email+="@";
+		email+=req.getParameter("email2");
+		dto.setEmail(email);
+		String tel=req.getParameter("tel1");
+		tel+="-";
+		tel+=req.getParameter("tel2");
+		tel+="-";
+		tel+=req.getParameter("tel3");
+		dto.setTel(tel);
+		dto.setZip(req.getParameter("zip"));
+		dto.setAddr_1(req.getParameter("addr_1"));
+		dto.setAddr_2(req.getParameter("addr_2"));
+		int check=dao.insertMember(dto);
+		if(check!=0) {
+			req.setAttribute("userId", dto.getUserId());
+			forward(req, resp, "/WEB-INF/views/member/succeed.jsp");
+		}else {
+			forward(req, resp, "/WEB-INF/views/member/fail.jsp");
+		}
+	}
+	
+	private void memberUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("utf-8");
+		
+		req.setAttribute("userId", req.getParameter("userId"));
+		req.setAttribute("userName", req.getParameter("userName"));
+		req.setAttribute("birth", req.getParameter("birth"));
+		req.setAttribute("tel", req.getParameter("tel"));
+		
+		
+		
+		req.setAttribute("email", req.getParameter("email"));
+		
+		
+		
+		req.setAttribute("addr_1", req.getParameter("addr_1"));
+		req.setAttribute("addr_2", req.getParameter("addr_2"));
+		req.setAttribute("mode", "update");
+		forward(req, resp, "/WEB-INF/views/member/member.jsp");
+	}
+	
+	private void memberUpdateSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		MemberDAO dao=new MemberDAO();
+		MemberDTO dto=new MemberDTO();
+		dto.setUserId(info.getUserId());
+		dto.setUserPwd(req.getParameter("userPwd"));
+		String email=req.getParameter("email1");
+		email+="@";
+		email+=req.getParameter("email2");
+		dto.setEmail(email);
+		String tel=req.getParameter("tel1");
+		tel+="-";
+		tel+=req.getParameter("tel2");
+		tel+="-";
+		tel+=req.getParameter("tel3");
+		dto.setTel(tel);
+		dto.setZip(req.getParameter("zip"));
+		dto.setAddr_1(req.getParameter("addr_1"));
+		dto.setAddr_2(req.getParameter("addr_2"));
+		
+		dao.updateMember(dto);
+		
+		req.setAttribute("dto", dto);
+		
+		forward(req, resp, "/WEB-INF/views/member/mypage.jsp");
+	}
+	
 	private void mypage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
-		
+		MemberDAO dao=new MemberDAO();
+		MemberDTO dto=new MemberDTO();
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		
+		dto=dao.readMember(info.getUserId());
 		
 		req.setAttribute("userId", info.getUserId());
 		req.setAttribute("userName", info.getUserName());
+		req.setAttribute("member", dto);
+		
 		forward(req, resp, "/WEB-INF/views/member/mypage.jsp");
 	}
 	

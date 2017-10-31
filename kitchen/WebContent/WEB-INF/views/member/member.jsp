@@ -297,7 +297,7 @@ function memberOk() {
     if(mode=="created") {
     	f.action = "<%=cp%>/member/memberCreatedSubmit.do";
     } else if(mode=="update") {
-    	f.action = "<%=cp%>/member/update_ok.do";
+    	f.action = "<%=cp%>/member/memberUpdateSubmit.do";
     }
 
     f.submit();
@@ -518,23 +518,10 @@ function userIdCheck() {
 			      <td style="padding: 0 0 15px 15px;">
 			      
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
-			            <input type="text" name="userId" id="userId"
-                         onchange="userIdCheck();" style="width: 30%;"
-                         maxlength="15" placeholder="아이디"> 아이디를 입력해주세요
-			        	
-			        	 <c:if test="${mode1=='check'}">
 			            <input type="text" name="userId" id="userId" value="${userId}"
                          onchange="userIdCheck();" style="width: 30%;"
-                         maxlength="15" placeholder="아이디">
-                         ${userId!=null ? (userIdCheck>=1 ? '<span style="color: red;">중복된 아이디 입니다.</span>' : '사용 가능 합니다.') : '아이디를 입력해 주세요.' }
-			        	</c:if>
-			        	
-			            <input type="text" name="userId" id="userId" value="${dto.userId}"
-                         style="width: 30%;"
-                         readonly="readonly"
-                         maxlength="15" placeholder="아이디">
+                         maxlength="15" readonly="readonly" placeholder="아이디">
 			        </p>
-			       
 			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
 			      </td>
 			  </tr>
@@ -571,9 +558,8 @@ function userIdCheck() {
 			      </td>
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
-			            <input type="text" name="userName" value="${dto.userName}" maxlength="30"
-		                      style="width: 40%;"
-		                      readonly="readonly"
+			            <input type="text" name="userName" value="${userName}" maxlength="30"
+		                      style="width: 40%;" readonly="readonly"
 		                      placeholder="이름">
 			        </p>
 			      </td>
@@ -585,8 +571,8 @@ function userIdCheck() {
 			      </td>
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
-			            <input type="text" name="birth" value="${dto.birth}" maxlength="10" 
-			                       style="width: 40%;" placeholder="생년월일">
+			            <input type="text" name="birth" value="${birth}" maxlength="10" 
+			                       style="width: 40%;" readonly="readonly" placeholder="생년월일">
 			        </p>
 			        <p class="help-block">생년월일은 2000-01-01 형식으로 입력 합니다.</p>
 			      </td>
@@ -607,8 +593,8 @@ function userIdCheck() {
 			                <option value="direct">직접입력</option>
 			            </select>
 
-			            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="20" style="width: 20%;">
-			            @<input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30" readonly="readonly" style="width: 30%;">
+			            <input type="text" name="email1" size="13" maxlength="20" style="width: 20%;">
+			            @<input type="text" name="email2" size="13" maxlength="30" readonly="readonly" style="width: 30%;">
 			      </td>
 			  </tr>
 			  <tr>
@@ -627,9 +613,9 @@ function userIdCheck() {
 			                <option value="019" ${dto.tel1=="019" ? "selected='selected'" : ""}>019</option>
 			            </select>
 			            -
-			            <input type="text" name="tel2" value="${dto.tel2}" maxlength="4" style="width: 10%;">
+			            <input type="text" name="tel2" maxlength="4" style="width: 10%;">
 			            -
-			            <input type="text" name="tel3" value="${dto.tel3}" maxlength="4" style="width: 10%;">
+			            <input type="text" name="tel3" maxlength="4" style="width: 10%;">
 			        </p>
 			      </td>
 			  </tr>
@@ -655,8 +641,8 @@ function userIdCheck() {
 			     <tr height="45"> 
 			      <td align="center">
 			        <button type="reset" class="submit">다시입력</button>
-			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/';" style="margin-left: 10px; margin-right: 10px;">${mode=="update" ? "수정취소" : "가입취소"}</button>
-			        <button type="button" name="sendButton" class="submit" onclick="memberOk();">정보수정</button>
+			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/';" style="margin-left: 10px; margin-right: 10px;">수정취소</button>
+			        <button type="button" name="sendButton" class="submit" onclick="memberOk();">수정완료</button>
 			      </td>
 			    </tr>
 			    <tr height="30">

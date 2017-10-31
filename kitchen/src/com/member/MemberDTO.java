@@ -2,9 +2,17 @@ package com.member;
 
 public class MemberDTO {
 	private String userId, userName, userPwd, enabled
-	, email, tel, zip, addr_1, addr_2, birth, gender,created_date,modify_date ;
+	, email, tel, zip, addr_1, addr_2, birth, gender,created_date,modify_date, point;
 	
 	
+
+	public String getPoint() {
+		return point;
+	}
+
+	public void setPoint(String point) {
+		this.point = point;
+	}
 
 	public String getTel() {
 		return tel;

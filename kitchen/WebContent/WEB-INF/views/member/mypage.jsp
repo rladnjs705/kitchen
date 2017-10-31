@@ -9,7 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-ui.min.js" type="text/js">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js" type="text/js">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
 <style type="text/css">
 @charset "UTF-8";
 body{
@@ -166,78 +170,96 @@ body .tabs .tab.active {
     font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
 }
 .td{
- font-size: 25px;
+ font-size: 20px;
  font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
  text-align: left; 
  width: 800px; 
- height: 100px;
+ height: 60px;
 }
 
 </style>
 
+<script type="text/javascript">
+function send(){
+	var f=document.mypageForm;
+	
+	f.action="<%=cp%>/member/memberUpdate.do";
+	f.submit();
+}
+
+
+</script>
+
+
+
 </head>
 <body>
-
+<div class="header">
+    <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 
 <div class="container">
     <div class="body-container" style="width: 1600px;">
         <div class="tabs">
-            <span class="tab signin active"><a href="#">My Page</a></span>
+            <span class="tab signin active"><a href="<%=cp%>/member/mypage.do">My Page</a></span>
         </div>
         
         <div align="center">
-        	<table style="margin-top: 100px;">
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">아이디</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userId}</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">이름</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userName}</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">포인트</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;kddkkdkddk</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">전화번호</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;kddkkdkddk</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">이메일</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;kddkkdkddk</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td style="font-weight: 900;">주소</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;kddkkdkddk</td>
-        		</tr>
-        		<tr align="center" style="text-align: right;">
-        			<td></td>
+        	<form name="mypageForm" method="post">
+        	<table style="width: 60%; margin-bottom: 100px;">
+        	
+        		<tr style="text-align: right;">
+        			<td><button type="button" class="submit" style="float: left;">거래내역 조회</button></td>
         			<td style="width: 200px; height: 100px;">
-        			<button type="button" class="submit">돌아가기</button>
-        			<button type="button" class="submit" style="float: left;">거래내역 조회</button>
-        			<button type="button" class="submit">수정</button>
+        			<button type="button" class="submit" style="margin-right: 100px; margin-left: 20px;">돌아가기</button>
+        			
+        			<button type="button" class="submit" onclick="send();">수정</button>
+        			</td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">아이디</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userId}<input type="hidden" name="userId" value="${userId}"></td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">이름</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userName}<input type="hidden" name="userName" value="${userName}"></td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">생년월일</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.birth}<input type="hidden" name="birth" value="${member.birth}"></td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">포인트</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.point}</td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">전화번호</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.tel}<input type="hidden" name="tel" value="${member.tel}"></td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">이메일</td>
+        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.email}<input type="hidden" name="email" value="${member.email}"></td>
+        		</tr>
+        		<tr style="text-align: right;">
+        			<td style="font-weight: 900;">주소</td>
+        			<td class="td">
+        			<input type="hidden" name="zip" value="${member.zip}">
+        			&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+        			${member.addr_1}
+        			<input type="hidden" name="addr_1" value="${member.addr_1}">
+        			&ensp;&ensp;
+        			나머지주소: ${member.addr_2}
+        			<input type="hidden" name="addr_1" value="${member.addr_2}">
         			</td>
         		</tr>
         	</table>
-        
-        
-        
-        
-        
-        
-        
+        	</form>
         </div>
-        
-        
-        
-        
-        
-        
-        
     </div>
 </div>
-
+<div class="footer">
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
 
 
 </body>
