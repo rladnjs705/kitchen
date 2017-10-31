@@ -2,6 +2,7 @@ package com.shop;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.util.DBConn;
 
@@ -45,14 +46,14 @@ public class ShopDAO {
 		
 	}
 	
-	public int updateHitCount(int num){
+	public int updateHitCount(int shopnum){
 			PreparedStatement pstmt=null;
 			String sql;
 			int result=0;
 			try{
 				sql="UPDATE shop SET hitCount=hitCount+1 WHERE shopnum=?";
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, shopNum);
+				pstmt.setInt(1, shopnum);
 				result=pstmt.executeUpdate();
 				pstmt.close();
 				
@@ -64,7 +65,7 @@ public class ShopDAO {
 	}
 	
 	public int dataCount() {
-		int dataCount=0;
+		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
@@ -72,13 +73,17 @@ public class ShopDAO {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				dataCountrs.getInt("cnt");
+				result=rs.getInt(1);
+				rs.close();
+				pstmt.close();
+				
+				rs=null;
+				pstmt=null;
 			}
-			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		return dataCount;
+		return result;
 	}
 	
 }

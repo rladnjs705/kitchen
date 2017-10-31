@@ -61,7 +61,7 @@ public class ShopServlet extends MyServlet{
 	private void createdForm(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
 		req.setAttribute("mode", "created");
 		
-		forward(req, resp, "/WEB-INF/views/menu/created.jsp");
+		forward(req, resp, "/WEB-INF/views/shop/created.jsp");
 	}
 	
 	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

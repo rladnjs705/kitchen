@@ -210,7 +210,7 @@
 										<button type="button" class="btn btn-danger"
 											onclick="javascript:location.href='<%=cp%>/photo/list.do';">
 											취소</button> <c:if test="${mode=='update'}">
-											<input type="hidden" name="num" value="${dto.num}">
+											<input type="hidden" name="shopNum" value="${dto.shopNum}">
 											<input type="hidden" name="userId" value="${dto.userId}">
 											<input type="hidden" name="imageFilename"
 												value="${dto.imageFilename}">

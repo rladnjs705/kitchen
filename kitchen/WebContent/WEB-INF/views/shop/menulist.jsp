@@ -73,7 +73,7 @@ function article(num) {
 	          <h3><img src="<%=cp%>/resource/images/food.png" style="width: 40px; height: 40px;"> 한식 </h3>
 	    </div>
 
-	<c:if test="${dataCount!=0 }">    
+	<c:if test="${dataCount!=0}">    
 	        <div style="clear: both; height: 30px; line-height: 30px;">
 	            <div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
 	            <div style="float: right;">&nbsp;</div>
@@ -482,10 +482,10 @@ function article(num) {
 	</c:if>
 	
 	        <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-	            <c:if test="${dataCount==0 }">
+	            <c:if test="${dataCount==0}">
 	                  등록된 게시물이 없습니다.
 	            </c:if>
-	            <c:if test="${dataCount!=0 }">
+	            <c:if test="${dataCount!=0}">
 	                ${paging}
 	            </c:if>
 	        </div>        
@@ -498,7 +498,7 @@ function article(num) {
 	        		    &nbsp;
 	        		</div>
 	        		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
-	        		    <button type="button" class="btn btn-primary btn-sm" onclick="javascript:location.href='<%=cp%>/photo/created.do';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기</button>
+	        		    <button type="button" class="btn btn-primary btn-sm" onclick="javascript:location.href='<%=cp%>/shop/created.do';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기</button>
 	        		</div>
 	        </div>
 	        
