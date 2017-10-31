@@ -80,19 +80,18 @@ public class MemberServlet extends MyServlet{
 		rd.forward(req, resp);
 	}
 	
-	private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		forward(req, resp, "/WEB-INF/views/member/login.jsp");
-	}
-	
 	private void userIdCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		MemberDAO dao=new MemberDAO();
 		String userId=req.getParameter("userId");
 		int check=dao.checkUserId(userId);
 		req.setAttribute("mode", "created");
-		req.setAttribute("mode1", "check");
 		req.setAttribute("userIdCheck", check);
 		req.setAttribute("userId", userId);
 		forward(req, resp, "/WEB-INF/views/member/member.jsp");
+	}
+	
+	private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		forward(req, resp, "/WEB-INF/views/member/login.jsp");
 	}
 	
 	

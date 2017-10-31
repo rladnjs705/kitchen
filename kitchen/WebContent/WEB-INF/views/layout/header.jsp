@@ -39,7 +39,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <a href="<%=cp%>/member/logout.do">로그아웃</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="<%=cp%>/">마이페이지</a>
+                    <a href="<%=cp%>/member/mypage.do">마이페이지</a>
                 	&nbsp;&nbsp;&nbsp;
                     <a href="<%=cp%>/">장바구니</a>
                 	&nbsp;&nbsp;&nbsp;
@@ -74,7 +74,7 @@
 					</li>
 					<li>
 						<a href="#"style="margin-left: 100px;">
-						<img src="<%=cp%>/resource/images/dim-sum.png" width="40" height="40"><br>
+						<img src="<%=cp%>/resource/images/jajang.png" width="50" height="50"><br>
 						 &nbsp;중&nbsp;식
 						 </a>
 					 </li>
