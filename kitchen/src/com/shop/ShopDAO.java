@@ -87,11 +87,38 @@ public class ShopDAO {
 	}
 	
 	public ShopDTO readShop(int ShopNum) {
-		ShopDTO dto=null;
+		ShopDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql;
+		sql="SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, TO_CHAR(created,'YYYY-MM-DD')created, hitCount FROM shop WHERE shopNum=? ";
 		
 		try {
-			sql="SELECT shopNum, m.userId, ";
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, ShopNum);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ShopDTO();
+				dto.setShopNum(rs.getInt("shopNum"));
+				dto.setShopName(rs.getString("shopName"));
+				dto.setShopTel1(rs.getString("shopTel1"));
+				dto.setShopTel2(rs.getString("shopTel2"));
+				dto.setShopAddr1(rs.getString("shopAddr1"));
+				dto.setShopAddr2(rs.getString("shopAddr2"));
+				dto.setShopPrice(rs.getInt("shopPrice"));
+				dto.setShopTime(rs.getInt("shopTime"));
+				dto.setShopStart(rs.getString("shopStart"));
+				dto.setShopEnd(rs.getString("shopEnd"));
+				dto.setLatitude(rs.getInt("latitude"));
+				dto.setLongitude(rs.getInt("longitude"));
+				dto.setContent(rs.getString("content"));
+				dto.setCreated(rs.getString("created"));
+				dto.setHitCount(rs.getInt("hitCount"));
+			}
+				rs.close();
+				pstmt.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
