@@ -34,6 +34,8 @@ public class MemberServlet extends MyServlet{
 			memberCreated(req, resp);
 		} else if(uri.indexOf("memberCreatedSubmit.do")!=-1) {
 			memberCreatedSubmit(req, resp);
+		} else if(uri.indexOf("mypage.do")!=-1) {
+			mypage(req,resp);
 		}
 	}
 	private void memberCreated(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -115,6 +117,7 @@ public class MemberServlet extends MyServlet{
 		SessionInfo info = new SessionInfo();
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
+		info.setRoll(dto.getEnabled());
 		String cp = req.getContextPath();
 		session.setAttribute("member", info);
 		resp.sendRedirect(cp);
@@ -123,10 +126,21 @@ public class MemberServlet extends MyServlet{
 	private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		HttpSession session = req.getSession();
 		
-		session.invalidate();	
+		session.invalidate();
 		
 		String cp = req.getContextPath();
 		resp.sendRedirect(cp);
 	}
+	private void mypage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		req.setAttribute("userId", info.getUserId());
+		req.setAttribute("userName", info.getUserName());
+		forward(req, resp, "/WEB-INF/views/member/mypage.jsp");
+	}
+	
 	
 }
