@@ -2,7 +2,7 @@ package com.menu;
 
 public class MenuDTO {
 	int menunum, menuprice;
-	String menuname, menucontent, savefilename, origrnalfilename;
+	String menuname, menucontent, savefilename, originalfilename;
 	
 
 	public int getMenunum() {
@@ -35,11 +35,11 @@ public class MenuDTO {
 	public void setSavefilename(String savefilename) {
 		this.savefilename = savefilename;
 	}
-	public String getOrigrnalfilename() {
-		return origrnalfilename;
+	public String getOriginalfilename() {
+		return originalfilename;
 	}
-	public void setOrigrnalfilename(String origrnalfilename) {
-		this.origrnalfilename = origrnalfilename;
+	public void setOriginalfilename(String originalfilename) {
+		this.originalfilename = originalfilename;
 	}
 
 }

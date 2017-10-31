@@ -60,33 +60,34 @@
           return;
       }
 
-     var mode="${mode}";
-     /*  
+     var mode="${mode}"; 
   	  if(mode=="created"||mode=="update" && f.upload.value!="") {
   		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
   			alert('이미지 파일만 가능합니다. !!!');
   			f.upload.focus();
   			return;
   		}
-  	  } */
+  	  }
       
   	  if(mode=="created")
   		f.action="<%=cp%>/menu/created_ok.do";
   	  else if(mode=="update")
   		f.action="<%=cp%>/menu/update_ok.do";
+  		
+  	  function imageViewer(img) {
+  		var preViewer = $("#imageViewModal .modal-body");
+  		var s="<img src='"+img+"' width='85' height='85'>";
+  		preViewer.html(s);
+  	  
+  		$('#imageViewModal').modal('show');
+  }
 		
   	f.submit();
 		// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
 
 	}
 
-	function imageViewer(img) {
-		var preViewer = $("#imageViewModal .modal-body");
-		var s = "<img src='"+img+"' width='570' height='450'>";
-		preViewer.html(s);
 
-		$('#imageViewModal').modal('show');
-	}
 	function AddComma(data_value) {
 		return Number(data_value).toLocaleString('en').split;
 		}
@@ -109,8 +110,8 @@
 				</h4>
 			</div>
 			<div>
-				<form name="photoForm" method="post">
-					<!-- enctype="multipart/form-data"> -->
+				<form name="photoForm" method="post" 
+					enctype="multipart/form-data">
 					<div class="bs-write">
 						<table class="table">
 							<tbody>
@@ -148,9 +149,9 @@
 									<tr>
 										<td class="td1">메뉴이미지</td>
 										<td colspan="3" class="td3"><img
-											src="<%=cp%>/uploads/photo/${dto.imageFilename}" width="30"
+											src="C:\web\work\kitchen\kitchen\WebContent\WEB-INF\views\menu\image" width="30"
 											height="30" border="0"
-											onclick="imageViewer('<%=cp%>/uploads/photo/${dto.imageFilename}');"
+											onclick="imageViewer('<%=cp%>/menu/image/${dto.savefilename}');"
 											style="cursor: pointer;"></td>
 									</tr>
 								</c:if>
@@ -158,7 +159,7 @@
 							<tfoot>
 								<tr>
 									<td colspan="4" style="text-align: center; padding-top: 15px;">
-										<button type="submit" class="btn btn-primary" onclick="check();">
+										<button type="button" class="btn btn-primary" onclick="check();">
 											등록 <span class="glyphicon glyphicon-ok"></span>
 										</button>
 										<button type="button" class="btn btn-danger"
@@ -167,7 +168,7 @@
 											<input type="hidden" name="num" value="${dto.num}">
 											<input type="hidden" name="userId" value="${dto.userId}">
 											<input type="hidden" name="imageFilename"
-												value="${dto.imageFilename}">
+												value="${dto.savefileame}">
 											<input type="hidden" name="page" value="${page}">
 										</c:if>
 									</td>
