@@ -41,7 +41,7 @@ public class MemberDAO {
 	StringBuffer sb=new StringBuffer();
 	
 	try {
-		sb.append("SELECT m1.userId, userName, userPwd,");
+		sb.append("SELECT m.userId, userName, userPwd,");
 		sb.append("      enabled, created_date, modify_date,");
 		sb.append("      TO_CHAR(birth, 'YYYY-MM-DD') birth, ");
 		sb.append("      email, tel,");

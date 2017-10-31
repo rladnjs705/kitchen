@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
-
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 
 <style type="text/css">
 @charset "UTF-8";
@@ -61,7 +61,7 @@ body .container h1 {
 body .container .tabs {
   width: 100%;
   margin-bottom: 29px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #d9d9d9;
 }
 body .container .tabs .tab {
   display: inline-block;
@@ -69,7 +69,7 @@ body .container .tabs .tab {
   padding: 20px 15px 10px;
   cursor: pointer;
   letter-spacing: 0;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #d9d9d9;
   -moz-user-select: -moz-none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -80,18 +80,18 @@ body .container .tabs .tab a {
   font-size: 11px;
   text-decoration: none;
   text-transform: uppercase;
-  color: #000000;
+  color: #d9d9d9;
   transition: all 0.1s ease-in-out;
 }
 body .container .tabs .tab.active a, body .container .tabs .tab:hover a {
   color: #263238;
 }
 body .container .tabs .tab.active {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #263238;
 }
 body .container .content form {
   position: relative;
-  height: 300px;
+  height: 287px;
 }
 body .container .content label:first-of-type, body .container .content input:first-of-type, body .container .content .more:first-of-type {
   -moz-animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1);
@@ -124,6 +124,7 @@ body .container .content input.inpt {
   display: block;
   width: 100%;
   height: 42px;
+  margin-bottom: 12px;
   padding: 16px 13px;
   color: #999999;
   border: 1px solid #d9d9d9;
@@ -156,12 +157,10 @@ body .container .content input.inpt:focus {
   border-color: #999999;
 }
 body .container .content input.submit {
-  float: left;
-  margin-left: 1px;
   font-size: 12px;
   line-height: 42px;
   display: block;
-  width: 49%;
+  width: 100%;
   height: 42px;
   cursor: pointer;
   vertical-align: middle;
@@ -170,7 +169,7 @@ body .container .content input.submit {
   color: #263238;
   border: 1px solid #263238;
   background: transparent;
-  -moz-border-radius: 5px;
+  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
@@ -287,23 +286,23 @@ body .container .content .signup-cont {
 </style>
 <script type="text/javascript">
 function check() {
-	var f = document.loginForm;
-	
-	if(! f.userId.value){
-		alert("아이디는 필수 입니다.");
-		f.id.focus();
-		return false;
-	}
-	
-	if(! f.userPwd.value){
-		alert("패스워드는 필수입니다. ");
-		f.pwd.focus();
-		return false;
-	}
-	//input type = submit, input type = image, button에서는
-	//절대로 submit() 메소드를 호출하지 않는다. 호출하면 두 번 전송된다. 
-	f.action = "<%=cp%>/member/login_ok.do";
-	return true;
+   var f = document.loginForm;
+   
+   if(! f.userId.value){
+      alert("아이디는 필수 입니다.");
+      f.id.focus();
+      return false;
+   }
+   
+   if(! f.userPwd.value){
+      alert("패스워드는 필수입니다. ");
+      f.pwd.focus();
+      return false;
+   }
+   //input type = submit, input type = image, button에서는
+   //절대로 submit() 메소드를 호출하지 않는다. 호출하면 두 번 전송된다. 
+   f.action = "<%=cp%>/member/login_ok.do";
+   return true;
 }
 </script>
 </head>
@@ -314,31 +313,45 @@ function check() {
 <br><br>
 <div class="container">
 <section class="container">
-	<article class="half">
+   <article class="half">
         <h1>Kwon's Kitchen</h1>
         <div class="tabs">
             <span class="tab signin active"><a href="#signin">Sign in</a></span>
+            <span class="tab signup"><a href="#signup">Sign up</a></span>
         </div>
         <div class="content">
             <div class="signin-cont cont">
-                <form name="loginForm" method="post" action="">
+                <form name="loginForm" method="post" action="" onsubmit="check();">
                     <input type="text" name="userId" id="userId" class="inpt" placeholder="아이디">
-	                    <label for="userId">아이디</label>
-	                    <input type="password" name="userPwd" id="userPwd" class="inpt" placeholder="비밀번호">
-           						    <label for="userPwd">패스워드</label>
-	                    <div class="submit-wrap">
-	                    	<input type="submit" value="Sign in" class="submit" onclick="check();">
-	                    	<input type="button" class="submit" value="Sign up" onclick="javascript:location.href='<%=cp%>/member/memberCreated.do'">
-		                        
-		                </div>
-		        </form>
-	        </div>
+                       <label for="userId">Your id</label>
+                       <input type="password" name="userPwd" id="userPwd" class="inpt" placeholder="비밀번호">
+                                 <label for="userPwd">Your password</label>
+                       <div class="submit-wrap">
+                          <input type="submit" value="Sign in" class="submit">
+                          <c:if test="${message==null}">
+                             <div class="more" style="color:#999999;" align="center"><br>Hello!</div>
+                          </c:if>
+                          <c:if test="${message!=null}">
+                             <div class="more" style="color:red;" align="center"><br>${message}</div>
+                          </c:if>
+                              
+                      </div>
+              </form>
+           </div>
+        <div class="signup-cont cont">
+         <form method="post" enctype="multipart/form-data">
+               <div class="submit-wrap">
+                     <input type="button" class="submit" value="Sign up" onclick="javascript:location.href='<%=cp%>/member/memberCreated.do'">
+                    <div class="more" style="color:#999999;" align="center"><br>Welcome!</div>
+                </div>
+            </form>
+         </div>
      </div>
-	</article>
-	<div class="half bg"></div>
+   </article>
+   <div class="half bg"></div>
 </section>
 </div>
-	
+   
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>

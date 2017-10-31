@@ -5,10 +5,10 @@
 <%
    String cp = request.getContextPath();
 %>
-<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
+
 <script type="text/javascript">
 //엔터 처리
-$(function(){
+/* $(function(){
 	   $("input").not($(":button")).keypress(function (evt) {
 	        if (evt.keyCode == 13) {
 	            var fields = $(this).parents('form,body').find('button,input,textarea,select');
@@ -19,7 +19,7 @@ $(function(){
 	            return false;
 	        }
 	     });
-});
+}); */
 </script>
 <br>
 <div class="header-top" align="right">
