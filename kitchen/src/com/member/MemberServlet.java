@@ -37,7 +37,7 @@ public class MemberServlet extends MyServlet{
 		}
 	}
 	private void memberCreated(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("mode", "created1");
+		req.setAttribute("mode", "created");
 		forward(req, resp, "/WEB-INF/views/member/member.jsp");
 	}
 	
