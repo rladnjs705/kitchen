@@ -69,7 +69,7 @@ public class MemberServlet extends MyServlet{
 		// 로그인 처리
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
-		
+		session.setMaxInactiveInterval(60*60);
 		MemberDAO dao = new MemberDAO();
 		String id = req.getParameter("userId");
 		String pwd = req.getParameter("userPwd");
@@ -164,8 +164,16 @@ public class MemberServlet extends MyServlet{
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		MemberDAO dao=new MemberDAO();
 		MemberDTO dto=new MemberDTO();
-		dto.setUserId(info.getUserId());
+		String userId = null;
+		if(info!=null) {
+			userId=info.getUserId();
+		}else {
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
+			return;
+		}
+		dto.setUserId(userId);
 		dto.setUserPwd(req.getParameter("userPwd"));
+		dto.setBirth(req.getParameter("birth"));
 		String email=req.getParameter("email1");
 		email+="@";
 		email+=req.getParameter("email2");
@@ -182,9 +190,7 @@ public class MemberServlet extends MyServlet{
 		
 		dao.updateMember(dto);
 		
-		req.setAttribute("dto", dto);
-		
-		forward(req, resp, "/WEB-INF/views/member/mypage.jsp");
+		forward(req, resp, "/WEB-INF/views/member/login.jsp");
 	}
 	
 	private void mypage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

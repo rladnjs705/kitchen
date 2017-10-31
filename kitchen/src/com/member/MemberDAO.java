@@ -121,11 +121,12 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getUserId());
 			result=pstmt.executeUpdate();
 			pstmt.close();
-			sql="UPDATE member_detail SET email=? , tel=? WHERE userId=?";
+			sql="UPDATE member_detail SET email=? , tel=? , birth=? WHERE userId=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getEmail());
 			pstmt.setString(2, dto.getTel());
-			pstmt.setString(3, dto.getUserId());
+			pstmt.setString(3, dto.getBirth());
+			pstmt.setString(4, dto.getUserId());
 			result=pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
