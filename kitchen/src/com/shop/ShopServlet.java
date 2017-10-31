@@ -91,7 +91,6 @@ public class ShopServlet extends MyServlet{
 		
 		if(mreq.getFile("upload")!=null) {
 			dto.setSaveFilename(mreq.getFilesystemName("upload"));
-			dto.setOriginalFilename(mreq.getOriginalFileName("upload"));
 		}
 		
 		dao.insertShop(dto);
