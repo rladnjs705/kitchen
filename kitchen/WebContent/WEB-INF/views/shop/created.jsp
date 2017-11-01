@@ -26,14 +26,46 @@
 
   	var str = f.shopName.value;
       if(!str) {
+    	  alert('매장명을 입력하세요 !!!');
           f.shopName.focus();
           return false;
       }
 
   	  str = f.content.value;
       if(!str) {
+    	  alert('내용을 입력하세요 !!!');
           f.content.focus();
           return false;
+      }
+      
+      str = f.shopPrice.value;
+      str = String(str);
+	  return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	  
+      if(!str){
+    	  alert('배달 최소 가격을 입력하세요 !!!');
+    	  f.shopPrice.focus();
+    	  return false;
+      }
+      str = f.shopTime.value;
+      if(!str){
+    	  alert('배달 최소시간을 입력하세요 !!!');
+    	  f.shopTime.focus();
+    	  return false;
+      }
+      
+      str = f.latitude.value;
+      if(!str){
+    	  alert('위도를 입력하세요 !!!');
+    	  f.latitude.focus();
+    	  return false;
+      }
+      
+      str = f.longitude.value;
+      if(!str){
+    	  alert('경도를 입력하세요 !!!');
+    	  f.longitude.focus();
+    	  return false;
       }
 
       var mode="${mode}";
@@ -44,7 +76,7 @@
   			return false;
   		}
   	  }
-      
+  	  
   	  if(mode=="created")
   		f.action="<%=cp%>/shop/created_ok.do";
   	  else if(mode=="update")
@@ -61,6 +93,7 @@
 
 		$('#imageViewModal').modal('show');
 	}
+	
 	$('input[name=data_name]').val()
 	
 	function numberWithCommas(num){
@@ -148,6 +181,7 @@
 											onclick="imageViewer('<%=cp%>/uploads/shop/${dto.saveFilename}');"
 											style="cursor: pointer;"></td>
 									</tr>
+									
 								</c:if>
 								<tr>
 									<th>주소</th>
@@ -211,9 +245,23 @@
 										</button>
 										<button type="button" class="btn btn-danger"
 											onclick="javascript:location.href='<%=cp%>/shop/shopmenu.do';">
-											취소</button> <c:if test="${mode=='update'}">
+											취소</button> 
+										<c:if test="${mode=='update'}">
 											<input type="hidden" name="shopNum" value="${dto.shopNum}">
 											<input type="hidden" name="page" value="${page}">
+											<input type="hidden" name="shopNum" value="${dto.shopNum}">
+											<input type="hidden" name="page" value="${page}">
+											<input type="hidden" name="shopZip1" value="${dto.shopZip1}">
+											<input type="hidden" name="shopAddr1" value="${dto.shopAddr1}">
+											<input type="hidden" name="shopAddr2" value="${dto.shopAddr2}">
+											<input type="hidden" name="shopTel1" value="${dto.shopTel1}">
+											<input type="hidden" name="shopTel2" value="${dto.shopTel2}">
+											<input type="hidden" name="shopPrice" value="${dto.shopPrice}">
+											<input type="hidden" name="shopTime" value="${dto.shopTime}">
+											<input type="hidden" name="shopStart" value="${dto.shopStart}">
+											<input type="hidden" name="shopEnd" value="${dto.shopEnd}">
+											<input type="hidden" name="latitude" value="${dto.latitude}">
+											<input type="hidden" name="longitude" value="${dto.longitude}">
 										</c:if>
 									</td>
 								</tr>

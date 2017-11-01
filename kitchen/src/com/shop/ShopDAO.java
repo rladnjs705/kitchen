@@ -220,7 +220,6 @@ public class ShopDAO {
 			pstmt.setInt(11, dto.getShopTime());
 			pstmt.setString(12, dto.getShopStart());
 			pstmt.setString(13, dto.getShopEnd());
-			
 			pstmt.setString(14, dto.getLatitude());
 			pstmt.setString(15, dto.getLongitude());
 

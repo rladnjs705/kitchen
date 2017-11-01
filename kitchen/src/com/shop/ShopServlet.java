@@ -174,17 +174,21 @@ public class ShopServlet extends MyServlet{
 		
 		String cp=req.getContextPath();
 		ShopDTO dto=dao.readShop(shopNum);
-		
+		String state = req.getParameter("state");
 		if(dto==null) {
-			resp.sendRedirect(cp+"/menu/article.do?page="+page);
+			resp.sendRedirect(cp+"/menu/list.do?page="+page+"&state="+state+"&shopNum="+shopNum);
 			return;
 		}
 		
 		req.setAttribute("mode", "update");
 		req.setAttribute("dto", dto);
 		req.setAttribute("page", page);
+		req.setAttribute("state", state);
+		req.setAttribute("dto", dto);
+		req.setAttribute("page", page);
+		req.setAttribute("shopNum", shopNum);
 		
-		forward(req, resp, "/WEB-INF/views/menu/article.jsp");
+		forward(req, resp, "/WEB-INF/views/shop/created.jsp");
 	}
 	
 	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname)throws ServletException , IOException{
@@ -212,8 +216,7 @@ public class ShopServlet extends MyServlet{
 		dto.setShopEnd(mreq.getParameter("shopEnd"));
 		dto.setLatitude(mreq.getParameter("latitude"));
 		dto.setLongitude(mreq.getParameter("longitude"));
-		
-		dto.setShopEnd(mreq.getParameter("shopEnd"));
+
 		
 		if(mreq.getFile("upload")!=null) {
 			if(dto.getSaveFilename().length()!=0) {
