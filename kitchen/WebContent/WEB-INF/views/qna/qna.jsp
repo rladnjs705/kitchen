@@ -274,7 +274,9 @@ clear:left;
 </table>
 
 </div>
-
+<br>
+<br>
+<br>
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
