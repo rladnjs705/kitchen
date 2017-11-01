@@ -1,7 +1,7 @@
 package com.notice;
 
 public class NoticeDTO {
-	private int num,notice,hitCount,listNum;
+	private int num,notice,hitCount,listNum,pwd;
 	private String userName,userId,subject,content,saveFileName,originalFileName,created;
 	public int getNum() {
 		return num;
@@ -68,6 +68,12 @@ public class NoticeDTO {
 	}
 	public void setListNum(int listNum) {
 		this.listNum = listNum;
+	}
+	public int getPwd() {
+		return pwd;
+	}
+	public void setPwd(int pwd) {
+		this.pwd = pwd;
 	}
 	
 	

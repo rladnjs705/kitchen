@@ -199,6 +199,7 @@ public class NoticeServlet extends MyServlet{
 		dto.setUserId(info.getUserId());
 		dto.setSubject(mreq.getParameter("subject"));
 		dto.setContent(mreq.getParameter("content"));
+		dto.setPwd(Integer.parseInt(mreq.getParameter("pwd")));
 		//dto.setIpAddr(req.getRemoteAddr());	//ip주소는 파라미터가 아니므로 그냥 req써도 된다.
 		
 		String isNotice = mreq.getParameter("isNotice");
@@ -234,6 +235,7 @@ public class NoticeServlet extends MyServlet{
 		NoticeDAO dao = new NoticeDAO();
 		NoticeDTO dto = new NoticeDTO();
 		dto = dao.readNotice(num);
+		System.out.println("비번"+dto.getPwd());
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		dao.updateHit(num);
 		
@@ -307,6 +309,7 @@ public class NoticeServlet extends MyServlet{
 		
 		dto.setSubject(mreq.getParameter("subject"));
 		dto.setContent(mreq.getParameter("content"));
+		dto.setPwd(Integer.parseInt(mreq.getParameter("pwd")));
 		
 		dto.setSaveFileName(mreq.getParameter("saveFileName"));
 		dto.setOriginalFileName(mreq.getParameter("originalFileName"));

@@ -39,7 +39,7 @@ public class BoardDAO {
 			else if(mode.equals("reply")) {
 				//오더넘버 업데이트해줘야한다
 				//답변인 경우,
-				
+				updateOrderNo(dto.getGroupNum(), dto.getOrderNo());
 				
 				dto.setDepth(dto.getDepth()+1);
 				dto.setOrderNo(dto.getOrderNo()+1);
@@ -118,7 +118,11 @@ public class BoardDAO {
 				sb.append("WHERE INSTR("+searchKey+",?)>=1");
 			else if(searchKey.equals("questionType"))
 				sb.append("WHERE questionType=?");
+			else if(searchKey.equals("created")) {
+				sb.append("WHERE (ROUND(MOD(MOD(MONTHS_BETWEEN(SYSDATE,created)/12,1)*12,1)*(365/12),0))<=? ");
+				}
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, searchValue);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -160,7 +164,6 @@ public class BoardDAO {
 				dto.setQuestionNum(rs.getInt("questionNum"));
 				dto.setUserId(rs.getString("userId"));
 				dto.setUserName(rs.getString("userName"));
-				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setGroupNum(rs.getInt("groupNum"));
 				dto.setOrderNo(rs.getInt("orderNo"));
@@ -170,7 +173,27 @@ public class BoardDAO {
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCreated(rs.getString("created"));
-				dto.setQuestionType(rs.getString("questionType"));
+
+				if(rs.getString("questionType")==null)
+					dto.setQuestionType("");
+				else if(rs.getString("questionType").equals("store"))
+					dto.setQuestionType("매장문의");
+				else if(rs.getString("questionType").equals("delivery"))
+					dto.setQuestionType("배달문의");
+				else if(rs.getString("questionType").equals("system"))
+					dto.setQuestionType("시스템오류문의");
+				else if(rs.getString("questionType").equals("cooperate"))
+					dto.setQuestionType("제휴문의");
+				else if(rs.getString("questionType").equals("and"))
+					dto.setQuestionType("기타");
+				else if(rs.getString("questionType").equals("reply"))
+					dto.setQuestionType("답변");
+				
+				String vacancy = "";
+				for(int a=0;a<dto.getDepth();a++)
+					vacancy+="&nbsp;&nbsp;";
+				
+				dto.setSubject(vacancy+rs.getString("subject"));
 				
 				list.add(dto);
 			}
@@ -196,9 +219,9 @@ public class BoardDAO {
 			//sb.append("               TO_CHAR(created, 'YYYY-MM-DD') created");
 			sb.append("               FROM question q");
 			sb.append("               JOIN member m ON q.userId=m.userId");
-//			if(searchKey.equals("created")) {
-//				searchValue=searchValue.replaceAll("-", "");
-//				sb.append("           WHERE TO_CHAR(created, 'YYYYMMDD') = ? ");}
+			if(searchKey.equals("created")) {
+				sb.append("		WHERE (ROUND(MOD(MOD(MONTHS_BETWEEN(SYSDATE,created)/12,1)*12,1)*(365/12),0))<=? ");
+			}
 			if(searchKey.equals("userName")||searchKey.equals("questionType")) {
 				sb.append("           WHERE "+searchKey+"=? ");
 			} else if(searchKey.equals("subject")||searchKey.equals("content")){
@@ -209,6 +232,9 @@ public class BoardDAO {
 			sb.append(") WHERE rnum >= ?");
 			
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, start);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -217,7 +243,6 @@ public class BoardDAO {
 				dto.setQuestionNum(rs.getInt("questionNum"));
 				dto.setUserId(rs.getString("userId"));
 				dto.setUserName(rs.getString("userName"));
-				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setGroupNum(rs.getInt("groupNum"));
 				dto.setOrderNo(rs.getInt("orderNo"));
@@ -227,7 +252,27 @@ public class BoardDAO {
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCreated(rs.getString("created"));
-				dto.setQuestionType(rs.getString("questionType"));
+				
+				if(rs.getString("questionType")==null)
+					dto.setQuestionType("");
+				else if(rs.getString("questionType").equals("store"))
+					dto.setQuestionType("매장문의");
+				else if(rs.getString("questionType").equals("delivery"))
+					dto.setQuestionType("배달문의");
+				else if(rs.getString("questionType").equals("system"))
+					dto.setQuestionType("시스템오류문의");
+				else if(rs.getString("questionType").equals("cooperate"))
+					dto.setQuestionType("제휴문의");
+				else if(rs.getString("questionType").equals("and"))
+					dto.setQuestionType("기타");
+				else if(rs.getString("questionType").equals("reply"))
+					dto.setQuestionType("답변");
+				
+				String vacancy = "";
+				for(int a=0;a<dto.getDepth();a++)
+					vacancy+="&nbsp;&nbsp;";
+				
+				dto.setSubject(vacancy+rs.getString("subject"));
 				
 				list.add(dto);
 			}
@@ -246,7 +291,7 @@ public class BoardDAO {
 		try {
 			sb.append("SELECT questionNum, q.userId, userName, ");
 			sb.append("		  subject, content, groupNum, orderNo, depth, hitCount, ");
-			sb.append("		  tel, saveFileName, originalFileName, created, questionType ");
+			sb.append("		  tel, saveFileName, originalFileName, created, questionType, pwd ");
 			sb.append("FROM question q JOIN member m ON q.userId=m.userId ");
 			sb.append("WHERE questionNum=?");
 			pstmt = conn.prepareStatement(sb.toString());
@@ -270,6 +315,7 @@ public class BoardDAO {
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCreated(rs.getString("created"));
 				dto.setQuestionType(rs.getString("questionType"));
+				dto.setPwd(rs.getInt("pwd"));
 			}
 			
 			rs.close();
@@ -415,7 +461,7 @@ public class BoardDAO {
 		int result = 0;
 		try {
 			sql = "UPDATE question SET subject=?, content=?, tel=?, "
-					+ "questionType=?, saveFileName=?, originalFileName=?, password=? WHERE questionNum=?";
+					+ "questionType=?, saveFileName=?, originalFileName=?, pwd=? WHERE questionNum=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getSubject());
 			pstmt.setString(2, dto.getContent());
@@ -434,12 +480,13 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public int deleteInquiry(int questionNum) {
+	public int deleteInquiry(int groupNum, int depth) {
 		int result = 0;
 		try {
-			sql = "DELETE question WHERE questionNum=?";
+			sql = "DELETE question WHERE groupNum=? AND depth>=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, questionNum);
+			pstmt.setInt(1, groupNum);
+			pstmt.setInt(2, depth);
 			result = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {

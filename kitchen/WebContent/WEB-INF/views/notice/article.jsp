@@ -21,10 +21,36 @@
 
 <script type="text/javascript">
 function deleteBoard(num) {
-	if(confirm('삭제하시겠습니까?')){
+	alert('${dto.pwd}');
+	<c:if test="${sessionScope.member.userId=='admin'}">
+	var pass = prompt('패스워드를 입력하세요','');
+	if(pass==${dto.pwd}){
 		var url = "<%=cp%>/notice/delete.do?num="+num+"&page=${page}";
 		location.href = url;
+	}else{
+		var pass = prompt('패스워드가 틀렸습니다. 다시 입력해 주세요.','');
 	}
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+    alert("삭제권한이 없습니다.");
+	</c:if>
+}
+
+function updateNotice() {
+	<c:if test="${sessionScope.member.userId=='admin'}">
+	var pass = prompt('패스워드를 입력하세요','');
+	if(pass==${dto.pwd}){
+	    var url = "<%=cp%>/notice/update.do?num=${dto.num}&page=${page}";
+		location.href=url;
+	}else{
+		var pass = prompt('패스워드가 틀렸습니다. 다시 입력해 주세요.','');
+	}
+	</c:if>
+
+	<c:if test="${sessionScope.member.userId!='admin'}">
+    alert("수정권한이 없습니다.");
+	</c:if>
 }
 </script>
 </head>
@@ -46,8 +72,8 @@ function deleteBoard(num) {
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
-           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
+           <li><a href="#">진행중인이벤트</a></li> 
+           <li><a href="#">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -98,7 +124,7 @@ function deleteBoard(num) {
     <td colspan="2" align="left" style="padding-left: 5px;">
        이전글 :  
        <c:if test="${not empty predto}">
-       	<a href="<%=cp%>/notice/article.do?num=${predto.num}">${predto.subject}</a>
+       	<a href="<%=cp%>/notice/article.do?num=${predto.num}&page=${page}">${predto.subject}</a>
        </c:if>
        <c:if test="${empty predto}">${msgP}</c:if>
     </td>
@@ -108,7 +134,7 @@ function deleteBoard(num) {
     <td colspan="2" align="left" style="padding-left: 5px;">
     다음글 : 
    		<c:if test="${not empty nextdto}">
-       	<a href="<%=cp%>/notice/article.do?num=${nextdto.num}">${nextdto.subject}</a>
+       	<a href="<%=cp%>/notice/article.do?num=${nextdto.num}&page=${page}">${nextdto.subject}</a>
        </c:if>
        <c:if test="${empty nextdto}">${msgN}</c:if>
     </td>
@@ -119,7 +145,7 @@ function deleteBoard(num) {
 <tr height="45">
 <c:if test="${roll!='guest'}">
     <td width="300" align="left">
-        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/notice/update.do?num=${dto.num}&page=${page}';">수정</button>
+        <button type="button" class="btn" onclick="updateNotice();">수정</button>
         <button type="button" class="btn" onclick="deleteBoard('${dto.num}');">삭제</button>
     </td>
 </c:if>
