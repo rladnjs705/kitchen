@@ -93,7 +93,7 @@ function article(num) {
 		                     	<div style="color: #FF6C6C;" align="right">
 		                     	${dto.shopStart}~${dto.shopEnd}
 		                     	<hr></div>
-		                     	<div align="center" style="font-size:14px; float:left;">${dto.content}</div>
+		                     	<div align="center" style="font-size:14px; float:left; margin:0px 10px; ">${dto.content}</div>
 		                     	<div style="clear: both;"></div>
 		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}<br> ${dto.shopAddr1} - ${dto.shopAddr2}</div>
 		                     	<div align="right" style="font-size :15px;">배달 소요시간: | ${dto.shopTime} 분 </div>
