@@ -227,9 +227,11 @@ clear:left;
 				<button type="button" class="btn" onclick="searchList()">검색</button>
 			</form>
 		</td>
-		<td align="right" width="100">
-			<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/created.do';">글올리기</button>
-		</td>
+		<c:if test="${roll!='guest'}">
+      <td align="right" width="100">
+          <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/created.do?page=${page}';">글올리기</button>
+      </td>
+      </c:if>
 	</tr>
 </table>
 
