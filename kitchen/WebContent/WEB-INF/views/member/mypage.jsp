@@ -209,7 +209,7 @@ function send(){
         	<table style="width: 60%; margin-bottom: 100px;">
         	
         		<tr style="text-align: right;">
-        			<td><button type="button" class="submit" style="float: left;">거래내역 조회</button></td>
+        			<td><button type="button" class="submit" style="float: left;">결제내역 조회</button></td>
         			<td style="width: 200px; height: 100px;">
         			<button type="button" class="submit" style="margin-right: 100px; margin-left: 20px;" onclick="javascript:location.href='<%=cp%>/shop/shopmenu.do';">돌아가기</button>
         			

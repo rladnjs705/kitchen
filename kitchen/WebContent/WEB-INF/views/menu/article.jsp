@@ -184,7 +184,7 @@
 			
 			<!-- 주소지 -->
       		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br>${dto.shopTel1}<br>${dto.shopTel2}</div>
-    	<a href="<%=cp%>/menu/created.do?shopnum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴등록</button></a>
+    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴등록</button></a>
     </div>
    </form>    
 

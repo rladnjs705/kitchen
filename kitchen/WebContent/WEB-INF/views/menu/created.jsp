@@ -48,15 +48,15 @@
   function check() {
       var f = document.photoForm;
 
-  	var str = f.subject.value;
+  	var str = f.menuname.value;
       if(!str) {
-          f.subject.focus();
+          f.menuname.focus();
           return;
       }
 
-  	  str = f.content.value;
+  	  str = f.menucontent.value;
       if(!str) {
-          f.content.focus();
+          f.menucontent.focus();
           return;
       }
 
@@ -68,9 +68,12 @@
   			return;
   		}
   	  }
-      
+    //  var page = "${page}";
+     // var state = "${state}";
+     // var shopNum = "${shopNum}";
   	  if(mode=="created")
   		f.action="<%=cp%>/menu/created_ok.do";
+  		//page="+page+"&state="+state+"&shopNum="+shopNum;
   	  else if(mode=="update")
   		f.action="<%=cp%>/menu/update_ok.do";
   		
@@ -121,12 +124,12 @@
 								</tr>
 								<tr>
 									<th>메뉴이름 </th>
-									<th colspan="3"><input type="text" name="subject"
+									<th colspan="3"><input type="text" name="menuname"
 										class="form-control input-sm" ></th>
 								</tr>
 								<tr>
 									<th>메뉴가격 </th>
-									<th colspan="3"><input type="text" name="price"
+									<th colspan="3"><input type="text" name="menuprice"
 										class="form-control input-sm"></th>
 								</tr>
 								<tr>
@@ -134,8 +137,8 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td colspan="4"><textarea name="content"
-											class="form-control" rows="7">${dto.content}</textarea>
+									<td colspan="4"><textarea name="menucontent"
+											class="form-control" rows="7"></textarea>
 									</td>
 								</tr>
 

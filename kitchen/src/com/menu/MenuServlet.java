@@ -51,6 +51,7 @@ public class MenuServlet extends MyServlet{
 	}
 	
 	private void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("UTF-8");
 		String cp = req.getContextPath();
 		MenuDAO dao = new MenuDAO();
 		
@@ -59,12 +60,12 @@ public class MenuServlet extends MyServlet{
 		
 		List<MenuDTO> list = dao.listMenu(shopNum);
 		ShopDTO dto = dao.readMenu(shopNum);
-		
+		String state = req.getParameter("state");
 		if(list==null) {
-			resp.sendRedirect(cp+"/menu/list.do?page="+page+"&"+"shopNum="+shopNum);
+			resp.sendRedirect(cp+"/menu/list.do?page="+page+"&state="+state+"&shopNum="+shopNum);
 			return;
 		}
-		
+		req.setAttribute("state", state);
 		req.setAttribute("dto", dto);
 		req.setAttribute("list", list);
 		req.setAttribute("page", page);
@@ -93,9 +94,9 @@ public class MenuServlet extends MyServlet{
 		dto.setMenuprice(Integer.parseInt(mreq.getParameter("menuprice")));
 		dto.setMenucontent(mreq.getParameter("menucontent"));
 		
-		int shopNum = Integer.parseInt(req.getParameter("shopNm"));
-		String page = req.getParameter("page");
-		
+//		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
+//		String page = req.getParameter("page");
+//		String state = req.getParameter("state");
 		if(mreq.getFile("upload")!=null) {
 		String savefilename=mreq.getFilesystemName("upload");
 			
@@ -104,8 +105,13 @@ public class MenuServlet extends MyServlet{
 		dto.setSavefilename(savefilename);
 
 		}
+		
+//		req.setAttribute("state", state);
+//		req.setAttribute("page", page);
+//		req.setAttribute("shopNum", shopNum);
 		dao.insertMenu(dto);
-		resp.sendRedirect(cp+"/menu/article.do?page="+page+"&"+"shopNum="+shopNum);
+		resp.sendRedirect(cp+"/menu/article.do");
+		
 	}
 	
 
