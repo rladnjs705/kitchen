@@ -66,12 +66,25 @@ public class ShopDAO {
 			
 	}
 	
-	public int dataCount() {
+	public int dataCount(String state) {
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
-			String sql="SELECT NVL(COUNT (shopNum), 0) cnt FROM shop";
+			String sql="SELECT NVL(COUNT (shopNum), 0) cnt FROM shop ";
+			if(state.equals("한식")) {
+				sql+="WHERE categoryName='한식'";
+			} else if(state.equals("일식")) {
+				sql+="WHERE categoryName='일식'";
+			}else if(state.equals("양식")) {
+				sql+="WHERE categoryName='양식'";
+			}else if(state.equals("중식")) {
+				sql+="WHERE categoryName='중식'";
+			}else if(state.equals("피자")) {
+				sql+="WHERE categoryName='피자'";
+			}else if(state.equals("치킨")) {
+				sql+="WHERE categoryName='치킨'";
+			}
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -127,14 +140,28 @@ public class ShopDAO {
 		return dto;
 	}
 	
-	public List<ShopDTO> listShop(int start, int end){
+	public List<ShopDTO> listShop(int start, int end, String state){
 		List<ShopDTO> list=new ArrayList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql;
 		
 		try {
-			sql="SELECT * FROM ( SELECT ROWNUM rnum, tb.*FROM ( SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopZip1, shopZip2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, hitCount, TO_CHAR(created, 'YYYY-MM-DD') created, saveFilename FROM shop ORDER BY shopNum DESC)tb WHERE ROWNUM <= ? ) WHERE rnum >=?";
+			sql="SELECT * FROM ( SELECT ROWNUM rnum, tb.*FROM ( SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopZip1, shopZip2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, hitCount, TO_CHAR(created, 'YYYY-MM-DD') created, saveFilename FROM shop ";
+			if(state.equals("한식")) {
+				sql+="WHERE categoryName='한식'";
+			} else if(state.equals("일식")) {
+				sql+="WHERE categoryName='일식'";
+			}else if(state.equals("양식")) {
+				sql+="WHERE categoryName='양식'";
+			}else if(state.equals("중식")) {
+				sql+="WHERE categoryName='중식'";
+			}else if(state.equals("피자")) {
+				sql+="WHERE categoryName='피자'";
+			}else if(state.equals("치킨")) {
+				sql+="WHERE categoryName='치킨'";
+			}
+			sql+=" ORDER BY shopNum DESC)tb WHERE ROWNUM <= ? ) WHERE rnum >=?";
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, end);
