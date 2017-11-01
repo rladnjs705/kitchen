@@ -87,12 +87,16 @@ function article(num) {
 		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
 		                     	${dto.shopName}
 		                     	</span>
+		                     	<div style="float:left;" align="center">
+		                     	${dto.created}
+		                     	</div>
 		                     	<div style="color: #FF6C6C;" align="right">
 		                     	${dto.shopStart}~${dto.shopEnd}
 		                     	<hr></div>
 		                     	<div style="clear: both;"></div>
-		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}-${dto.shopZip2} ${dto.shopAddr1} - ${dto.shopAddr2}</div>
-		                     	<div align="center">배달 소요시간: | ${dto.shopTime}  </div>
+		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}-${dto.shopZip2}<br> ${dto.shopAddr1} - ${dto.shopAddr2}</div>
+		                     	<div align="center">${dto.content}</div>
+		                     	<div align="right" style="font-size :15px;">배달 소요시간: | ${dto.shopTime} 분 </div>
 		                     </div>
 	               		 </div>
 				       </div>

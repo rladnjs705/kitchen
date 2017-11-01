@@ -97,7 +97,6 @@ public class ShopServlet extends MyServlet{
 			String saveFilename =mreq.getFilesystemName("upload");
 			
 			saveFilename = FileManager.doFilerename(pathname, saveFilename);
-			
 			dto.setSaveFilename(saveFilename);
 		}
 		
@@ -120,8 +119,10 @@ public class ShopServlet extends MyServlet{
 		if(state!=null&&req.getMethod().equalsIgnoreCase("get")) {
 			state=URLDecoder.decode(state,"utf-8");
 		}
-		if(state==null)
+		
+		if(state==null||state.length()==0)
 			state="ÇÑ½Ä";
+		
 		int dataCount=dao.dataCount(state);
 		int numPerPage = 10;
 		int totalPage = util.pageCount(numPerPage, dataCount);
@@ -163,7 +164,6 @@ public class ShopServlet extends MyServlet{
 		
 		req.setAttribute("page", currentPage);
 		req.setAttribute("query", query);
-		
 		req.setAttribute("state", state);
 		req.setAttribute("articleUrl", articleUrl);
 		req.setAttribute("dataCount", dataCount);
