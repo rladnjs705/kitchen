@@ -180,8 +180,8 @@ function notHangul(obj) {
 
 <div class="menubar">
    <ul>
-      <li><a href="#">공지사항 </a></li>
-      <li><a href="#">문의하기</a></li>
+      <li><a href="<%=cp%>/notice/list.do">공지사항 </a></li>
+      <li><a href="<%=cp%>/bbs/list.do">문의하기</a></li>
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" style="background: rgb(71,71,71);" id="current">이벤트</a>
          <ul>
