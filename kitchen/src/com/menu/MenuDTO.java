@@ -26,8 +26,8 @@ public class MenuDTO {
 	public String getMenucontent() {
 		return menucontent;
 	}
-	public void setMenucountent(String menucountent) {
-		this.menucontent = menucountent;
+	public void setMenucontent(String menucontent) {
+		this.menucontent = menucontent;
 	}
 	public String getSavefilename() {
 		return savefilename;

@@ -17,7 +17,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		String sql;
 		
-		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename, originalfilename) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?)";
 
 		try {
 			conn = DBConn.getConnection();
@@ -27,7 +27,6 @@ public class MenuDAO {
 			pstmt.setInt(2, dto.getMenuprice());
 			pstmt.setString(3, dto.getMenucontent());
 			pstmt.setString(4, dto.getSavefilename());
-			pstmt.setString(5, dto.getOriginalfilename());
 			
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -37,7 +36,7 @@ public class MenuDAO {
 		return result; 
 	}
 	
-	public List<MenuDTO> listMenu(int shopnum){
+	public List<MenuDTO> listMenu(int shopNum){
 		List<MenuDTO> list = new ArrayList<MenuDTO>();
 		
 		PreparedStatement pstmt = null;
@@ -45,20 +44,20 @@ public class MenuDAO {
 		String sql;
 		
 		try {
-			sql = "SELECT * FROM shopmenu m JOIN shop s ON m.shopnum=s.shopnum WHERE shopnum=?";
+			sql = "SELECT s.shopnum, m.menuname, m.menucontent, m.menuprice, m.savefilename FROM shopmenu m JOIN shop s ON m.shopnum=s.shopNum WHERE m.shopNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, shopnum);
+			pstmt.setInt(1, shopNum);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				MenuDTO dto = new MenuDTO();
-						
+
 				dto.setMenuname(rs.getString("menuname"));
-				dto.setMenucountent(rs.getString("menucontent"));
+				dto.setMenucontent(rs.getString("menucontent"));
 				dto.setMenuprice(rs.getInt("menuprice"));
-				dto.setOriginalfilename(rs.getString("originalfilename"));
+				dto.setSavefilename(rs.getString("savefilename"));
 				
 				list.add(dto);
 
@@ -70,6 +69,39 @@ public class MenuDAO {
 			System.out.println(e.toString());
 		} 
 		return list;
+	}
+	
+	public ShopDTO readMenu(int shopNum) {
+		ShopDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		sql="SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, latitude, longitude FROM shop WHERE shopNum=? ";
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNum);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ShopDTO();
+				dto.setShopNum(rs.getInt("shopNum"));
+				dto.setShopName(rs.getString("shopName"));
+				dto.setShopTel1(rs.getString("shopTel1"));
+				dto.setShopTel2(rs.getString("shopTel2"));
+				dto.setShopAddr1(rs.getString("shopAddr1"));
+				dto.setShopAddr2(rs.getString("shopAddr2"));
+				dto.setShopPrice(rs.getInt("shopPrice"));
+				dto.setLatitude(rs.getInt("latitude"));
+				dto.setLongitude(rs.getInt("longitude"));
+			}
+				rs.close();
+				pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 	
 }
