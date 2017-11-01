@@ -2,6 +2,7 @@ package com.menu;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.shop.ShopDAO;
 import com.shop.ShopDTO;
 import com.util.MyServlet;
 
@@ -35,12 +37,18 @@ public class MenuServlet extends MyServlet{
 		if(uri.indexOf("article.do") != -1) {
 			article(req, resp);
 		} else if(uri.indexOf("payment.do") != -1) {
-			forward(req, resp, "/WEB-INF/views/menu/payment.jsp");
+			payment(req,resp);
 		} else if(uri.indexOf("created.do") != -1) {
 			createdForm(req, resp);
 		} else if(uri.indexOf("created_ok.do") != -1) {
 			createdSubmit(req, resp, pathname);
-		} 
+		} else if(uri.indexOf("update.do") != -1) {
+			updateForm(req, resp);
+		} else if(uri.indexOf("update_ok.do") != -1) {
+			updateSubmit(req, resp);
+		} else if(uri.indexOf("delete.do") != -1) {
+			delete(req, resp);
+		}
 	}
 	
 	private void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -116,6 +124,41 @@ public class MenuServlet extends MyServlet{
 		
 	}
 	
-
+	private void payment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		String[] menuname = req.getParameterValues("menuname");
+		
+		String[] menuprice = req.getParameterValues("menuprice");
+		List<MenuDTO> list=new ArrayList<>();
+		MenuDTO dto=new MenuDTO();
+		for (int i = 0; i < menuprice.length; i++) {
+			dto.setMenuname(menuname[i]);
+			dto.setMenuprice(Integer.parseInt(menuprice[i]));
+			list.add(dto);
+		}
+		
+		
+		
+		req.setAttribute("list", list);
+		forward(req, resp, "/WEB-INF/views/menu/payment.jsp");
+	}
+	
+	private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		MenuDAO dao = new MenuDAO();
+		String cp = req.getContextPath();
+		
+		int shopNum = Integer.parseInt(req.getParameter("menunum"));
+		
+		dao.deleteMenu(shopNum);
+		
+		resp.sendRedirect(cp+"/main.do");
+	}
+	
+	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
+	
+	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
 }
 

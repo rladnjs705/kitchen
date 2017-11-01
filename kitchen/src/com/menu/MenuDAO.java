@@ -105,4 +105,22 @@ public class MenuDAO {
 		return dto;
 	}
 	
+	public int deleteMenu(int shopNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		sql = "DELETE FROM shop WHERE shopNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNum);
+			result = pstmt.executeUpdate();
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
 }
