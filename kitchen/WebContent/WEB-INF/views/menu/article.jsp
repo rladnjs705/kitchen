@@ -114,7 +114,6 @@ $(function(){
 		var menuprice=parseInt($(this).attr("data-menuprice"));
 		var selectTotal=$("#selectTotal").text();
 		selectTotal=parseInt(selectTotal)+menuprice;
-		
 		var s="<div style='295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;'>";
 		s+="<div style='float: left;'>메뉴 : "+menuname+"</div>";
 		s+="<div style='float: right;'>가격 : "+menuprice+" | <span style='cursor: pointer;' class='deleteMenuItem' data-menuprice='"+menuprice+"'>X</span>";
@@ -136,6 +135,28 @@ $(function(){
 		$(div).remove();
 	});
 });
+
+function send(){
+	
+	var form = document.menunameForm;
+    var selSize = form.menuname.length;
+    var menuname = new Array(selSize);
+    var menuprice = new Array(selSize);
+   
+    for (i = 0; i < selSize; i++){
+           var menuname = form.menuname[i].value;
+           var menuprice = form.menuprice[i].value;
+          
+           menuname[i] = menuname;
+           menuprice[i] = menuprice;
+
+    }
+    form.menuname.value = menuname;
+    form.menuprice.value = menuprice;
+    form.action = "<%=cp%>/menu/payment.do";
+    form.submit();
+	
+}
 </script>
 </head>
  
@@ -158,16 +179,16 @@ $(function(){
 <form>
 <c:forEach var="dto" items="${list}">
 	<div id="article-content" align="left">
-       	<div style="float: left; width: 20%;" align="center"><a href="#"><img src="<%=cp%>/resource/images/${dto.savefilename}" width="130px;" height="90px"></a></div>
+       	<div style="float: left; width: 20%;" align="center"><img src="<%=cp%>/resource/images/${dto.savefilename}" width="130px;" height="90px"></div>
        	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;">
-       	     <span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">${dto.menuname}<br><br>${dto.menucontent}<br><br>${dto.menuprice}</span></div>
+       	     <span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">메뉴이름 : ${dto.menuname}<br><br>메뉴설명 : ${dto.menucontent}<br><br>가격 : ${dto.menuprice}</span></div>
 	</div>
 </c:forEach>
 </form>      
 
 <!-- 사이드바(결제, map, 주소) -->
 <!-- 메뉴 선택 시  각 메뉴(금액) 아래로 나열됨 총 금액, 결제하기 -->
-<form>
+<form name="menunameForm" method="post">
 	<div id="article-sidebar" align="left">
        
         	<div id="article-sidebar-head">
@@ -178,16 +199,12 @@ $(function(){
         			
         			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px dashed #bcbcbc;clear: both;">
         				<div style="float: right;">총금액 : <span id="selectTotal">0</span>원</div>
-        			</div>
-        			
+        			</div>			
         		</div>
+
         		
-        		        			
-        			
-        		
-        			<a href="<%=cp%>/menu/payment.do">
-        		<button type="button" class="btn"><b>주 문 하 기</b></button>
-        		</a>
+        		<button type="button" class="btn" onclick="send();"><b>주 문 하 기</b></button>
+
         	</div>
       	
         	
@@ -211,8 +228,10 @@ $(function(){
 			</script>
 			
 			<!-- 주소지 -->
-      		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br>${dto.shopTel1}-${dto.shopTel2}</div>
+      		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br></div>
     	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴등록</button></a>
+    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴수정</button></a>
+    	<a href="#"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴삭제</button></a>
     </div>
    </form>    
 
