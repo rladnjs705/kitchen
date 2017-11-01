@@ -330,19 +330,21 @@ function result(){
         <h1>Kwon's Kitchen</h1>
         <div class="tabs">
             <span class="tab signin active"><a href="#signin">Sign in</a></span>
-            <span class="tab signup"><a href="#signup">Sign up</a></span>
         </div>
         <div class="content">
             <div class="signin-cont cont">
                 <form name="loginForm" method="post" action="" onsubmit="check();">
                     <input type="text" name="userId" id="userId" class="inpt" placeholder="아이디">
-                       <label for="userId">Your id</label>
+                       <label for="userId">아이디</label>
                        <input type="password" name="userPwd" id="userPwd" class="inpt" placeholder="비밀번호">
-                                 <label for="userPwd">Your password</label>
+                                 <label for="userPwd">비밀번호</label>
                        <div class="submit-wrap">
-                          <input type="submit" value="Sign in" class="submit">
+                          <input type="submit" value="로그인" class="submit">
+                          <input type="button" class="submit" value="회원가입" 
+                          onclick="javascript:location.href='<%=cp%>/member/memberCreated.do'" 
+                          style="margin-top: 5px;">
                           <c:if test="${message==null}">
-                             <div class="more" style="color:#999999;" align="center"><br>Hello!</div>
+                             <div class="more" style="color:#999999;" align="center"><br>환영합니다!</div>
                           </c:if>
                           <c:if test="${message!=null}">
                              <div class="more" style="color:red;" align="center"><br>${message}</div>
@@ -351,14 +353,6 @@ function result(){
                       </div>
               </form>
            </div>
-        <div class="signup-cont cont">
-         <form method="post" enctype="multipart/form-data">
-               <div class="submit-wrap">
-                     <input type="button" class="submit" value="Sign up" onclick="javascript:location.href='<%=cp%>/member/memberCreated.do'">
-                    <div class="more" style="color:#999999;" align="center"><br>Welcome!</div>
-                </div>
-            </form>
-         </div>
      </div>
    </article>
    <div class="half bg"></div>
