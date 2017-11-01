@@ -11,8 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>spring</title>
-<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-ui.min.js" type="text/js">
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js" type="text/js">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/js/jquery-ui.min.js" type="text/js">
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
@@ -330,9 +332,17 @@ function userIdCheck() {
 	f.action="<%=cp%>/member/userIdCheck.do";
 	f.submit();
 }
+
+function idCheckFocus(){
+	if(${userIdCheck=="0"}){
+		$("#userPwd").focus();//사용가능 0 불가능 1
+	}else{
+		$("#userId").focus();//사용가능 0 불가능 1
+	}
+}
 </script>
 </head>
-<body>
+<body onload="idCheckFocus();">
 
 <div>
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
@@ -370,7 +380,7 @@ function userIdCheck() {
 			      </td>
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
-			            <input type="password" name="userPwd" maxlength="15"
+			            <input type="password" id="userPwd" name="userPwd" maxlength="15"
 			                       style="width: 30%;" placeholder="패스워드">
 			        </p>
 			        <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
@@ -626,11 +636,11 @@ function userIdCheck() {
 			      	</td>
 			  		<td width="100" style="padding: 0 0 15px 15px;">
 			  			<p style="height: 50px; margin-top: 1px; margin-bottom: 5px;">
-						<button style="height: 35px; float: left;" class="btn" type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-						<input style="width: 200px; margin-left: 2px;" type="text" name="zip" id="sample6_postcode" placeholder="우편번호">
+						<button style="height: 35px; float: left;" class="btn"  type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+						<input style="width: 200px; margin-left: 2px;" type="text" readonly="readonly" name="zip" id="sample6_postcode" placeholder="우편번호">
 			  			</p>
 			  			<p style="margin-top: 1px; margin-bottom: 5px;">
-							<input style="width: 300px;" type="text" name="addr_1" id="sample6_address" placeholder="주소">
+							<input style="width: 300px;" type="text" readonly="readonly" name="addr_1" id="sample6_address" placeholder="주소">
 							<input style="width: 250px;" type="text" name="addr_2" id="sample6_address2" placeholder="상세주소">			  		
 			  			</p>
 			  		</td>
