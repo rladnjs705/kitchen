@@ -19,6 +19,15 @@
 <script type="text/javascript">
 
 </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 <style type="text/css">
 .menubar{
 border:none;
@@ -137,12 +146,6 @@ function sendEvent() {
 		f.eventSubject.focus();
 		return;
 	}
-	str = f.eventEnd.value;
-	if(!str) {
-		alert("이벤트 종료일을 입력하세요. (YYYY-MM-DD 형식)");
-		f.eventEnd.focus();
-		return;
-	}
 	
 	str = f.eventContent.value;
 	if(!str) {
@@ -221,8 +224,11 @@ function notHangul(obj) {
 		
 	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 		<td width="100" bgcolor="#eeeeee" style="text-align: center;">이벤트종료일</td>
+			
 		<td style="padding-left:10px;">
-			<input type="text" name="eventEnd" onkeyup="notHangul(this)" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.eventEnd}">
+		
+			<!-- 글 업로드시 날짜 -->
+			<p>Date: <input type="text" id="datepicker" name="eventEnd" value="${dto.eventEnd}"></p>
 		</td>
 	</tr>
 		

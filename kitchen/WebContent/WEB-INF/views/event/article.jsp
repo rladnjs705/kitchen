@@ -19,6 +19,12 @@
 <script type="text/javascript">
 
 </script>
+
+<script>
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
 <style type="text/css">
 .menubar{
 border:none;
@@ -123,7 +129,7 @@ clear:left;
 
 <script type="text/javascript">
 function deleteEvent(eventNum) {
-	if(confirm("위 자료를 삭제 하시겠습니까 ?")) {
+	if(confirm("이 게시물을 삭제 하시겠습니까 ?")) {
 		var url="<%=cp%>/event/delete.do?eventNum="+eventNum+"&page=${page}";
 		location.href=url;
 	}
