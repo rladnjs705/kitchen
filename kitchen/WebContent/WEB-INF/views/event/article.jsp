@@ -19,6 +19,12 @@
 <script type="text/javascript">
 
 </script>
+
+<script>
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
 <style type="text/css">
 .menubar{
 border:none;
