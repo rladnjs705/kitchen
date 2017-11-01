@@ -248,6 +248,7 @@ public class EventServlet extends HttpServlet{
 		dto.setUserId(req.getParameter("userId"));
 		dto.setEventSubject(req.getParameter("eventSubject"));
 		dto.setEventContent(req.getParameter("eventContent"));
+		dto.setEventEnd(req.getParameter("eventEnd"));
 		
 		dao.updateEvent(dto);
 		

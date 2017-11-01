@@ -214,7 +214,7 @@ public class EventDAO {
 		ResultSet rs=null;
 		String sql;
 		
-		sql="SELECT eventNum, userId, eventSubject, eventContent, eventEnd, ";
+		sql="SELECT eventNum, userId, eventSubject, eventContent, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd, ";
 		sql+=" eventHitcount, eventCreated ";
 		sql+=" FROM event WHERE eventNum=?";
 		
@@ -367,7 +367,7 @@ public class EventDAO {
 		PreparedStatement pstmt=null;
 		String sql;
 		
-		sql="UPDATE event SET eventSubject=?, eventContent=?, eventEnd=?";
+		sql="UPDATE event SET eventSubject=?, eventContent=?, eventEnd=? ";
 		sql+=" WHERE eventNum=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
