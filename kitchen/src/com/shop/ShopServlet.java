@@ -121,7 +121,7 @@ public class ShopServlet extends MyServlet{
 		}
 		
 		if(state==null||state.length()==0)
-			state="kor";
+			state="ÇÑ½Ä";
 		
 		int dataCount=dao.dataCount(state);
 		int numPerPage = 10;
