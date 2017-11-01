@@ -201,6 +201,41 @@ public class ShopDAO {
 		return list;
 	}
 	
+	public int updateShop(ShopDTO dto) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql;
+		
+		try {
+			sql="UPDATE shop SET categoryName=?, shopName=?, content=?, saveFilename=?, shopZip1=?, shopZip2=?, shopAddr1=?, shopAddr2=?, shopTel1=?, shopTel2=?, shopPrice=?, shopTime=?, shopStart=?, shopEnd=?, latitude=?, longitude=? WHERE shopNum=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getCategoryname());
+			pstmt.setString(2, dto.getShopName());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getSaveFilename());
+			pstmt.setString(5, dto.getShopZip1());
+			pstmt.setString(6, dto.getShopZip2());
+			pstmt.setString(7, dto.getShopAddr1());
+			pstmt.setString(8, dto.getShopAddr2());
+			pstmt.setString(9, dto.getShopTel1());
+			pstmt.setString(10, dto.getShopTel2());
+			pstmt.setInt(11, dto.getShopPrice());
+			pstmt.setInt(12, dto.getShopTime());
+			pstmt.setString(13, dto.getShopStart());
+			pstmt.setString(14, dto.getShopEnd());
+			pstmt.setInt(15, dto.getLatitude());
+			pstmt.setInt(16, dto.getLongitude());
+			
+			result=pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	
 	
 	
 }

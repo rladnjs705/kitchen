@@ -3,7 +3,7 @@ package com.shop;
 public class ShopDTO {
 	int shopNum,shopPrice,shopTime,latitude,longitude,hitCount,listNum;
 	String userId,shopName,shopTel1,shopTel2,shopAddr1,shopAddr2,shopStart,shopEnd,Content,Created;
-	String saveFilename,OriginalFilename,Categoryname,shopZip1,shopZip2;
+	String saveFilename,Categoryname,shopZip1,shopZip2;
 
 	public int getListNum() {
 		return listNum;
@@ -125,12 +125,7 @@ public class ShopDTO {
 	public void setSaveFilename(String saveFilename) {
 		this.saveFilename = saveFilename;
 	}
-	public String getOriginalFilename() {
-		return OriginalFilename;
-	}
-	public void setOriginalFilename(String originalFilename) {
-		OriginalFilename = originalFilename;
-	}
+	
 	public String getCategoryname() {
 		return Categoryname;
 	}

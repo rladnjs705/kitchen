@@ -14,36 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>spring</title>
 
-<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css"	type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css"type="text/css"/>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css"/>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<script type="text/javascript" src="wickedpicker.js"></script>
-	
-<style type="text/css">
-.bs-write table {
-	width: 100%;
-	border: 0;
-	border-spacing: 0;
-}
 
-.table tbody tr td {
-	border-top: none;
-	font-weight: normal;
-}
-
-.bs-write table td {
-	padding: 3px 3px 3px 3px;
-}
-
-</style>
-
-<script type="text/javascript"
-	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
   function check() {
       var f = document.photoForm;
@@ -72,7 +48,7 @@
   	  if(mode=="created")
   		f.action="<%=cp%>/shop/created_ok.do";
   	  else if(mode=="update")
-  		f.action="<%=cp%>/photo/update_ok.do";
+  		f.action="<%=cp%>/shop/update_ok.do";
 
 		// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
 		return true;
@@ -85,9 +61,11 @@
 
 		$('#imageViewModal').modal('show');
 	}
-	function AddComma(data_value) {
-		return Number(data_value).toLocaleString('en').split;
-		}
+	
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 </script>
 
 
@@ -150,9 +128,9 @@
 									<tr>
 										<td class="td1">메뉴이미지</td>
 										<td colspan="3" class="td3"><img
-											src="<%=cp%>/uploads/shop/${dto.imageFilename}" width="30"
+											src="<%=cp%>/uploads/shop/${dto.saveFilename}" width="30"
 											height="30" border="0"
-											onclick="imageViewer('<%=cp%>/uploads/shop/${dto.imageFilename}');"
+											onclick="imageViewer('<%=cp%>/uploads/shop/${dto.saveFilename}');"
 											style="cursor: pointer;"></td>
 									</tr>
 								</c:if>
@@ -191,7 +169,7 @@
 								<tr>
 								<tr>
 									<th>배달 최소 비용</th>
-									<td><input type="text" name="shopPrice" value="${dto.shopPrice}">원</td>
+									<td><input type="text" name="shopPrice" value="${dto.shopPrice}" onkeypress="numberWithCommas()">원</td>
 								</tr>
 								<tr>
 									<th>배달 소요 시간</th>

@@ -55,7 +55,7 @@ public class ShopServlet extends MyServlet{
 			updateForm(req, resp);
 		}else if(uri.indexOf("update_ok.do")!=-1) {
 			//글 수정 완료
-			updateSubmit(req, resp);
+			updateSubmit(req, resp, pathname);
 		}else if(uri.indexOf("delete.do")!=-1) {
 			//글 삭제
 			delete(req, resp);
@@ -175,11 +175,70 @@ public class ShopServlet extends MyServlet{
 	}
 	
 	private void updateForm(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
+		ShopDAO dao=new ShopDAO();
 		
+		int shopNum=Integer.parseInt(req.getParameter("shopNum"));
+		String page=req.getParameter("page");
+		
+		String cp=req.getContextPath();
+		ShopDTO dto=dao.readShop(shopNum);
+		
+		if(dto==null) {
+			resp.sendRedirect(cp+"/shop/shopmenu.do?page="+page);
+			return;
+		}
+		
+		req.setAttribute("mode", "update");
+		req.setAttribute("dto", dto);
+		req.setAttribute("page", page);
+		
+		forward(req, resp, "/WEB-INF/views/shop/created.jsp");
 	}
 	
-	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
+	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname)throws ServletException , IOException{
+		ShopDAO dao=new ShopDAO();
+		ShopDTO dto=new ShopDTO();
 		
+		String encType="utf-8";
+		int maxFilesize=20*1024*1024;
+		MultipartRequest mreq=null;
+		mreq=new MultipartRequest(req, pathname, maxFilesize, encType, new DefaultFileRenamePolicy());
+		
+		dto.setShopNum(Integer.parseInt(mreq.getParameter("shopNum")));
+		dto.setCategoryname(mreq.getParameter("categoryName"));
+		dto.setShopName(mreq.getParameter("shopName"));
+		dto.setContent(mreq.getParameter("content"));
+		dto.setSaveFilename(mreq.getParameter("saveFilename"));
+		dto.setShopZip1(mreq.getParameter("shopZip1"));
+		dto.setShopZip2(mreq.getParameter("shopZip2"));
+		dto.setShopAddr1(mreq.getParameter("shopAddr1"));
+		dto.setShopAddr2(mreq.getParameter("shopAddr2"));
+		dto.setShopTel1(mreq.getParameter("shopTel1"));
+		dto.setShopTel2(mreq.getParameter("shopTel2"));
+		dto.setShopPrice(Integer.parseInt(mreq.getParameter("shopPrice")));
+		dto.setShopTime(Integer.parseInt(mreq.getParameter("shopTime")));
+		dto.setShopStart(mreq.getParameter("shopStart"));
+		dto.setShopEnd(mreq.getParameter("shopEnd"));
+		dto.setLatitude(Integer.parseInt(mreq.getParameter("latitude")));
+		dto.setLongitude(Integer.parseInt(mreq.getParameter("longitude")));
+		
+		dto.setShopEnd(mreq.getParameter("shopEnd"));
+		
+		if(mreq.getFile("upload")!=null) {
+			if(dto.getSaveFilename().length()!=0) {
+				//기존 파일 지우기
+				FileManager.doFiledelete(pathname, dto.getSaveFilename());
+			}
+			dto.setSaveFilename(mreq.getFilesystemName("upload"));
+			
+		}
+
+		String page=mreq.getParameter("page");
+		dao.updateShop(dto);
+		
+		String cp=req.getContextPath();
+		
+		resp.sendRedirect(cp+"/fbbs/list.do?page="+page);
 	}
 	
 	private void delete(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
