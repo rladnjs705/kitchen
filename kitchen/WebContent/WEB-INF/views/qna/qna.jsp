@@ -42,7 +42,7 @@ font-weight:bold;
 
 .menubar ul{
 background: gray;
-height:50px;
+height:70px;
 list-style:none;
 margin:0;
 padding:0;
@@ -58,7 +58,7 @@ background: gray;
 color:#cccccc;
 display:block;
 font-weight:normal;
-line-height:50px;
+line-height:70px;
 margin:0px;
 padding:0px 25px;
 text-align:center;
@@ -104,7 +104,7 @@ background:none;
 
 .menubar li ul a{
 display:block;
-height:50px;
+height:70px;
 font-size:12px;
 font-style:normal;
 margin:0px;
@@ -157,7 +157,6 @@ clear:left;
   </ul>
 </div>
 <br><br>
-
 <table style="width: 900px; margin: 0px auto; border-spacing: 0">
 <tr height="50">
 <td align="center" width="400">
@@ -189,14 +188,19 @@ clear:left;
   <h3 style="text-align: left;"> | 주문 메뉴를 변경하고 싶어요 </h3>
   <div>
     <p style="text-align: left;">
-    메뉴에서 주문버튼
+    - 주문이 접수 전이라면 업소에서 확인 전으로 어플에서 직접 취소 후 재주문 부탁 드립니다.<br>
+	다만, 주문이 "접수 완료" 인 경우 메뉴 변경이 어려울 수 있으니 업소 혹은 권식당 고객센터 ( 0000-0000 )로 연락 부탁 드립니다. 
     </p>
-  </div>
-  
-  <h3 style="text-align: left;"> | 메뉴를 선택하는데 </h3>
+</div>
+  <h3 style="text-align: left;"> | 이번 달 이벤트는 어떻게 되나요? </h3>
   <div>
     <p style="text-align: left;">
-    무
+    - 권식당에서는 고객님들께 더 많은 혜택을 제공해드리기 위해 노력하고 있습니다.<br>
+    진행하고 있는 이벤트는 아래의 경로를 통하여 확인하실 수 있습니다.
+    <br>
+    <br>
+    <br>
+    - 고객센터 -> 이벤트 -> 진행중인 이벤트
     </p>
   </div>
   
@@ -209,10 +213,12 @@ clear:left;
     </p>
   </div>
   
-  <h3 style="text-align: left;"> | 홈페이지에 있는 가격이 정확한 가격인가요? </h3>
+  <h3 style="text-align: left;"> | 배달예정시간보다 훨씬 늦게 음식이 도착하면 환불이나 보상이 되나요? </h3>
   <div>
     <p style="text-align: left;">
-    네
+    - 권식당은 주문 내역에 대한 정보를 제공하고 결제 관련 판매 중개만을 하고 있습니다.<br>
+배달 서비스나 배달 음식의 품질에 대해서는 업소에서 진행하는 부분으로,<br>
+만약 환불이나 보상을 원하신다면 번거롭더라도 업소와 확인을 부탁 드립니다.<br>
     </p>
   </div>
   
@@ -227,7 +233,8 @@ clear:left;
   <h3 style="text-align: left;"> | 탈퇴 후 동일한 ID로 가입이 가능한가요? </h3>
   <div>
     <p style="text-align: left;">
-    ㅂ
+    - 네. 동일한 이메일 ID로 재가입이 가능합니다.<br>
+단, 기존의 쿠폰/포인트, 주문내역과 같은 정보는 모두 소멸되며 복구가 불가한 점 유의하시어 진행 부탁드립니다.
     </p>
   </div>
   
@@ -270,8 +277,6 @@ clear:left;
 	</tbody>
 </table>
 
-<table >
-</table>
 
 </div>
 <br>

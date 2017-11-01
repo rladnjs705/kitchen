@@ -41,7 +41,7 @@ font-weight:bold;
 
 .menubar ul{
 background: gray;
-height:50px;
+height:70px;
 list-style:none;
 margin:0;
 padding:0;
@@ -57,7 +57,7 @@ background: gray;
 color:#cccccc;
 display:block;
 font-weight:normal;
-line-height:50px;
+line-height:70px;
 margin:0px;
 padding:0px 25px;
 text-align:center;
@@ -103,7 +103,7 @@ background:none;
 
 .menubar li ul a{
 display:block;
-height:50px;
+height:70px;
 font-size:12px;
 font-style:normal;
 margin:0px;
