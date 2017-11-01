@@ -641,7 +641,7 @@ function userIdCheck() {
 			     <tr height="45"> 
 			      <td align="center">
 			        <button type="reset" class="submit">다시입력</button>
-			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/';" style="margin-left: 10px; margin-right: 10px;">수정취소</button>
+			        <button type="button" class="submit" onclick="javascript:location.href='<%=cp%>/member/mypage.do';" style="margin-left: 10px; margin-right: 10px;">수정취소</button>
 			        <button type="button" name="sendButton" class="submit" onclick="memberOk();">수정완료</button>
 			      </td>
 			    </tr>

@@ -133,8 +133,10 @@ public class MemberServlet extends MyServlet{
 		if(check!=0) {
 			req.setAttribute("userId", dto.getUserId());
 			forward(req, resp, "/WEB-INF/views/member/succeed.jsp");
+			return;
 		}else {
 			forward(req, resp, "/WEB-INF/views/member/fail.jsp");
+			return;
 		}
 	}
 	

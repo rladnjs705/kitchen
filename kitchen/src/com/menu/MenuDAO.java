@@ -37,47 +37,31 @@ public class MenuDAO {
 		return result; 
 	}
 	
-	public List<MenuDTO> listMenu(int start, int end){
+	public List<MenuDTO> listMenu(int shopnum){
 		List<MenuDTO> list = new ArrayList<MenuDTO>();
-		List<ShopDTO> slist = new ArrayList<ShopDTO>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
 		
 		try {
-			sql = "SELECT * FROM shopmenu m JOIN shop s ON m.shopnum=s.shopnum;";
+			sql = "SELECT * FROM shopmenu m JOIN shop s ON m.shopnum=s.shopnum WHERE shopnum=?";
 			
 			pstmt = conn.prepareStatement(sql);
-
+			pstmt.setInt(1, shopnum);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				MenuDTO dto = new MenuDTO();
-				ShopDTO sdto = new ShopDTO();
 						
 				dto.setMenuname(rs.getString("menuname"));
 				dto.setMenucountent(rs.getString("menucontent"));
 				dto.setMenuprice(rs.getInt("menuprice"));
 				dto.setOriginalfilename(rs.getString("originalfilename"));
-				sdto.setShopName(rs.getString("shopName"));
-				sdto.setShopTel1(rs.getString("shopTel1"));
-				sdto.setShopTel2(rs.getString("shopTel2"));
-				sdto.setShopAddr1(rs.getString("shopAddr1"));
-				sdto.setShopAddr2(rs.getString("shopAddr2"));
-				sdto.setShopPrice(rs.getInt("shopPrice"));
-				sdto.setShopTime(rs.getInt("shopTime"));
-				sdto.setShopStart(rs.getString("shopStart"));
-				sdto.setShopEnd(rs.getString("shopEnd"));
-				sdto.setLatitude(rs.getInt("latitude"));
-				sdto.setLongitude(rs.getInt("longitude"));
-				sdto.setContent(rs.getString("Content"));
-				sdto.setShopZip1(rs.getString("shopZip1"));
-				sdto.setOriginalFilename(rs.getString("originalFilename"));
 				
 				list.add(dto);
-				slist.add(sdto);
+
 			}
 			rs.close();
 			pstmt.close();
@@ -87,8 +71,5 @@ public class MenuDAO {
 		} 
 		return list;
 	}
-
-	
-	
 	
 }

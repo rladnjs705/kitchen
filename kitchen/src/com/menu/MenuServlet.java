@@ -59,7 +59,7 @@ public class MenuServlet extends MyServlet{
 		}
 		
 		if(uri.indexOf("article.do") != -1) {
-			forward(req, resp, "/WEB-INF/views/menu/article.jsp");
+			article(req, resp);
 		} else if(uri.indexOf("payment.do") != -1) {
 			forward(req, resp, "/WEB-INF/views/menu/payment.jsp");
 		} else if(uri.indexOf("created.do") != -1) {
@@ -67,6 +67,9 @@ public class MenuServlet extends MyServlet{
 		} else if(uri.indexOf("created_ok.do") != -1) {
 			createdSubmit(req, resp);
 		} 
+	}
+	private void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		
 	}
 	
 	private void createdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -98,12 +101,11 @@ public class MenuServlet extends MyServlet{
 					
 		dto.setSavefilename(saveFilename);
 
-	}
+		}
 		dao.insertMenu(dto);
 		
 		resp.sendRedirect(cp + "/menu/article.do");
 	}
-	
 	
 
 }
