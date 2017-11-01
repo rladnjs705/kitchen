@@ -166,7 +166,7 @@ function deleteEvent(eventNum) {
 
 
 
-<table style="width: 600px; margin: 30px auto 0px; border-spacing: 0px;">
+<table style="width: 700px; margin: 30px auto 0px; border-spacing: 0px;">
 <tr height="40">
 	<td align="left" class="title">
 		<h3><span>|</span> 이벤트 게시판</h3>
@@ -174,7 +174,7 @@ function deleteEvent(eventNum) {
 </tr>
 </table>
 
-<table style="width: 600px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+<table style="width: 700px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 <tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 	<td colspan="2" align="center">
 		${dto.eventSubject}
@@ -215,7 +215,7 @@ function deleteEvent(eventNum) {
 </tr>
 </table>
 
-<table style="width: 600px; margin: 0px auto 20px; border-spacing: 0px;">
+<table style="width: 700px; margin: 0px auto 20px; border-spacing: 0px;">
 <tr height="45">
 	<td width="300" align="left">
 		<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/update.do?eventNum=${dto.eventNum}&page=${page}';">
