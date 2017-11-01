@@ -17,9 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-$( function() {
-    $( "#accordion" ).accordion();
-  } );
+
 </script>
 <style type="text/css">
 .menubar{
@@ -139,11 +137,11 @@ clear:left;
    <ul>
       <li><a href="#">공지사항 </a></li>
       <li><a href="#">문의하기</a></li>
-      <li><a href="#">질문과답변</a></li> 
-      <li><a href="#" style="background: rgb(71,71,71);" id="current">이벤트</a>
+      <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
+      <li><a href="<%=cp%>/event/list.do" style="background: rgb(71,71,71);" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -173,6 +171,7 @@ clear:left;
 
 <table style="width: 700px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
 	<tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+		<th width="100" style="color: #787878;">이벤트 종료일</th>
 		<th width="60" style="color: #787878;">번호</th>
 		<th style="color: #787878;">제목</th>
 		<th width="100" style="color: #787878;">작성자</th>
@@ -182,6 +181,7 @@ clear:left;
 
 <c:forEach var="dto" items="${list}">
 	<tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;">
+		<td>${dto.eventEnd}</td>
 		<td>${dto.listNum}</td>
 		<td align="left" style="padding-left: 10px;">
 			<a href="${articleUrl}&eventNum=${dto.eventNum}">${dto.eventSubject}</a>
@@ -229,5 +229,14 @@ clear:left;
 	</tr>
 </table>
 
+<br>
+<br>
+<br>
+<div class="footer">
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
+
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
 </body>
 </html>

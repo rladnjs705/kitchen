@@ -4,8 +4,14 @@ public class EventDTO {
 	private int listNum, eventNum, eventHitcount;
 	
 	private String userId, eventProcess, eventSubject,
-	eventContent, eventCreated, saveFilename, originalFilename;
+	eventContent, eventCreated, saveFilename, originalFilename, eventEnd;
 	
+	public String getEventEnd() {
+		return eventEnd;
+	}
+	public void setEventEnd(String eventEnd) {
+		this.eventEnd = eventEnd;
+	}
 	public int getListNum() {
 		return listNum;
 	}
