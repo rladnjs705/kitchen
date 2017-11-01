@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
-</head>
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <style>
 
@@ -106,8 +107,39 @@
   
 </style>
 
+<script type="text/javascript">
+$(function(){
+	$(document).on("click", ".menuselect", function(){
+		var menuname=$(this).attr("data-menuname");
+		var menuprice=parseInt($(this).attr("data-menuprice"));
+		var selectTotal=$("#selectTotal").text();
+		selectTotal=parseInt(selectTotal)+menuprice;
+		
+		var s="<div style='295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;'>";
+		s+="<div style='float: left;'>"+menuname+"</div>";
+		s+="<div style='float: right;'>"+menuprice+" | <span style='cursor: pointer;' class='deleteMenuItem' data-menuprice='"+menuprice+"'>X</span>";
+		s+="<input type='hidden' name='menuname' value='"+menuname+"'>";
+		s+="<input type='hidden' name='menuprice' value='"+menuprice+"'>";
+		s+="</div>"
+		alert(s);
+		$("#selectMenuLayout").append(s);
+		$("#selectTotal").text(selectTotal);
+	});
+});
 
-
+$(function(){
+	$(document).on("click", ".deleteMenuItem", function(){
+		var menuprice=parseInt($(this).attr("data-menuprice"));
+		var selectTotal=$("#selectTotal").text();
+		selectTotal=parseInt(selectTotal)-menuprice;
+		$("#selectTotal").text(selectTotal);
+		var div=$(this).parent().parent();
+		$(div).remove();
+	});
+});
+</script>
+</head>
+ 
 <body>
 
 <div class="header">
@@ -120,7 +152,7 @@
 <div>
 	<div id="article-container" align="left" style="background: #F6F6F6;"><h2>${dto.shopName}</h2></div>
 	<div id="article-container_bottom">
-		<div style="float: left; width: 15%" align="center"><img src="<%=cp%>/resource/images/1.png" width="100px;" height="100px"></div>
+		<div style="float: left; width: 15%" align="center"><img src="<%=cp%>/resource/images/${dto.saveFilename}" width="130px;" height="90px"></div>
 		<div style="float: left; width: 80%; margin-left: 10px;"><br><b>최소주문금액 : ${dto.shopPrice}원 이상</b><br><b>결제방법 : </b>현금, 카드</div>
 	</div>
 </div>
@@ -130,8 +162,9 @@
 <form>
 <c:forEach var="dto" items="${list}">
 	<div id="article-content" align="left">
-       	<div style="float: left; width: 20%;" align="center"><a href="#"><img src="<%=cp%>/WEB-INF/views/menu/image/2017103114560019664884620055.jpg" width="300px;" height="300px"></a></div>
-       	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;"><a href="#">${dto.menuname}<br><br>${dto.menucontent}<br><br>${dto.menuprice}</a></div>
+       	<div style="float: left; width: 20%;" align="center"><a href="#"><img src="<%=cp%>/resource/images/${dto.savefilename}" width="130px;" height="90px"></a></div>
+       	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;">
+       	     <span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">${dto.menuname}<br><br>${dto.menucontent}<br><br>${dto.menuprice}</span></div>
 	</div>
 </c:forEach>
 </form>      
@@ -144,12 +177,11 @@
         	<div id="article-sidebar-head">
         		<div style="background: #EAEAEA; height:30px; border-bottom: 1px solid #F6F6F6; padding-top: 10px; padding-bottom: 10px;"><h2 align="center">선 택 메 뉴</h2></div>
         		<div id="select-menu-order" style="height: 335px;">
-        			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;">
-        				<div style="float: left;">비빔밥</div>
-        				<div style="float: right;">금액</div>
-        			</div>
-        			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px dashed #bcbcbc;">
-        				<div style="float: right;">총금액</div>
+        		    <div id="selectMenuLayout" style="clear: both;">
+        		    </div>
+        			
+        			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px dashed #bcbcbc;clear: both;">
+        				<div style="float: right;">총금액 : <span id="selectTotal">0</span>원</div>
         			</div>
         			
         		</div>
@@ -183,7 +215,7 @@
 			</script>
 			
 			<!-- 주소지 -->
-      		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br>${dto.shopTel1}<br>${dto.shopTel2}</div>
+      		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br>${dto.shopTel1}-${dto.shopTel2}</div>
     	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴등록</button></a>
     </div>
    </form>    

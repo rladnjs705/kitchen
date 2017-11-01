@@ -17,7 +17,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		String sql;
 		
-		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?)";
+		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename, shopnum) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 
 		try {
 			conn = DBConn.getConnection();
@@ -27,7 +27,7 @@ public class MenuDAO {
 			pstmt.setInt(2, dto.getMenuprice());
 			pstmt.setString(3, dto.getMenucontent());
 			pstmt.setString(4, dto.getSavefilename());
-			
+			pstmt.setInt(5, dto.getShopnum());
 			result = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
-		sql="SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, latitude, longitude FROM shop WHERE shopNum=? ";
+		sql="SELECT shopNum, shopName, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, latitude, longitude, savefilename FROM shop WHERE shopNum=? ";
 		
 		try {
 			pstmt= conn.prepareStatement(sql);
@@ -93,8 +93,9 @@ public class MenuDAO {
 				dto.setShopAddr1(rs.getString("shopAddr1"));
 				dto.setShopAddr2(rs.getString("shopAddr2"));
 				dto.setShopPrice(rs.getInt("shopPrice"));
-				dto.setLatitude(rs.getInt("latitude"));
-				dto.setLongitude(rs.getInt("longitude"));
+				dto.setLatitude(rs.getString("latitude"));
+				dto.setLongitude(rs.getString("longitude"));
+				dto.setSaveFilename(rs.getString("saveFilename"));
 			}
 				rs.close();
 				pstmt.close();

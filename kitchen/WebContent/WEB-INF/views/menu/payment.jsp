@@ -212,14 +212,7 @@
         				<div style="float: left;">비빔밥</div>
         				<div style="float: right;">금액</div>
         			</div>
-        			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;">
-        				<div style="float: left;">비빔밥</div>
-        				<div style="float: right;">금액</div>
-        			</div>
-        			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;">
-        				<div style="float: left;">비빔밥</div>
-        				<div style="float: right;">금액</div>
-        			</div>
+
         			<div style="295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px dashed #bcbcbc;">
         				<div style="float: right;">총금액</div>
         			</div>

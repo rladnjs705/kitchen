@@ -73,7 +73,6 @@
      // var shopNum = "${shopNum}";
   	  if(mode=="created")
   		f.action="<%=cp%>/menu/created_ok.do";
-  		//page="+page+"&state="+state+"&shopNum="+shopNum;
   	  else if(mode=="update")
   		f.action="<%=cp%>/menu/update_ok.do";
   		
@@ -162,18 +161,23 @@
 							<tfoot>
 								<tr>
 									<td colspan="4" style="text-align: center; padding-top: 15px;">
+									    <input type="hidden" name="shopNum" value="${shopNum}">
+									    <input type="hidden" name="page" value="${page}">
+									    <input type="hidden" name="state" value="${state}">
+									    
 										<button type="button" class="btn btn-primary" onclick="check();">
 											등록 <span class="glyphicon glyphicon-ok"></span>
 										</button>
 										<button type="button" class="btn btn-danger"
 											onclick="javascript:location.href='<%=cp%>/menu/menulist.do';">
 											취소</button> <c:if test="${mode=='update'}">
-											<input type="hidden" name="num" value="${dto.shopNum}">
+											<input type="hidden" name="menunum" value="${dto.menunum}">
 											<input type="hidden" name="userId" value="${dto.userId}">
 											<input type="hidden" name="imageFilename"
 												value="${dto.savefileame}">
 											<input type="hidden" name="page" value="${page}">
 										</c:if>
+										
 									</td>
 								</tr>
 							</tfoot>
