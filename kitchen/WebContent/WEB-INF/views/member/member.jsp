@@ -383,7 +383,7 @@ function idCheckFocus(){
 			            <input type="password" id="userPwd" name="userPwd" maxlength="15"
 			                       style="width: 30%;" placeholder="패스워드">
 			        </p>
-			        <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
+			        <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 영문자가 포함되어야 합니다.</p>
 			      </td>
 			  </tr>
 			
