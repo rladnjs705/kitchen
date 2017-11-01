@@ -2,6 +2,8 @@ package com.shop;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -114,8 +116,13 @@ public class ShopServlet extends MyServlet{
 		if(page!=null) {
 			currentPage = Integer.parseInt(page);
 		}
-		int dataCount = dao.dataCount();
-		
+		String state=req.getParameter("state");
+		if(state!=null&&req.getMethod().equalsIgnoreCase("get")) {
+			state=URLDecoder.decode(state,"utf-8");
+		}
+		if(state==null)
+			state="ÇÑ½Ä";
+		int dataCount=dao.dataCount(state);
 		int numPerPage = 10;
 		int totalPage = util.pageCount(numPerPage, dataCount);
 		
@@ -128,7 +135,7 @@ public class ShopServlet extends MyServlet{
 		
 		List<ShopDTO> list = new ArrayList<>();
 		
-		list = dao.listShop(start, end);
+		list = dao.listShop(start, end, state);
 		
 		for(ShopDTO dto: list) {
 			System.out.println(dto.getContent());
@@ -145,7 +152,7 @@ public class ShopServlet extends MyServlet{
 		String cp = req.getContextPath();
 		String listUrl = cp+"/shop/shopmenu.do";
 		String articleUrl = cp+"/menu/article.do?page="+currentPage;
-		String query = "";
+		String query = "state="+URLEncoder.encode(state,"utf-8");
 		
 		if(query.length()!=0) {
 			listUrl+="?"+query;
@@ -156,6 +163,8 @@ public class ShopServlet extends MyServlet{
 		
 		req.setAttribute("page", currentPage);
 		req.setAttribute("query", query);
+		
+		req.setAttribute("state", state);
 		req.setAttribute("articleUrl", articleUrl);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("totalPage", totalPage);

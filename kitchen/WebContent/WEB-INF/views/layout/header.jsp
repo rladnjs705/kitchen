@@ -55,37 +55,37 @@
 </div><br>
 		    <ul class="nav">
 					<li>
-						<a href="<%=cp%>/">
+						<a href="<%=cp%>/shop/shopmenu.do?state=한식">
 						<img src="<%=cp%>/resource/images/food.png" width="40" height="40"><br>
 						 &nbsp;한&nbsp;식
 						 </a>
 					 </li>
 					<li>
-						<a href="#"style="margin-left: 100px;">
+						<a href="<%=cp%>/shop/shopmenu.do?state=일식"style="margin-left: 100px;">
 						<img src="<%=cp%>/resource/images/sus.png" width="40" height="40"><br>
 						 &nbsp;일&nbsp;식
 						 </a>
 					 </li>
 					<li>
-						<a href="#"style="margin-left: 100px;">
+						<a href="<%=cp%>/shop/shopmenu.do?state=양식"style="margin-left: 100px;">
 						<img src="<%=cp%>/resource/images/steak.png" width="40" height="40"><br>
 						 &nbsp;양&nbsp;식
 						 </a>
 					</li>
 					<li>
-						<a href="#"style="margin-left: 100px;">
+						<a href="<%=cp%>/shop/shopmenu.do?state=중식"style="margin-left: 100px;">
 						<img src="<%=cp%>/resource/images/jajang.png" width="50" height="50"><br>
 						 &nbsp;중&nbsp;식
 						 </a>
 					 </li>
 					<li>
-						<a href="#" style="margin-left: 100px;">
+						<a href="<%=cp%>/shop/shopmenu.do?state=피자" style="margin-left: 100px;">
 						<img src="<%=cp%>/resource/images/pizza.png" width="40" height="40"><br>
 						 &nbsp;피&nbsp;자
 						 </a>
 					 </li>
 					<li>
-						<a href="#" style="margin-left: 100px;">
+						<a href="<%=cp%>/shop/shopmenu.do?state=치킨" style="margin-left: 100px;">
 						<img src="<%=cp%>/resource/images/roast-chicken.png" width="40" height="40"><br>
 						&nbsp;치&nbsp;킨
 						</a>
