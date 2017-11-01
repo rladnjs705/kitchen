@@ -19,8 +19,8 @@ public class NoticeDAO {
 		int result=0;
 		
 		try {
-			sb.append("INSERT INTO notice(num,notice,userId,subject,content,saveFileName,originalFileName) ");
-			sb.append("VALUES(notice_seq.NEXTVAL,?,?,?,?,?,?)");
+			sb.append("INSERT INTO notice(num,notice,userId,subject,content,saveFileName,originalFileName,pwd) ");
+			sb.append("VALUES(notice_seq.NEXTVAL,?,?,?,?,?,?,?)");
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, dto.getNotice());
 			pstmt.setString(2, dto.getUserId());
@@ -28,6 +28,7 @@ public class NoticeDAO {
 			pstmt.setString(4, dto.getContent());
 			pstmt.setString(5, dto.getSaveFileName());
 			pstmt.setString(6, dto.getOriginalFileName());
+			pstmt.setInt(7, dto.getPwd());
 			result = pstmt.executeUpdate();
 			
 			pstmt.close();
@@ -202,7 +203,7 @@ public class NoticeDAO {
 	public NoticeDTO readNotice(int num) {
 		NoticeDTO dto = null;
 		try {
-			sql = "SELECT num,notice,n.userId,userName,subject,content,saveFileName,originalFileName,hitCount,TO_CHAR(created,'YYYY-MM-DD') created FROM notice n "+ 
+			sql = "SELECT num,notice,n.userId,userName,subject,content,saveFileName,originalFileName,hitCount,pwd,TO_CHAR(created,'YYYY-MM-DD') created FROM notice n "+ 
 					"JOIN member m ON n.userId=m.userId WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -221,6 +222,7 @@ public class NoticeDAO {
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setHitCount(rs.getInt("hitCount"));
 				dto.setCreated(rs.getString("created"));
+				dto.setPwd(rs.getInt("pwd"));
 			}
 			rs.close();
 			pstmt.close();

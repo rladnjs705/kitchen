@@ -14,16 +14,57 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/menubar.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 function deleteBoard(num) {
-	if(confirm("게시물을 삭제 하시겠습니까 ?")) {
+	<c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">
+	var pass = prompt('패스워드를 입력하세요','');
+	if(pass==${dto.pwd}){
 		var url="<%=cp%>/bbs/delete.do?num="+num+"&page=${page}";
 		location.href=url;
+	}else{
+		var pass = prompt('패스워드가 틀렸습니다. 다시 입력해 주세요.','');
 	}
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+    alert("삭제권한이 없습니다.");
+	</c:if>
+}
+
+function updateInquiry() {
+	<c:if test="${sessionScope.member.userId==dto.userId}">
+	var num = "${dto.questionNum}";
+    var page = "${page}";
+    var query = "num="+num+"&page="+page;
+    var url = "<%=cp%>/bbs/update.do?" + query;
+	var pass = prompt('패스워드를 입력하세요','');
+	if(pass==${dto.pwd}){
+		location.href=url;
+	}else{
+		var pass = prompt('패스워드가 틀렸습니다. 다시 입력해 주세요.','');
+	}
+	</c:if>
+
+	<c:if test="${sessionScope.member.userId!=dto.userId}">
+    alert("수정권한이 없습니다.");
+	</c:if>
+}
+
+function reply(){
+	<c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">
+		var url="<%=cp%>/bbs/reply.do?num=${dto.questionNum}&page=${page}";
+		location.href=url;
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+    alert("답글작성 권한이 없습니다.");
+	</c:if>
+	
 }
 </script>
 </head>
@@ -31,6 +72,26 @@ function deleteBoard(num) {
 
 <div class="header">
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
+	
+	<div class="containerList">
+
+<div class="body-title">
+            <h3>고객센터 | </h3>
+</div>
+<div class="menubar">
+   <ul>
+      <li><a href="<%=cp%>/notice/list.do">공지사항 </a></li>
+      <li><a href="<%=cp%>/bbs/list.do"  style="background: rgb(71,71,71);">문의하기</a></li>
+      <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
+      <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
+         <ul>
+           <li><a href="#">진행중인이벤트</a></li> 
+           <li><a href="#">지난이벤트</a></li>
+         </ul>
+      </li>
+  </ul>
+</div>
 </div>
 	
 <div class="container">
@@ -46,7 +107,8 @@ function deleteBoard(num) {
 			
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 			    <td width="50%" align="left" style="padding-left: 5px;">
-			       이름 : ${dto.userName}
+			    <c:if test="${dto.userId=='admin'}">이름 : ${dto.userName}</c:if>
+			    <c:if test="${dto.userId!='admin'}">이름 : ${dto.userName}(${dto.viewId})</c:if>
 			    </td>
 			    <td width="50%" align="right" style="padding-right: 5px;">
 			        ${dto.created} | 조회 ${dto.hitCount}
@@ -68,7 +130,7 @@ function deleteBoard(num) {
 			</c:if>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 			    <td colspan="2" align="left" style="padding-left: 5px;">
-			       이전글 :	<c:if test="${not empty preDto}"><a href="${articleUrl}&num=${preDto.questionNum}">${preDto.subject}</a></c:if>
+			       이전글 :	<c:if test="${not empty preDto}"><a href="<%=cp%>/bbs/article.do?num=${preDto.questionNum}&page=${page}">${preDto.subject}</a></c:if>
 							<c:if test="${empty preDto}">${msgP}</c:if>
 							
 			    </td>
@@ -76,7 +138,7 @@ function deleteBoard(num) {
 			
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 			    <td colspan="2" align="left" style="padding-left: 5px;">
-			       다음글 :	<c:if test="${not empty nextDto}"><a href="${articleUrl}&num=${nextDto.questionNum}">${nextDto.subject}</a></c:if>
+			       다음글 :	<c:if test="${not empty nextDto}"><a href="<%=cp%>/bbs/article.do?num=${nextDto.questionNum}&page=${page}">${nextDto.subject}</a></c:if>
 							<c:if test="${empty nextDto}">${msgN}</c:if>
 			    </td>
 			</tr>
@@ -85,9 +147,14 @@ function deleteBoard(num) {
 			<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
 			<tr height="45">
 			    <td width="300" align="left">
-			    	<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/bbs/reply.do?num=${dto.questionNum}&page=${page}';">답글달기</button>
-			          <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/bbs/update.do?num=${dto.questionNum}&page=${page}';">수정</button>
-			          <button type="button" class="btn" onclick="deleteBoard('1');">삭제</button>
+			    	<button type="button" class="btn" onclick="reply()">답글달기</button>
+			    	<c:if test="${type=='inquiry'}">
+			    	<button type="button" class="btn" onclick="updateInquiry();">수정</button>
+			        </c:if>
+			        <c:if test="${type=='reply'}">
+			    	<button type="button" class="btn" onclick="updateInquiry();">수정</button>
+			        </c:if>
+			        <button type="button" class="btn" onclick="deleteBoard('${dto.questionNum}');">삭제</button>
 			    </td>
 			    
 			    <td align="right">

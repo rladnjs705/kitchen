@@ -132,11 +132,11 @@ public class MemberServlet extends MyServlet{
 		int check=dao.insertMember(dto);
 		if(check!=0) {
 			req.setAttribute("result", "succeed");
-			forward(req, resp, "/WEB-INF/views/main/main.jsp");
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
 			return;
 		}else {
 			req.setAttribute("result", "fail");
-			forward(req, resp, "/WEB-INF/views/main/main.jsp");
+			forward(req, resp, "/WEB-INF/views/member/member.jsp");
 			return;
 		}
 	}

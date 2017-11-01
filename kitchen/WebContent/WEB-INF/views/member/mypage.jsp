@@ -217,32 +217,32 @@ function send(){
         			</td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">아이디</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userId}<input type="hidden" name="userId" value="${userId}"></td>
+        			<td style="font-weight: 900;">아이디&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userId}<input type="hidden" name="userId" value="${userId}"></td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">이름</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userName}<input type="hidden" name="userName" value="${userName}"></td>
+        			<td style="font-weight: 900;">이름&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${userName}<input type="hidden" name="userName" value="${userName}"></td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">생년월일</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.birth}<input type="hidden" name="birth" value="${member.birth}"></td>
+        			<td style="font-weight: 900;">생년월일&ensp;&ensp;</td>
+        			<td class="td"  style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.birth}<input type="hidden" name="birth" value="${member.birth}"></td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">포인트</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.point}</td>
+        			<td style="font-weight: 900;">포인트&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.point}</td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">전화번호</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.tel}<input type="hidden" name="tel" value="${member.tel}"></td>
+        			<td style="font-weight: 900;">전화번호&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.tel}<input type="hidden" name="tel" value="${member.tel}"></td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">이메일</td>
-        			<td class="td">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.email}<input type="hidden" name="email" value="${member.email}"></td>
+        			<td style="font-weight: 900;">이메일&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;${member.email}<input type="hidden" name="email" value="${member.email}"></td>
         		</tr>
         		<tr style="text-align: right;">
-        			<td style="font-weight: 900;">주소</td>
-        			<td class="td">
+        			<td style="font-weight: 900;">주소&ensp;&ensp;</td>
+        			<td class="td" style="border-right: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee; border-bottom-right-radius: 10px;">
         			<input type="hidden" name="zip" value="${member.zip}">
         			&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
         			${member.addr_1}

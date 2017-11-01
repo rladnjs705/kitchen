@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.SessionInfo;
 import com.util.MyUtil;
 
 @WebServlet("/event/*")
@@ -67,6 +69,15 @@ public class EventServlet extends HttpServlet{
 		EventDAO dao=new EventDAO();
 		MyUtil util=new MyUtil();
 		String cp=req.getContextPath();
+		
+		//로그인했는지 안했는지 확인
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		//관리자계정일 경우에만 공지리스트에서 글올리기 버튼을 보여준다.
+		if(info==null||!info.getUserId().equals("admin")) {
+			req.setAttribute("roll", "guest");
+		}
 		
 		String page=req.getParameter("page");
 		int current_page=1;
@@ -185,6 +196,9 @@ public class EventServlet extends HttpServlet{
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue=URLDecoder.decode(searchValue, "utf-8");
 		}
+		
+
+		
 		
 		// 조회수 증가
 		dao.updateHitcount(eventNum);

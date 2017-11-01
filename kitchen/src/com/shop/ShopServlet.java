@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -93,7 +92,6 @@ public class ShopServlet extends MyServlet{
 		if(mreq.getFile("upload")!=null) {
 			String saveFilename =mreq.getFilesystemName("upload");
 			
-			saveFilename = FileManager.doFilerename(pathname, saveFilename);
 			dto.setSaveFilename(saveFilename);
 		}
 		

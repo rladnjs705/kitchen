@@ -47,6 +47,13 @@
             return;
         }
         
+        str = f.pwd.value;
+        if(!str) {
+            alert("비밀번호를 입력하세요. ");
+            f.pwd.focus();
+            return;
+        }
+        
         //var size = document.getElementById("fileInput").files[0].size;
         //if(size>1024*1024*20){
 	    //    alert("파일크기는 최대 **입니다.");
@@ -78,11 +85,11 @@
    <ul>
       <li><a href="<%=cp%>/notice/list.do" style="background: rgb(71,71,71);">공지사항 </a></li>
       <li><a href="<%=cp%>/bbs/list.do">문의하기</a></li>
-      <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
+     <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
-           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
+           <li><a href="#">진행중인이벤트</a></li> 
+           <li><a href="#">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
