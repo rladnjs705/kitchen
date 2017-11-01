@@ -131,11 +131,12 @@ public class MemberServlet extends MyServlet{
 		dto.setAddr_2(req.getParameter("addr_2"));
 		int check=dao.insertMember(dto);
 		if(check!=0) {
-			req.setAttribute("userId", dto.getUserId());
-			forward(req, resp, "/WEB-INF/views/member/succeed.jsp");
+			req.setAttribute("result", "succeed");
+			forward(req, resp, "/WEB-INF/views/main/main.jsp");
 			return;
 		}else {
-			forward(req, resp, "/WEB-INF/views/member/fail.jsp");
+			req.setAttribute("result", "fail");
+			forward(req, resp, "/WEB-INF/views/main/main.jsp");
 			return;
 		}
 	}
@@ -190,9 +191,18 @@ public class MemberServlet extends MyServlet{
 		dto.setAddr_1(req.getParameter("addr_1"));
 		dto.setAddr_2(req.getParameter("addr_2"));
 		
-		dao.updateMember(dto);
+		int check=dao.updateMember(dto);
 		
-		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+		if(check!=0) {
+			req.setAttribute("result", "succeed");
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
+			return;
+		}else {
+			req.setAttribute("result", "fail");
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
+			return;
+		}
+		
 	}
 	
 	private void mypage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

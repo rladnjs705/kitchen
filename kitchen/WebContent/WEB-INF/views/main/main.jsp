@@ -23,8 +23,27 @@
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 
+<script type="text/javascript">
+function result(){
+	var ans="${result}";
+	if(ans=="succeed"){
+		alert("가입이 완료 되었습니다.");	
+		return;
+	}else if(ans=="fail"){
+		alert("가입 실패 했습니다. 다시 시도해주세요.");
+		return;
+	}else{
+		return;
+	}
+	
+}
+
+
+</script>
+
+
 </head>
-<body>
+<body onload="result();">
 <div class="main-header">
 	<img src="<%=cp%>/resource/images/main.jpg" width="550px" height="550px"
 	style="margin-left: auto; margin-right: auto; display: block;"/>

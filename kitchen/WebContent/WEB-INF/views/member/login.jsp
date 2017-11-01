@@ -304,9 +304,22 @@ function check() {
    f.action = "<%=cp%>/member/login_ok.do";
    return true;
 }
+function result(){
+	var ans="${result}";
+	if(ans=="succeed"){
+		alert("수정이 완료 되었습니다.");	
+		return;
+	}else if(ans=="fail"){
+		alert("수정 실패 했습니다. 다시 시도해주세요.");
+		return;
+	}else{
+		return;
+	}
+	
+}
 </script>
 </head>
-<body>
+<body onload="result();">
 <div class="header">
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
