@@ -214,7 +214,7 @@ public class EventDAO {
 		ResultSet rs=null;
 		String sql;
 		
-		sql="SELECT eventNum, userId, eventSubject, eventContent, eventEnd";
+		sql="SELECT eventNum, userId, eventSubject, eventContent, eventEnd, ";
 		sql+=" eventHitcount, eventCreated ";
 		sql+=" FROM event WHERE eventNum=?";
 		
