@@ -83,19 +83,19 @@ function article(num) {
 	                <div class="col-sm-6">
 				      <div class="imgLayout" >
 		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
-		                     	<img src="<%=cp%>/uploads/shop/${dto.saveFilename}" style="width: 33%; height: 70px; float:left;">
+		                     	<img src="<%=cp%>/uploads/shop/${dto.saveFilename}" style="width: 20%; height: 70px; float:left;">
 		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
 		                     	${dto.shopName}
 		                     	</span>
-		                     	<div style="float:left; color:#8C8C8C; font-size:13px;" align="right">
-		                     	${dto.created}
+		                     	<div style="float:left; color:#8C8C8C; font-size:13px;">
+		                     	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.created}
 		                     	</div>
 		                     	<div style="color: #FF6C6C;" align="right">
 		                     	${dto.shopStart}~${dto.shopEnd}
 		                     	<hr></div>
+		                     	<div align="center" style="font-size:14px; float:left;">${dto.content}</div>
 		                     	<div style="clear: both;"></div>
-		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}-${dto.shopZip2}<br> ${dto.shopAddr1} - ${dto.shopAddr2}</div>
-		                     	<div align="center" style="font-size:14px;">${dto.content}</div>
+		                     	<div style="float:left; color: #6B66FF; padding:5px;">${dto.shopZip1}<br> ${dto.shopAddr1} - ${dto.shopAddr2}</div>
 		                     	<div align="right" style="font-size :15px;">배달 소요시간: | ${dto.shopTime} 분 </div>
 		                     </div>
 	               		 </div>

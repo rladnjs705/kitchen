@@ -61,6 +61,8 @@
 
 		$('#imageViewModal').modal('show');
 	}
+	$('input[name=data_name]').val()
+	
 	function numberWithCommas(num){
 	    var len, point, str; 
 	       

@@ -22,23 +22,24 @@ public class ShopDAO {
 
 			pstmt.setString(1, dto.getShopName());
 			pstmt.setString(2, dto.getShopZip1());
-			pstmt.setString(4, dto.getShopTel1());
-			pstmt.setString(5, dto.getShopTel2());
-			pstmt.setString(6, dto.getShopAddr1());
-			pstmt.setString(7, dto.getShopAddr2());
-			pstmt.setInt(8, dto.getShopPrice());
-			pstmt.setInt(9, dto.getShopTime());
-			pstmt.setString(10, dto.getShopStart());
-			pstmt.setString(11, dto.getShopEnd());
-			pstmt.setInt(12, dto.getLatitude());
-			pstmt.setInt(13, dto.getLongitude());
-			pstmt.setString(14, dto.getContent());
-			pstmt.setString(15, dto.getSaveFilename());
-			pstmt.setString(16, dto.getCategoryname());
+			pstmt.setString(3, dto.getShopTel1());
+			pstmt.setString(4, dto.getShopTel2());
+			pstmt.setString(5, dto.getShopAddr1());
+			pstmt.setString(6, dto.getShopAddr2());
+			pstmt.setInt(7, dto.getShopPrice());
+			pstmt.setInt(8, dto.getShopTime());
+			pstmt.setString(9, dto.getShopStart());
+			pstmt.setString(10, dto.getShopEnd());
+			pstmt.setString(11, dto.getLatitude());
+			pstmt.setString(12, dto.getLongitude());
+			pstmt.setString(13, dto.getContent());
+			pstmt.setString(14, dto.getSaveFilename());
+			pstmt.setString(15, dto.getCategoryname());
 
 			result = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e.toString());
 		}
 
@@ -124,8 +125,8 @@ public class ShopDAO {
 				dto.setShopTime(rs.getInt("shopTime"));
 				dto.setShopStart(rs.getString("shopStart"));
 				dto.setShopEnd(rs.getString("shopEnd"));
-				dto.setLatitude(rs.getInt("latitude"));
-				dto.setLongitude(rs.getInt("longitude"));
+				dto.setLatitude(rs.getString("latitude"));
+				dto.setLongitude(rs.getString("longitude"));
 				dto.setContent(rs.getString("content"));
 				dto.setCreated(rs.getString("created"));
 				dto.setHitCount(rs.getInt("hitCount"));
@@ -179,8 +180,8 @@ public class ShopDAO {
 				dto.setShopTime(rs.getInt("shopTime"));
 				dto.setShopStart(rs.getString("shopStart"));
 				dto.setShopEnd(rs.getString("shopEnd"));
-				dto.setLatitude(rs.getInt("latitude"));
-				dto.setLongitude(rs.getInt("longitude"));
+				dto.setLatitude(rs.getString("latitude"));
+				dto.setLongitude(rs.getString("longitude"));
 				dto.setContent(rs.getString("content"));
 				dto.setHitCount(rs.getInt("hitCount"));
 				dto.setCreated(rs.getString("created"));
@@ -219,8 +220,9 @@ public class ShopDAO {
 			pstmt.setInt(11, dto.getShopTime());
 			pstmt.setString(12, dto.getShopStart());
 			pstmt.setString(13, dto.getShopEnd());
-			pstmt.setInt(14, dto.getLatitude());
-			pstmt.setInt(15, dto.getLongitude());
+			
+			pstmt.setString(14, dto.getLatitude());
+			pstmt.setString(15, dto.getLongitude());
 
 			result = pstmt.executeUpdate();
 			pstmt.close();

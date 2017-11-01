@@ -88,8 +88,8 @@ public class ShopServlet extends MyServlet{
 		dto.setShopEnd(mreq.getParameter("shopEnd"));
 		dto.setShopPrice(Integer.parseInt(mreq.getParameter("shopPrice")));
 		dto.setShopTime(Integer.parseInt(mreq.getParameter("shopTime")));
-		dto.setLatitude(Integer.parseInt(mreq.getParameter("latitude")));
-		dto.setLongitude(Integer.parseInt(mreq.getParameter("longitude")));
+		dto.setLatitude(mreq.getParameter("latitude"));
+		dto.setLongitude(mreq.getParameter("longitude"));
 		dto.setCategoryname(mreq.getParameter("categoryName"));
 		
 		if(mreq.getFile("upload")!=null) {
@@ -214,8 +214,8 @@ public class ShopServlet extends MyServlet{
 		dto.setShopTime(Integer.parseInt(mreq.getParameter("shopTime")));
 		dto.setShopStart(mreq.getParameter("shopStart"));
 		dto.setShopEnd(mreq.getParameter("shopEnd"));
-		dto.setLatitude(Integer.parseInt(mreq.getParameter("latitude")));
-		dto.setLongitude(Integer.parseInt(mreq.getParameter("longitude")));
+		dto.setLatitude(mreq.getParameter("latitude"));
+		dto.setLongitude(mreq.getParameter("longitude"));
 		
 		dto.setShopEnd(mreq.getParameter("shopEnd"));
 		

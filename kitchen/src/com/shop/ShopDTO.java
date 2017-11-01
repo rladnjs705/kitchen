@@ -1,7 +1,21 @@
 package com.shop;
 
 public class ShopDTO {
-	int shopNum,shopPrice,shopTime,latitude,longitude,hitCount,listNum;
+	int shopNum,shopPrice,shopTime,hitCount,listNum;
+	String latitude,longitude;
+	
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 	String userId,shopName,shopTel1,shopTel2,shopAddr1,shopAddr2,shopStart,shopEnd,Content,Created;
 	String saveFilename,Categoryname,shopZip1,shopZip2;
 
@@ -53,18 +67,7 @@ public class ShopDTO {
 	public void setShopTime(int shopTime) {
 		this.shopTime = shopTime;
 	}
-	public int getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(int latitude) {
-		this.latitude = latitude;
-	}
-	public int getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(int longitude) {
-		this.longitude = longitude;
-	}
+	
 	public int getHitCount() {
 		return hitCount;
 	}
