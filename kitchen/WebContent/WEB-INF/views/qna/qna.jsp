@@ -139,13 +139,13 @@ clear:left;
 
 <div class="menubar">
    <ul>
-      <li><a href="#" >공지사항 </a></li>
-      <li><a href="#">문의하기</a></li>
-      <li><a href="#" style="background: rgb(71,71,71);">질문과답변</a></li> 
-      <li><a href="#" id="current">이벤트</a>
+      <li><a href="<%=cp%>/notice/list.do" >공지사항 </a></li>
+      <li><a href="<%=cp%>/bbs/list.do">문의하기</a></li>
+      <li><a href="<%=cp%>/qna/qna.do" style="background: rgb(71,71,71);">질문과답변</a></li> 
+      <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>

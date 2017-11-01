@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이벤트게시판입니다.</title>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
@@ -144,8 +144,8 @@ function deleteEvent(eventNum) {
 
 <div class="menubar">
    <ul>
-      <li><a href="#">공지사항 </a></li>
-      <li><a href="#">문의하기</a></li>
+      <li><a href="<%=cp%>/notice/list.do">공지사항 </a></li>
+      <li><a href="<%=cp%>/bbs/list.do">문의하기</a></li>
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" style="background: rgb(71,71,71);" id="current">이벤트</a>
          <ul>

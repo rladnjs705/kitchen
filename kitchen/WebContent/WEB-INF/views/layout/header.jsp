@@ -43,7 +43,7 @@
                 	&nbsp;&nbsp;&nbsp;
                     <a href="<%=cp%>/">장바구니</a>
                 	&nbsp;&nbsp;&nbsp;
-            		<a href="<%=cp%>/event.do">고객센터</a><br>
+            		<a href="<%=cp%>/notice/list.do">고객센터</a><br>
             </c:if>
             
 </div>
