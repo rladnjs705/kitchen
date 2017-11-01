@@ -212,6 +212,7 @@ function notHangul(obj) {
 		<td width="100" bgcolor="#eeeeee" style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 		<td style="padding-left:10px;">
 			<input type="text" name="eventSubject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.eventSubject}">
+			
 		</td>
 	</tr>
 	

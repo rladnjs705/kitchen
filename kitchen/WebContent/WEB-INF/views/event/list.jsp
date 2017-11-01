@@ -177,7 +177,7 @@ clear:left;
 	<tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 		<th width="100" style="color: #787878;">이벤트 종료일</th>
 		<th width="60" style="color: #787878;">번호</th>
-		<th style="color: #787878;">제목</th>
+		<th style="color: #787878;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 		<th width="100" style="color: #787878;">작성자</th>
 		<th width="80" style="color: #787878;">작성일</th>
 		<th width="60" style="color: #787878;">조회수</th>

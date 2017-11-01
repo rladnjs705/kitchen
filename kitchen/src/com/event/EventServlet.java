@@ -197,6 +197,9 @@ public class EventServlet extends HttpServlet{
 			searchValue=URLDecoder.decode(searchValue, "utf-8");
 		}
 		
+
+		
+		
 		// 조회수 증가
 		dao.updateHitcount(eventNum);
 		
