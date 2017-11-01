@@ -16,14 +16,15 @@ public class EventDAO {
 		PreparedStatement pstmt=null;
 		String sql;
 		
-		String fields = "eventNum, userId, eventSubject, eventContent";
-		sql="INSERT INTO event (" + fields + ") VALUES (event_seq.NEXTVAL, ?, ?, ?)";
+		String fields = "eventNum, userId, eventSubject, eventEnd, eventContent";
+		sql="INSERT INTO event (" + fields + ") VALUES (event_seq.NEXTVAL, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getUserId());
 			pstmt.setString(2, dto.getEventSubject());
-			pstmt.setString(3, dto.getEventContent());
+			pstmt.setString(3, dto.getEventEnd());
+			pstmt.setString(4, dto.getEventContent());
 			
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -35,14 +36,18 @@ public class EventDAO {
 	}
 	
 	// 전체 데이터 개수
-	public int dataCount() {
+	public int dataCount(String state) {
 		int result = 0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql;
 		
 		sql = "SELECT NVL(COUNT(eventNum), 0) cnt FROM event";
-		
+		if(state.equals("y")) {
+			sql+="  WHERE  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ";
+		} else {
+			sql+="  WHERE  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ";
+		}		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
@@ -61,7 +66,7 @@ public class EventDAO {
 	}
 	
 	// 검색모드에서 전체의 개수 구하기
-	public int dataCount(String searchKey, String searchValue) {
+	public int dataCount(String searchKey, String searchValue, String state) {
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -74,15 +79,22 @@ public class EventDAO {
 				sql="SELECT NVL(COUNT(*), 0) FROM event WHERE INSTR(userId, ?) = 1";
 			else
 				sql="SELECT NVL(COUNT(*), 0) FROM event WHERE INSTR(" + searchKey + ", ? ) >=1 ";
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, searchValue);
+			
+			if(state.equals("y")) {
+				sql += "  AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ";
+			} else {
+				sql+= "  AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ";
+			}	
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchValue);
 				
-				rs=pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 				
-				if(rs.next())
+			if(rs.next())
 					result=rs.getInt(1);
-				rs.close();
-				pstmt.close();
+			rs.close();
+			pstmt.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -90,7 +102,7 @@ public class EventDAO {
 	}
 	
 	// 리스트
-	public List<EventDTO> listEvent(int start, int end){
+	public List<EventDTO> listEvent(int start, int end, String state){
 		List<EventDTO> list=new ArrayList<EventDTO>();
 		
 		PreparedStatement pstmt=null;
@@ -101,8 +113,13 @@ public class EventDAO {
 			sb.append("SELECT * FROM (");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("			SELECT eventNum, userId, eventSubject, eventHitcount");
-			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated");
+			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd");
 			sb.append("			FROM event");
+			if(state.equals("y")) {
+				sb.append("     WHERE TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+			} else {
+				sb.append("     WHERE  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+			}			
 			sb.append(" 		ORDER BY eventNum DESC");
 			sb.append("		) tb WHERE ROWNUM <= ?");
 			sb.append(") WHERE rnum >= ?");
@@ -120,6 +137,7 @@ public class EventDAO {
 				dto.setEventSubject(rs.getString("eventSubject"));
 				dto.setEventHitcount(rs.getShort("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
+				dto.setEventEnd(rs.getString("eventEnd"));
 				
 				list.add(dto);
 			}
@@ -134,7 +152,7 @@ public class EventDAO {
 	}
 	
 	// 검색에서 리스트
-	public List<EventDTO> listEvent(int start, int end, String searchKey, String searchValue) {
+	public List<EventDTO> listEvent(int start, int end, String searchKey, String searchValue, String state) {
 		List<EventDTO> list=new ArrayList<EventDTO>();
 		
 		PreparedStatement pstmt=null;
@@ -145,7 +163,7 @@ public class EventDAO {
 			sb.append("SELECT * FROM (");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("			SELECT eventNum, userId, eventSubject, eventHitcount");
-			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated");
+			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd");
 			sb.append("			FROM event");
 			if(searchKey.equalsIgnoreCase("eventCreated"))
 				sb.append("			WHERE TO_CHAR(eventCreated, 'YYYY-MM-DD') =? ");
@@ -153,6 +171,12 @@ public class EventDAO {
 				sb.append("		WHERE INSTR(userId, ?) =1 ");
 			else
 				sb.append("		WHERE INSTR(" + searchKey + ", ?) >=1");
+			
+			if(state.equals("y")) {
+				sb.append("  AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+			} else {
+				sb.append("  AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+			}
 			sb.append("		ORDER BY eventNum DESC");
 			sb.append("	) tb WHERE ROWNUM <= ?");
 			sb.append(") WHERE rnum >= ?");
@@ -172,6 +196,7 @@ public class EventDAO {
 				dto.setEventSubject(rs.getString("eventSubject"));
 				dto.setEventHitcount(rs.getInt("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
+				dto.setEventEnd(rs.getString("eventEnd"));
 				
 				list.add(dto);
 			}
@@ -189,7 +214,7 @@ public class EventDAO {
 		ResultSet rs=null;
 		String sql;
 		
-		sql="SELECT eventNum, userId, eventSubject, eventContent, ";
+		sql="SELECT eventNum, userId, eventSubject, eventContent, eventEnd";
 		sql+=" eventHitcount, eventCreated ";
 		sql+=" FROM event WHERE eventNum=?";
 		
@@ -205,6 +230,7 @@ public class EventDAO {
 				dto.setUserId(rs.getString("userId"));
 				dto.setEventSubject(rs.getString("eventSubject"));
 				dto.setEventContent(rs.getString("eventContent"));
+				dto.setEventEnd(rs.getString("eventEnd"));
 				dto.setEventHitcount(rs.getShort("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
 			}
@@ -341,13 +367,14 @@ public class EventDAO {
 		PreparedStatement pstmt=null;
 		String sql;
 		
-		sql="UPDATE event SET eventSubject=?, eventContent=?";
+		sql="UPDATE event SET eventSubject=?, eventContent=?, eventEnd=?";
 		sql+=" WHERE eventNum=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getEventSubject());
 			pstmt.setString(2, dto.getEventContent());
-			pstmt.setInt(3, dto.getEventNum());
+			pstmt.setString(3, dto.getEventEnd());
+			pstmt.setInt(4, dto.getEventNum());
 			result=pstmt.executeUpdate();
 			
 			pstmt.close();

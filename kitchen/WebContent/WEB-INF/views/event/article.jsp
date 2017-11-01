@@ -17,9 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-$( function() {
-    $( "#accordion" ).accordion();
-  } );
+
 </script>
 <style type="text/css">
 .menubar{
@@ -148,11 +146,11 @@ function deleteEvent(eventNum) {
    <ul>
       <li><a href="#">공지사항 </a></li>
       <li><a href="#">문의하기</a></li>
-      <li><a href="#">질문과답변</a></li> 
-      <li><a href="#" style="background: rgb(71,71,71);" id="current">이벤트</a>
+      <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
+      <li><a href="<%=cp%>/event/list.do" style="background: rgb(71,71,71);" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -223,7 +221,16 @@ function deleteEvent(eventNum) {
 			<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/list.do?${query}';">리스트</button>	
 	</td>
 </tr>
-</table>		
+</table>
+<br>
+<br>
+<br>
+		
+<div class="footer">
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
 
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
 </body>
 </html>

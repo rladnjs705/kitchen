@@ -82,13 +82,16 @@ public class EventServlet extends HttpServlet{
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue=URLDecoder.decode(searchValue, "utf-8");
 		}
+		String state=req.getParameter("state");
+		if(state==null)
+			state="y";
 		
 		// 전체 데이터 개수 구하기
 		int dataCount;
 		if(searchValue.length()!=0)
-			dataCount= dao.dataCount(searchKey, searchValue);
+			dataCount= dao.dataCount(searchKey, searchValue, state);
 		else
-			dataCount= dao.dataCount();
+			dataCount= dao.dataCount(state);
 		
 		int rows = 10;
 		int total_page=util.pageCount(rows, dataCount);
@@ -101,9 +104,9 @@ public class EventServlet extends HttpServlet{
 		
 		List<EventDTO> list;
 		if(searchValue.length()!=0)
-			list= dao.listEvent(start, end, searchKey, searchValue);
+			list= dao.listEvent(start, end, searchKey, searchValue, state);
 		else
-			list= dao.listEvent(start, end);
+			list= dao.listEvent(start, end, state);
 		
 		// 리스트 글번호 만들기
 		int listNum, n=0;
@@ -115,10 +118,10 @@ public class EventServlet extends HttpServlet{
 			n++;
 		}
 		
-		String query= "";
+		String query= "state="+state;
 		if(searchValue!=null && searchValue.length()!=0) {
 			searchValue = URLEncoder.encode(searchValue, "utf-8");
-			query="searchKey=" +searchKey + "&searchValue=" +searchValue;
+			query+="&searchKey=" +searchKey + "&searchValue=" +searchValue;
 		}
 		
 		// 페이징처리
@@ -133,6 +136,7 @@ public class EventServlet extends HttpServlet{
 		
 		// list.jsp 파일에 데이터를 넘겨준다.
 		req.setAttribute("list", list);
+		req.setAttribute("state", state);
 		req.setAttribute("paging", paging);
 		req.setAttribute("page", current_page);
 		req.setAttribute("total_page", total_page);
@@ -157,6 +161,7 @@ public class EventServlet extends HttpServlet{
 		dto.setUserId("admin");// 세션값 넣어주기
 		dto.setEventSubject(req.getParameter("eventSubject"));
 		dto.setEventContent(req.getParameter("eventContent"));
+		dto.setEventEnd(req.getParameter("eventEnd"));
 		
 		dao.insertEvent(dto);
 		
