@@ -2,6 +2,7 @@ package com.menu;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,51 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bbs.BoardDTO;
 import com.member.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.shop.ShopDTO;
 import com.util.FileManager;
 import com.util.MyServlet;
 
 @WebServlet("/menu/*")
 public class MenuServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
-	
-	private String pathname;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		process(req, resp);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		process(req, resp);
-	}
-	
-	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
-	}
 	
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		String uri = req.getRequestURI();
+		req.setCharacterEncoding("utf-8");
 		
-		String cp=req.getContextPath();
+		String uri=req.getRequestURI();
 		
 		HttpSession session=req.getSession();
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		if(info!=null) { // 로그인되지 않은 경우
-			resp.sendRedirect(cp+"/member/login.do");
-			return;
-		}
-		
-		// 이미지를 저장할 경로(pathname)
-		pathname="C:\\web\\work\\kitchen\\kitchen\\WebContent\\WEB-INF\\views\\menu\\image";
+		String root=session.getServletContext().getRealPath("/");
+		String pathname="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
 		File f=new File(pathname);
-		if(! f.exists()) { // 폴더가 존재하지 않으면
+
+		if(! f.exists()) {
 			f.mkdirs();
 		}
 		
@@ -65,10 +46,31 @@ public class MenuServlet extends MyServlet{
 		} else if(uri.indexOf("created.do") != -1) {
 			createdForm(req, resp);
 		} else if(uri.indexOf("created_ok.do") != -1) {
-			createdSubmit(req, resp);
+			createdSubmit(req, resp, pathname);
 		} 
 	}
+	
 	private void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		String cp = req.getContextPath();
+		MenuDAO dao = new MenuDAO();
+		
+		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
+		String page = req.getParameter("page");
+		
+		List<MenuDTO> list = dao.listMenu(shopNum);
+		ShopDTO dto = dao.readMenu(shopNum);
+		
+		if(list==null) {
+			resp.sendRedirect(cp+"/menu/list.do?page="+page+"&"+"shopNum="+shopNum);
+			return;
+		}
+		
+		req.setAttribute("dto", dto);
+		req.setAttribute("list", list);
+		req.setAttribute("page", page);
+		req.setAttribute("shopNum", shopNum);
+		
+		forward(req, resp, "/WEB-INF/views/menu/article.jsp");
 		
 	}
 	
@@ -77,34 +79,33 @@ public class MenuServlet extends MyServlet{
 		forward(req, resp, "/WEB-INF/views/menu/created.jsp");
 	}
 	
-	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname) throws ServletException, IOException{
 		MenuDAO dao = new MenuDAO();
 		String cp = req.getContextPath();
 		MenuDTO dto = new MenuDTO();
-
+		
 		String encType="utf-8";
 		int maxSize=5*1024*1024;
 		
 		MultipartRequest mreq=new MultipartRequest(req, pathname, maxSize, encType,new DefaultFileRenamePolicy());
 		
-		dto.setMenuname(mreq.getParameter("subject"));
-		dto.setMenuprice(Integer.parseInt(mreq.getParameter("price")));
-		dto.setMenucountent(mreq.getParameter("content"));
+		dto.setMenuname(mreq.getParameter("menuname"));
+		dto.setMenuprice(Integer.parseInt(mreq.getParameter("menuprice")));
+		dto.setMenucontent(mreq.getParameter("menucontent"));
+		
+		int shopNum = Integer.parseInt(req.getParameter("shopNm"));
+		String page = req.getParameter("page");
 		
 		if(mreq.getFile("upload")!=null) {
-		dto.setSavefilename(mreq.getParameter("savefilename"));
-		dto.setOriginalfilename(mreq.getParameter("originalfilename"));
-
-		String saveFilename=mreq.getFilesystemName("upload");
+		String savefilename=mreq.getFilesystemName("upload");
 			
-		saveFilename = FileManager.doFilerename(pathname, saveFilename);
+		savefilename = FileManager.doFilerename(pathname, savefilename);
 					
-		dto.setSavefilename(saveFilename);
+		dto.setSavefilename(savefilename);
 
 		}
 		dao.insertMenu(dto);
-		
-		resp.sendRedirect(cp + "/menu/article.do");
+		resp.sendRedirect(cp+"/menu/article.do?page="+page+"&"+"shopNum="+shopNum);
 	}
 	
 
