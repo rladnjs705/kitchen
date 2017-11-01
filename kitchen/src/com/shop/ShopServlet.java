@@ -121,7 +121,7 @@ public class ShopServlet extends MyServlet{
 		}
 		
 		if(state==null||state.length()==0)
-			state="ÇÑ½Ä";
+			state="kor";
 		
 		int dataCount=dao.dataCount(state);
 		int numPerPage = 10;
@@ -138,9 +138,6 @@ public class ShopServlet extends MyServlet{
 		
 		list = dao.listShop(start, end, state);
 		
-		for(ShopDTO dto: list) {
-			System.out.println(dto.getContent());
-		}
 		
 		int listNum, n=0;
 		Iterator<ShopDTO>it=list.iterator();
