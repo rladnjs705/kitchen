@@ -17,7 +17,11 @@
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-
+function searchList() {
+	var f = document.searchForm;
+	f.action = "<%=cp%>/event/list.do";
+	f.submit();
+}
 </script>
 <style type="text/css">
 .menubar{
