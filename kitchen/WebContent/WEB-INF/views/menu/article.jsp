@@ -116,12 +116,11 @@ $(function(){
 		selectTotal=parseInt(selectTotal)+menuprice;
 		
 		var s="<div style='295px; padding-top: 20px; padding-left: 10px; padding-right: 10px; border-bottom: 1px solid #bcbcbc;'>";
-		s+="<div style='float: left;'>"+menuname+"</div>";
-		s+="<div style='float: right;'>"+menuprice+" | <span style='cursor: pointer;' class='deleteMenuItem' data-menuprice='"+menuprice+"'>X</span>";
+		s+="<div style='float: left;'>메뉴 : "+menuname+"</div>";
+		s+="<div style='float: right;'>가격 : "+menuprice+" | <span style='cursor: pointer;' class='deleteMenuItem' data-menuprice='"+menuprice+"'>X</span>";
 		s+="<input type='hidden' name='menuname' value='"+menuname+"'>";
 		s+="<input type='hidden' name='menuprice' value='"+menuprice+"'>";
 		s+="</div>"
-		alert(s);
 		$("#selectMenuLayout").append(s);
 		$("#selectTotal").text(selectTotal);
 	});
@@ -146,11 +145,8 @@ $(function(){
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<!-- 매장정보 및 좋아요(개수) -->
-<!-- 좋아요 개수는 하트 클릭 시 1씩 증가(단, 한 ID 당 1개의 좋아요만 가능) -->
-
 <div>
-	<div id="article-container" align="left" style="background: #F6F6F6;"><h2>${dto.shopName}</h2></div>
+	<div id="article-container" align="left" style="background: #D5D5D5;"><h2>${dto.shopName}</h2></div>
 	<div id="article-container_bottom">
 		<div style="float: left; width: 15%" align="center"><img src="<%=cp%>/resource/images/${dto.saveFilename}" width="130px;" height="90px"></div>
 		<div style="float: left; width: 80%; margin-left: 10px;"><br><b>최소주문금액 : ${dto.shopPrice}원 이상</b><br><b>결제방법 : </b>현금, 카드</div>
@@ -175,7 +171,7 @@ $(function(){
 	<div id="article-sidebar" align="left">
        
         	<div id="article-sidebar-head">
-        		<div style="background: #EAEAEA; height:30px; border-bottom: 1px solid #F6F6F6; padding-top: 10px; padding-bottom: 10px;"><h2 align="center">선 택 메 뉴</h2></div>
+        		<div style="background: #D5D5D5; height:30px; border-bottom: 1px solid #F6F6F6; padding-top: 10px; padding-bottom: 10px;"><h2 align="center">선 택 메 뉴</h2></div>
         		<div id="select-menu-order" style="height: 335px;">
         		    <div id="selectMenuLayout" style="clear: both;">
         		    </div>
