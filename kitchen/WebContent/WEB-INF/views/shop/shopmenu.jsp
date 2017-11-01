@@ -72,16 +72,12 @@ function article(num) {
 	    <div class="body-title">
 	          <h3><img src="<%=cp%>/resource/images/food.png" style="width: 40px; height: 40px;"> 한 식 </h3>
 	    </div>
-
-	  
-	  
 	        <div style="clear: both; height: 30px; line-height: 30px;">
 	            <div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
 	            <div style="float: right;">&nbsp;</div>
 	        </div>
 	        <div style="clear: both;">
-	        
-	            
+
 	        <div class="row">
 	        	<c:forEach var="dto" items="${list}">
 	                <div class="col-sm-6">
