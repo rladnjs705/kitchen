@@ -172,6 +172,12 @@ public class BoardServlet extends MyServlet{
 			articleUrl+="&"+query;
 		}
 		
+///////////////////////////////////////////////
+		
+HttpSession session = req.getSession();
+SessionInfo info = (SessionInfo)session.getAttribute("member");
+//System.out.println("·Î±×ÀÎ"+info.getUserId());
+
 		String paging = util.paging(currentPage, totalPage, listUrl);
 		
 		req.setAttribute("page", currentPage);

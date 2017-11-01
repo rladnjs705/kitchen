@@ -54,6 +54,18 @@ function updateInquiry() {
     alert("수정권한이 없습니다.");
 	</c:if>
 }
+
+function reply(){
+	<c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">
+		var url="<%=cp%>/bbs/reply.do?num=${dto.questionNum}&page=${page}";
+		location.href=url;
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+    alert("답글작성 권한이 없습니다.");
+	</c:if>
+	
+}
 </script>
 </head>
 <body>
@@ -71,8 +83,8 @@ function updateInquiry() {
    <ul>
       <li><a href="<%=cp%>/notice/list.do">공지사항 </a></li>
       <li><a href="<%=cp%>/bbs/list.do"  style="background: rgb(71,71,71);">문의하기</a></li>
-      <li><a href="#">질문과답변</a></li> 
-      <li><a href="#" id="current">이벤트</a>
+      <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
+      <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
            <li><a href="#">진행중인이벤트</a></li> 
            <li><a href="#">지난이벤트</a></li>
@@ -95,7 +107,8 @@ function updateInquiry() {
 			
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 			    <td width="50%" align="left" style="padding-left: 5px;">
-			       이름 : ${dto.userName}
+			    <c:if test="${dto.userId=='admin'}">이름 : ${dto.userName}</c:if>
+			    <c:if test="${dto.userId!='admin'}">이름 : ${dto.userName}(${dto.viewId})</c:if>
 			    </td>
 			    <td width="50%" align="right" style="padding-right: 5px;">
 			        ${dto.created} | 조회 ${dto.hitCount}
@@ -134,7 +147,7 @@ function updateInquiry() {
 			<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
 			<tr height="45">
 			    <td width="300" align="left">
-			    	<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/bbs/reply.do?num=${dto.questionNum}&page=${page}';">답글달기</button>
+			    	<button type="button" class="btn" onclick="reply()">답글달기</button>
 			    	<c:if test="${type=='inquiry'}">
 			    	<button type="button" class="btn" onclick="updateInquiry();">수정</button>
 			        </c:if>

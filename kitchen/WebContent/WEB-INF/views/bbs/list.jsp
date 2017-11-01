@@ -58,6 +58,22 @@ function changes(fr) {
 	
 }
 
+function viewInquiry(){
+	<c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">
+		var url="${articleUrl}&num=${dto.questionNum}";
+		location.href=url;
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+    	alert("글보기 권한이 없습니다.");
+	</c:if>
+	
+	<c:if test="${sessionScope.member.userId==null}">
+		alert("글보기 권한이 없습니다.");
+	</c:if>
+	
+}
+
 /*
 function itemChange(){
 	 
@@ -139,7 +155,10 @@ function itemChange(){
       <td align="left" style="padding-left: 10px;">
            <a href="${articleUrl}&num=${dto.questionNum}">${dto.subject}</a>
       </td>
-      <td>${dto.userName}</td>
+      <td>
+      <c:if test="${dto.userId=='admin'}">${dto.userName}</c:if>
+      <c:if test="${dto.userId!='admin'}">${dto.userName}(${dto.viewId})</c:if>
+      </td>
       <td>${dto.created}</td>
       <td>${dto.hitCount}</td>
       <td>

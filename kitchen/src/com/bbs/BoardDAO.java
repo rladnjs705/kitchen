@@ -71,6 +71,16 @@ public class BoardDAO {
 		return result;
 	}
 	
+	public String makeviewId(String userId) {
+		String star = "";
+		String id = "";
+		for(int i=0;i<userId.length()-3;i++)
+			star+="*";
+		id = userId.substring(0,3)+star;
+		
+		return id;
+	}
+	
 	public int updateOrderNo(int groupNum, int orderNo) {
 		int result = 0;
 		try {
@@ -173,6 +183,7 @@ public class BoardDAO {
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCreated(rs.getString("created"));
+				dto.setViewId(makeviewId(rs.getString("userId")));
 
 				if(rs.getString("questionType")==null)
 					dto.setQuestionType("");
@@ -252,6 +263,7 @@ public class BoardDAO {
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setOriginalFileName(rs.getString("originalFileName"));
 				dto.setCreated(rs.getString("created"));
+				dto.setViewId(makeviewId(rs.getString("userId")));
 				
 				if(rs.getString("questionType")==null)
 					dto.setQuestionType("");
@@ -316,6 +328,7 @@ public class BoardDAO {
 				dto.setCreated(rs.getString("created"));
 				dto.setQuestionType(rs.getString("questionType"));
 				dto.setPwd(rs.getInt("pwd"));
+				dto.setViewId(makeviewId(rs.getString("userId")));
 			}
 			
 			rs.close();
