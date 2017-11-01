@@ -80,7 +80,6 @@ public class ShopServlet extends MyServlet{
 		dto.setShopName(mreq.getParameter("shopName"));
 		dto.setContent(mreq.getParameter("content"));
 		dto.setShopZip1(mreq.getParameter("shopZip1"));
-		dto.setShopZip2(mreq.getParameter("shopZip2"));
 		dto.setShopAddr1(mreq.getParameter("shopAddr1"));
 		dto.setShopAddr2(mreq.getParameter("shopAddr2"));
 		dto.setShopTel1(mreq.getParameter("shopTel1"));
@@ -181,7 +180,7 @@ public class ShopServlet extends MyServlet{
 		ShopDTO dto=dao.readShop(shopNum);
 		
 		if(dto==null) {
-			resp.sendRedirect(cp+"/shop/shopmenu.do?page="+page);
+			resp.sendRedirect(cp+"/menu/article.do?page="+page);
 			return;
 		}
 		
@@ -189,7 +188,7 @@ public class ShopServlet extends MyServlet{
 		req.setAttribute("dto", dto);
 		req.setAttribute("page", page);
 		
-		forward(req, resp, "/WEB-INF/views/shop/created.jsp");
+		forward(req, resp, "/WEB-INF/views/menu/article.jsp");
 	}
 	
 	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname)throws ServletException , IOException{
@@ -207,7 +206,6 @@ public class ShopServlet extends MyServlet{
 		dto.setContent(mreq.getParameter("content"));
 		dto.setSaveFilename(mreq.getParameter("saveFilename"));
 		dto.setShopZip1(mreq.getParameter("shopZip1"));
-		dto.setShopZip2(mreq.getParameter("shopZip2"));
 		dto.setShopAddr1(mreq.getParameter("shopAddr1"));
 		dto.setShopAddr2(mreq.getParameter("shopAddr2"));
 		dto.setShopTel1(mreq.getParameter("shopTel1"));
@@ -235,7 +233,7 @@ public class ShopServlet extends MyServlet{
 		
 		String cp=req.getContextPath();
 		
-		resp.sendRedirect(cp+"/fbbs/list.do?page="+page);
+		resp.sendRedirect(cp+"/menu/article.do?page="+page);
 	}
 	
 	private void delete(HttpServletRequest req, HttpServletResponse resp)throws ServletException , IOException{
