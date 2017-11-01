@@ -31,9 +31,7 @@ public class ShopServlet extends MyServlet{
 		
 		String uri=req.getRequestURI();
 		
-		HttpSession session=req.getSession();
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"shop";
+		String pathname="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
 		File f=new File(pathname);
 		
 		if(! f.exists()) {
