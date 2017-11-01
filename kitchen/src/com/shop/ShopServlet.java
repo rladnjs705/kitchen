@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.util.FileManager;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
@@ -88,9 +89,14 @@ public class ShopServlet extends MyServlet{
 		dto.setShopTime(Integer.parseInt(mreq.getParameter("shopTime")));
 		dto.setLatitude(Integer.parseInt(mreq.getParameter("latitude")));
 		dto.setLongitude(Integer.parseInt(mreq.getParameter("longitude")));
+		dto.setCategoryname(mreq.getParameter("categoryName"));
 		
 		if(mreq.getFile("upload")!=null) {
-			dto.setSaveFilename(mreq.getFilesystemName("upload"));
+			String saveFilename =mreq.getFilesystemName("upload");
+			
+			saveFilename = FileManager.doFilerename(pathname, saveFilename);
+			
+			dto.setSaveFilename(saveFilename);
 		}
 		
 		dao.insertShop(dto);

@@ -15,7 +15,7 @@ public class ShopDAO {
 		int result=0;
 		PreparedStatement pstmt=null;
 		String sql;
-		sql="INSERT INTO shop (shopNum, shopName, shopZip1, shopZip2, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, saveFilename) VALUES (shop_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+		sql="INSERT INTO shop (shopNum, shopName, shopZip1, shopZip2, shopTel1, shopTel2, shopAddr1, shopAddr2, shopPrice, shopTime, shopStart, shopEnd, latitude, longitude, content, saveFilename, categoryName) VALUES (shop_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class ShopDAO {
 			pstmt.setInt(13, dto.getLongitude());
 			pstmt.setString(14, dto.getContent());
 			pstmt.setString(15, dto.getSaveFilename());
-			
+			pstmt.setString(16, dto.getCategoryname());
 			
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -173,5 +173,7 @@ public class ShopDAO {
 		
 		return list;
 	}
+	
+	
 	
 }

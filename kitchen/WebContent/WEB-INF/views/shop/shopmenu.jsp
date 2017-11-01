@@ -70,9 +70,10 @@ function article(num) {
     <div class="col-sm-8" style="float:none; margin-left: auto; margin-right: auto;">
         
 	    <div class="body-title">
-	          <h3><img src="<%=cp%>/resource/images/food.png" style="width: 40px; height: 40px;"> 한식 </h3>
+	          <h3><img src="<%=cp%>/resource/images/food.png" style="width: 40px; height: 40px;"> 한 식 </h3>
 	    </div>
 
+	  
 	  
 	        <div style="clear: both; height: 30px; line-height: 30px;">
 	            <div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>

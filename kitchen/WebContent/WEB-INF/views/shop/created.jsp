@@ -118,12 +118,12 @@
 								</tr>
 								<tr>
 									<th>매장분류<th>
-									<label><input TYPE='radio' name='group1' value='kor' checked="checked"/>한식</label>
-									<label><input TYPE='radio' name='group1' value='japan'/>일식</label>
-									<label><input TYPE='radio' name='group1' value='western'/>양식</label>
-									<label><input TYPE='radio' name='group1' value='chinese'/>중식</label>
-									<label><input TYPE='radio' name='group1' value='pizza'/>피자</label>
-									<label><input TYPE='radio' name='group1' value='chicken'/>치킨</label>									
+									<label><input TYPE='radio' name='categoryName' value="한식" checked="checked"/>한식</label>
+									<label><input TYPE='radio' name='categoryName' value="일식"/>일식</label>
+									<label><input TYPE='radio' name='categoryName' value="양식"/>양식</label>
+									<label><input TYPE='radio' name='categoryName' value="중식"/>중식</label>
+									<label><input TYPE='radio' name='categoryName' value="피자"/>피자</label>
+									<label><input TYPE='radio' name='categoryName' value="치킨"/>치킨</label>									
 								</tr>
 								<tr>
 									<th>매장이름</th>
@@ -150,9 +150,9 @@
 									<tr>
 										<td class="td1">메뉴이미지</td>
 										<td colspan="3" class="td3"><img
-											src="<%=cp%>/uploads/photo/${dto.imageFilename}" width="30"
+											src="<%=cp%>/uploads/shop/${dto.imageFilename}" width="30"
 											height="30" border="0"
-											onclick="imageViewer('<%=cp%>/uploads/photo/${dto.imageFilename}');"
+											onclick="imageViewer('<%=cp%>/uploads/shop/${dto.imageFilename}');"
 											style="cursor: pointer;"></td>
 									</tr>
 								</c:if>
@@ -205,8 +205,8 @@
 								<tr>
 									<th>매장 위치</th>
 									<td>
-										<input type="number" name="latitude" value="${dto.latitude}">위도
-										<input type="number" name="longitude" value="${dto.longitude}">경도
+										<input type="text" name="latitude" value="${dto.latitude}">위도
+										<input type="text" name="longitude" value="${dto.longitude}">경도
 									</td>
 								</tr>
 							</tbody>
