@@ -50,7 +50,7 @@
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 function article(num) {
-	var url="${articleUrl}&num="+num;
+	var url="${articleUrl}&shopNum="+num;
 	location.href=url;
 }
 
@@ -87,7 +87,7 @@ function article(num) {
 	                <div class="col-sm-6">
 				      <div class="imgLayout" >
 		                     <div style="white-space:nowrap; overflow:auto;" class="inner">
-		                     	<img src="<%=cp%>/uplodes/shop/${dto.saveFilename}" style="width: 33%; height: 70px; float:left;">
+		                     	<img src="<%=cp%>/uploads/shop/${dto.saveFilename}" style="width: 33%; height: 70px; float:left;">
 		                     	<span class="subject" onclick="javascript:article('${dto.shopNum}');" style="float:left; font-size: 18px;  font-weight: bold; ">
 		                     	${dto.shopName}
 		                     	</span>
