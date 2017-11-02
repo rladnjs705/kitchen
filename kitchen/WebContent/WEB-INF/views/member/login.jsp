@@ -301,6 +301,7 @@ function check() {
    }
    //input type = submit, input type = image, button에서는
    //절대로 submit() 메소드를 호출하지 않는다. 호출하면 두 번 전송된다. 
+   
    f.action = "<%=cp%>/member/login_ok.do";
    return true;
 }
