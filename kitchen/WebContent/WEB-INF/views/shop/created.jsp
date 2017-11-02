@@ -73,7 +73,7 @@
   		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
   			alert('이미지 파일만 가능합니다. !!!');
   			f.upload.focus();
-  			return false;
+  			return;
   		}
   	  }
   	  
@@ -81,10 +81,6 @@
   		f.action="<%=cp%>/shop/created_ok.do";
   	  else if(mode=="update")
   		f.action="<%=cp%>/shop/update_ok.do";
-
-		// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
-		return true;
-	}
 
 	function imageViewer(img) {
 		var preViewer = $("#imageViewModal .modal-body");
