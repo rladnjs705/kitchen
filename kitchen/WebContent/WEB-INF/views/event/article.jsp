@@ -166,7 +166,7 @@ function deleteEvent(eventNum) {
 
 
 
-<table style="width: 700px; margin: 30px auto 0px; border-spacing: 0px;">
+<table style="width: 700px; margin: 0px auto 0px; border-spacing: 0px;">
 <tr height="40">
 	<td align="left" class="title">
 		<h3><span>|</span> 이벤트 게시판</h3>
@@ -202,6 +202,7 @@ function deleteEvent(eventNum) {
 			<c:if test="${not empty preReadDto}">
 				<a href="<%=cp%>/event/article.do?${query}&eventNum=${preReadDto.eventNum}">${preReadDto.eventSubject}</a>
 			</c:if>
+			<c:if test="${empty preReadDto}">이전글이 존재하지 않습니다.</c:if>
 	</td>
 </tr>
 
@@ -211,6 +212,7 @@ function deleteEvent(eventNum) {
 		<c:if test="${not empty nextReadDto}">
 			<a href="<%=cp%>/event/article.do?${query}&eventNum=${nextReadDto.eventNum}">${nextReadDto.eventSubject}</a>
 		</c:if>
+		<c:if test="${empty nextReadDto}">다음글이 존재하지 않습니다.</c:if>
 	</td>
 </tr>
 </table>

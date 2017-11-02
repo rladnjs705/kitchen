@@ -152,7 +152,7 @@ clear:left;
 </div>
 </div>
 
-<table style="width: 700px; margin: 30px auto 0px; border-spacing: 0px;">
+<table style="width: 700px; margin: 0px auto 0px; border-spacing: 0px;">
 <tr height="45">
 	<td align="left" class="title">
 		<h3><span>|</span> 이벤트 게시판</h3>

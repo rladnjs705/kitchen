@@ -248,7 +248,7 @@ public class EventDAO {
 	}
 	
 	// 이전글
-	public EventDTO preReadEvent(int eventNum, String searchKey, String searchValue) {
+	public EventDTO preReadEvent(int eventNum, String searchKey, String searchValue, String state) {
 		EventDTO dto=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -265,6 +265,11 @@ public class EventDAO {
 				else
 					sb.append("		WHERE (INSTR(" +searchKey + ", ?) >= 1) ");
 				sb.append("			AND (eventNum > ?) ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append("			ORDER BY eventNum ASC ");
 				sb.append(" ) tb WHERE ROWNUM=1 ");
 				
@@ -275,6 +280,11 @@ public class EventDAO {
 				sb.append("SELECT ROWNUM, tb.* FROM (");
 				sb.append("		SELECT eventNum, eventSubject FROM event");
 				sb.append("			WHERE eventNum > ?");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}				
 				sb.append("				ORDER BY eventNum ASC ");
 				sb.append(" ) tb WHERE ROWNUM =1 ");
 				
@@ -298,7 +308,7 @@ public class EventDAO {
 	}
 
 	// 다음글
-	public EventDTO nextReadEvent(int eventNum, String searchKey, String searchValue) {
+	public EventDTO nextReadEvent(int eventNum, String searchKey, String searchValue, String state) {
 		EventDTO dto=null;
 		
 		PreparedStatement pstmt=null;
@@ -316,16 +326,26 @@ public class EventDAO {
 				else
 					sb.append("		WHERE (INSTR(" + searchKey + ", ?) >=1) ");
 				sb.append("			AND (eventNum < ? ) ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append("			ORDER BY eventNum DESC ");
 				sb.append("	) tb WHERE ROWNUM=1 ");
 				
 				pstmt=conn.prepareStatement(sb.toString());
-				pstmt.setString(1, searchValue);;
+				pstmt.setString(1, searchValue);
 				pstmt.setInt(2,  eventNum);
 			} else {
 				sb.append("SELECT ROWNUM, tb.* FROM ( ");
 				sb.append("		SELECT eventNum, eventSubject FROM event ");
 				sb.append(" 	WHERE eventNum < ? ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append(" 		ORDER BY eventNum DESC ");
 				sb.append(" ) tb WHERE ROWNUM =1 ");
 				
