@@ -188,7 +188,7 @@ clear:left;
 		<td align="left" style="padding-left: 10px;">
 			<a href="${articleUrl}&eventNum=${dto.eventNum}">${dto.eventSubject}</a>
 		</td>
-		<td>${dto.userId}</td>
+		<td>${dto.userName}</td>
 		<td>${dto.eventCreated}</td>
 		<td>${dto.eventHitcount}</td>
 	</tr>
@@ -217,7 +217,7 @@ clear:left;
 			<form name="searchForm" action="" method="post">
 				<select name="searchKey" class="selectField">
 					<option value="eventSubject">제목</option>
-					<option value="userId">작성자</option>
+					<option value="userName">작성자</option>
 					<option value="eventContent">내용</option>
 					<option value="eventCreated">등록일</option>
 				</select>
@@ -225,11 +225,13 @@ clear:left;
 				<button type="button" class="btn" onclick="searchList()">검색</button>
 			</form>
 		</td>
+		
 		<c:if test="${roll!='guest'}">
       <td align="right" width="100">
           <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/created.do?page=${page}';">글올리기</button>
       </td>
       </c:if>
+      
 	</tr>
 </table>
 

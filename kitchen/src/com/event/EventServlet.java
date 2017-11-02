@@ -183,6 +183,15 @@ public class EventServlet extends HttpServlet{
 		EventDAO dao=new EventDAO();
 		String cp=req.getContextPath();
 		
+		//로그인했는지 안했는지 확인
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+				
+		//관리자계정일 경우에만 공지리스트에서 글올리기 버튼을 보여준다.
+		if(info==null||!info.getUserId().equals("admin")) {
+			req.setAttribute("roll", "guest");
+		}
+		
 		int eventNum=Integer.parseInt(req.getParameter("eventNum"));
 		String page=req.getParameter("page");
 		
@@ -263,6 +272,7 @@ public class EventServlet extends HttpServlet{
 		dto.setEventSubject(req.getParameter("eventSubject"));
 		dto.setEventContent(req.getParameter("eventContent"));
 		dto.setEventEnd(req.getParameter("eventEnd"));
+		dto.setUserName(req.getParameter("userName"));
 		
 		dao.updateEvent(dto);
 		

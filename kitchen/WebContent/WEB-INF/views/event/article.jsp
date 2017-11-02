@@ -183,7 +183,7 @@ function deleteEvent(eventNum) {
 
 <tr height="35" style="border-bottom: 1px solid #cccccc;">
 	<td width="50%" align="left" style="padding-left: 5px;">
-		아이디 : ${dto.userId}
+		작성자 : ${dto.userName}
 	</td>
 	<td width="50%" align="right" style="padding-right: 5px;">
 		${dto.eventCreated} | 조회 ${dto.eventHitcount}
@@ -217,12 +217,15 @@ function deleteEvent(eventNum) {
 
 <table style="width: 700px; margin: 0px auto 20px; border-spacing: 0px;">
 <tr height="45">
+
+		<c:if test="${roll!='guest'}">
 	<td width="300" align="left">
-		<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/update.do?eventNum=${dto.eventNum}&page=${page}';">
+	<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/update.do?eventNum=${dto.eventNum}&page=${page}';">
 		수정</button>
 			<button type="button" class="btn" onclick="deleteEvent('${dto.eventNum}');">삭제</button>
 		</td>
-		
+	</c:if>
+	
 		<td align="right">
 			<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/list.do?${query}';">리스트</button>	
 	</td>
