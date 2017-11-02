@@ -181,7 +181,6 @@
 											onclick="imageViewer('<%=cp%>/uploads/shop/${dto.saveFilename}');"
 											style="cursor: pointer;"></td>
 									</tr>
-									
 								</c:if>
 								<tr>
 									<th>주소</th>

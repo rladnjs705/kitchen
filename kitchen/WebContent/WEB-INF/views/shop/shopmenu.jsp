@@ -94,9 +94,7 @@ function deleteShop() {  //체크한 리스트 삭제
 	   }
 	      
 	}
-function updateShop() {
-	var f = documnet.
-}
+
 
 </script>
 
@@ -132,7 +130,7 @@ function updateShop() {
 							<div class="col-sm-6">
 								<div class="imgLayout">
 									<div style="white-space: nowrap; overflow: auto;" class="inner">
-										<img src="<%=cp%>/uploads/shop/${dto.saveFilename}"
+										<img src="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images\\${dto.saveFilename}"
 											style="width: 20%; height: 70px; float: left;"> <span
 											class="subject"
 											onclick="javascript:article('${dto.shopNum}');"
@@ -155,8 +153,8 @@ function updateShop() {
 										<div align="right" style="font-size: 15px;">배달 소요시간: |
 											${dto.shopTime} 분
 											<button type="button" class="btn btn-primary btn-sm"
-											onclick="updateShop('${dto.shopNum}');">
-											<span class="glyphicon glyphicon glyphicon-pencil"></span> 수정하기
+											onclick="javascript:location.href='<%=cp%>/shop/update.do?shopNum=${dto.shopNum}&${query}';">
+											수정하기
 											</button>
 										</div>	
 									</div>
@@ -189,13 +187,11 @@ function updateShop() {
 						</button>
 						<button type="button" class="btn btn-primary btn-sm"
 							onclick="deleteShop('${dto.shopNum}');">
-							<span class="glyphicon glyphicon glyphicon-pencil"></span> 삭제하기
+						 삭제하기
 						</button>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 	</form>
 
@@ -210,6 +206,5 @@ function updateShop() {
 		src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
 	<script type="text/javascript"
 		src="<%=cp%>/resource/bootstrap/js/bootstrap.min.js"></script>
-
 </body>
 </html>
