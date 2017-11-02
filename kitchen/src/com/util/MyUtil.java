@@ -24,7 +24,7 @@ public class MyUtil {
 			else
 				pageCount=dataCount/numPerPage+1;//나머지가 있으면 데이터 표시를 위해 LP를 늘린다.
 		}
-		
+		System.out.println(pageCount+"dfalisflks");
 		return pageCount;
 	}
 	
