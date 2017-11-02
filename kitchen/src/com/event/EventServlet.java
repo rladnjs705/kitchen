@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.member.SessionInfo;
+import com.notice.NoticeDTO;
 import com.util.MyUtil;
 
 @WebServlet("/event/*")
@@ -195,6 +196,7 @@ public class EventServlet extends HttpServlet{
 		int eventNum=Integer.parseInt(req.getParameter("eventNum"));
 		String page=req.getParameter("page");
 		
+		String state=req.getParameter("state");		
 		String searchKey=req.getParameter("searchKey");
 		String searchValue=req.getParameter("searchValue");
 		if(searchKey==null) {
@@ -205,9 +207,6 @@ public class EventServlet extends HttpServlet{
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue=URLDecoder.decode(searchValue, "utf-8");
 		}
-		
-
-		
 		
 		// 조회수 증가
 		dao.updateHitcount(eventNum);
@@ -223,10 +222,10 @@ public class EventServlet extends HttpServlet{
 		dto.setEventContent(dto.getEventContent().replaceAll("\n", "<br>"));
 		
 		// 이전글 / 다음글
-		EventDTO preReadDto = dao.preReadEvent(eventNum, searchKey, searchValue);
-		EventDTO nextReadDto = dao.nextReadEvent(eventNum, searchKey, searchValue);
+		EventDTO preReadDto = dao.preReadEvent(eventNum, searchKey, searchValue, state);
+		EventDTO nextReadDto = dao.nextReadEvent(eventNum, searchKey, searchValue, state);
 		
-		String query = "page="+page;
+		String query = "page="+page+"&state="+state;
 		if(! searchValue.equals("")) {
 			query += "&searchKey=" + searchKey + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}

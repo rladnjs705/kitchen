@@ -161,14 +161,7 @@ clear:left;
 <tr height="50">
 <td align="center" width="400">
 <div style="font-size: 30px;">어떻게 도와드릴까요?</div><br>
-	<tbody>
-		<tr height="50">
-			<td align="center" width="400">
-				<input type="text" name="searchqna" class="boxTF" style="width: 700px; height: 35px; font-size: 30px">
-				<button type="button" class="btn" onclick="" style="height: 45px; width: 100px;"> 검색 </button>
-			</td>
-		</tr>
-	</tbody>
+
 </table>
 <table style="width: 800px; margin: 30px auto 0px;">
 	<tbody>
@@ -179,8 +172,7 @@ clear:left;
 		</tr>
 	</tbody>
 </table>
-
-<table style="width: 800px; margin: 30px auto 0px;">
+<table style="width: 800px; margin: 10px auto 0px;">
 	<tbody>
 		<tr height="100">
 			<td align="center" width="400">
@@ -277,9 +269,7 @@ clear:left;
 
 
 </div>
-<br>
-<br>
-<br>
+
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
