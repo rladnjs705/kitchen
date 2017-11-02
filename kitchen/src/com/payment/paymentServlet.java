@@ -1,16 +1,15 @@
 package com.payment;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.member.MemberDAO;
-import com.member.MemberDTO;
 import com.util.MyServlet;
+
 @WebServlet("/plist/*")
 public class paymentServlet extends MyServlet{
 		private static final long serialVersionUID = 1L;
@@ -31,15 +30,15 @@ public class paymentServlet extends MyServlet{
 	}
 	
 	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String userId=req.getParameter("userId");
 		paymentDAO paymentDAO=new paymentDAO();
-		MemberDAO MemberDAO=new MemberDAO();
-		MemberDTO MemberDTO=new MemberDTO();
-		paymentDTO paymentDTO=new paymentDTO();
-		MemberDTO=MemberDAO.readMember(userId);
-		paymentDAO.insertPay(paymentDTO,MemberDTO);
+		List<paymentDTO> list=new ArrayList<>();
+		list=paymentDAO.listPurchase(userId);
 		
 		
+		req.setAttribute("list", list);
+		req.setAttribute("userId", userId);
 		forward(req, resp, "/WEB-INF/views/plist/list.jsp");
 	}
 	

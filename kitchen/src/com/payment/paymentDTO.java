@@ -1,30 +1,58 @@
 package com.payment;
 
 public class paymentDTO {
-	String pay,point,paydate,shopname,shoptel;
-
-	public String getPay() {
-		return pay;
+	String purchasenum,purchasedate,purchaseprice,
+	savepoint,usepoint,shopname,menuname,categoryname,
+	userid, shopnum;
+	
+	
+	
+	public String getShopnum() {
+		return shopnum;
 	}
 
-	public void setPay(String pay) {
-		this.pay = pay;
+	public void setShopnum(String shopnum) {
+		this.shopnum = shopnum;
 	}
 
-	public String getPoint() {
-		return point;
+	public String getPurchasenum() {
+		return purchasenum;
 	}
 
-	public void setPoint(String point) {
-		this.point = point;
+	public void setPurchasenum(String purchasenum) {
+		this.purchasenum = purchasenum;
 	}
 
-	public String getPaydate() {
-		return paydate;
+	public String getPurchasedate() {
+		return purchasedate;
 	}
 
-	public void setPaydate(String paydate) {
-		this.paydate = paydate;
+	public void setPurchasedate(String purchasedate) {
+		this.purchasedate = purchasedate;
+	}
+
+	public String getPurchaseprice() {
+		return purchaseprice;
+	}
+
+	public void setPurchaseprice(String purchaseprice) {
+		this.purchaseprice = purchaseprice;
+	}
+
+	public String getSavepoint() {
+		return savepoint;
+	}
+
+	public void setSavepoint(String savepoint) {
+		this.savepoint = savepoint;
+	}
+
+	public String getUsepoint() {
+		return usepoint;
+	}
+
+	public void setUsepoint(String usepoint) {
+		this.usepoint = usepoint;
 	}
 
 	public String getShopname() {
@@ -35,13 +63,32 @@ public class paymentDTO {
 		this.shopname = shopname;
 	}
 
-	public String getShoptel() {
-		return shoptel;
+	public String getMenuname() {
+		return menuname;
 	}
 
-	public void setShoptel(String shoptel) {
-		this.shoptel = shoptel;
+	public void setMenuname(String menuname) {
+		this.menuname = menuname;
 	}
+
+	public String getCategoryname() {
+		return categoryname;
+	}
+
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
+	
+	
 	
 	
 }

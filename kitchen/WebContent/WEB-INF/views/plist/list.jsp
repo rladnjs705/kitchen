@@ -15,19 +15,17 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
+<script type="text/javascript">
 $( function() {
   $( "#accordion" ).accordion();
 } );
 </script>
+
 
 <style type="text/css">
 .menubar{
@@ -161,15 +159,18 @@ clear:left;
 		<tr height="100">
 			<td align="center" width="400">
 				<div id="accordion">
+				
+				<c:if test="${empty list}">결제내역이 없습니다.</c:if>
+<c:if test="${not empty list}">
 	<c:forEach var="dto" items="${list}">
-  <h3 style="text-align: left;">&ensp;&ensp;${dto.paydate}&ensp;&ensp;|&ensp;&ensp;${dto.shopname}&ensp;&ensp;|&ensp;&ensp;${dto.pay} </h3>
+  <h3 style="text-align: left;">&ensp;&ensp;${dto.purchasedate}&ensp;&ensp;|&ensp;&ensp;${dto.shopname}&ensp;&ensp;|&ensp;&ensp;${dto.purchaseprice} </h3>
   <div>
     <p style="text-align: left;">
-    지점 정보
+   		<a href="<%=cp%>/menu/article.do?page=1&state=${dto.categoryname}&shopNum=${dto.shopnum}">${dto.shopname}</a>
     </p>
   </div>
   </c:forEach>
-  
+</c:if>
 
   
   </div>

@@ -220,9 +220,9 @@ public class ShopDAO {
 			pstmt.setInt(11, dto.getShopTime());
 			pstmt.setString(12, dto.getShopStart());
 			pstmt.setString(13, dto.getShopEnd());
-			
 			pstmt.setString(14, dto.getLatitude());
 			pstmt.setString(15, dto.getLongitude());
+			pstmt.setInt(16, dto.getShopNum());
 
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -233,5 +233,35 @@ public class ShopDAO {
 		return result;
 	}
 	
+	public int deleteShop(String[] shopNum) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql;
+		
+		try {
+			sql="DELETE FROM shop WHERE shopNum IN (";
+			
+			for(int i=0; i<shopNum.length; i++) {
+				sql+="?,";
+			}
+			sql=sql.substring(0, sql.length()-1);
+			sql+=")";
+			pstmt=conn.prepareStatement(sql);
+			
+			for(int i=0; i<shopNum.length;i++) {
+				pstmt.setInt(i+1, Integer.parseInt(shopNum[i]));
+			}
+			result=pstmt.executeUpdate();
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	
 	
 }
+

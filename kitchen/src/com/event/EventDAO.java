@@ -112,9 +112,10 @@ public class EventDAO {
 		try {
 			sb.append("SELECT * FROM (");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("			SELECT eventNum, userId, eventSubject, eventHitcount");
+			sb.append("			SELECT eventNum, e.userId, userName, eventSubject, eventHitcount");
 			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd");
-			sb.append("			FROM event");
+			sb.append("			FROM event e");
+			sb.append("		    JOIN member m ON e.userId = m.userId"); 
 			if(state.equals("y")) {
 				sb.append("     WHERE TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
 			} else {
@@ -138,6 +139,7 @@ public class EventDAO {
 				dto.setEventHitcount(rs.getShort("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
 				dto.setEventEnd(rs.getString("eventEnd"));
+				dto.setUserName(rs.getString("userName"));
 				
 				list.add(dto);
 			}
@@ -162,9 +164,10 @@ public class EventDAO {
 		try {
 			sb.append("SELECT * FROM (");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("			SELECT eventNum, userId, eventSubject, eventHitcount");
+			sb.append("			SELECT eventNum, e.userId, userName, eventSubject, eventHitcount");
 			sb.append("				,TO_CHAR(eventCreated, 'YYYY-MM-DD') eventCreated, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd");
-			sb.append("			FROM event");
+			sb.append("			FROM event e");
+			sb.append("			JOIN member m ON e.userId=m.userId");
 			if(searchKey.equalsIgnoreCase("eventCreated"))
 				sb.append("			WHERE TO_CHAR(eventCreated, 'YYYY-MM-DD') =? ");
 			else if(searchKey.equalsIgnoreCase("userId"))
@@ -197,6 +200,7 @@ public class EventDAO {
 				dto.setEventHitcount(rs.getInt("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
 				dto.setEventEnd(rs.getString("eventEnd"));
+				dto.setUserName(rs.getString("userName"));
 				
 				list.add(dto);
 			}
@@ -214,9 +218,9 @@ public class EventDAO {
 		ResultSet rs=null;
 		String sql;
 		
-		sql="SELECT eventNum, userId, eventSubject, eventContent, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd, ";
+		sql="SELECT eventNum, e.userId, userName, eventSubject, eventContent, TO_CHAR(eventEnd, 'YYYY-MM-DD') eventEnd, ";
 		sql+=" eventHitcount, eventCreated ";
-		sql+=" FROM event WHERE eventNum=?";
+		sql+=" FROM event e JOIN member m ON e.userId=m.userId WHERE eventNum=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -233,6 +237,7 @@ public class EventDAO {
 				dto.setEventEnd(rs.getString("eventEnd"));
 				dto.setEventHitcount(rs.getShort("eventHitcount"));
 				dto.setEventCreated(rs.getString("eventCreated"));
+				dto.setUserName(rs.getString("userName"));
 			}
 			rs.close();
 			pstmt.close();
@@ -243,7 +248,7 @@ public class EventDAO {
 	}
 	
 	// 이전글
-	public EventDTO preReadEvent(int eventNum, String searchKey, String searchValue) {
+	public EventDTO preReadEvent(int eventNum, String searchKey, String searchValue, String state) {
 		EventDTO dto=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -260,6 +265,11 @@ public class EventDAO {
 				else
 					sb.append("		WHERE (INSTR(" +searchKey + ", ?) >= 1) ");
 				sb.append("			AND (eventNum > ?) ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append("			ORDER BY eventNum ASC ");
 				sb.append(" ) tb WHERE ROWNUM=1 ");
 				
@@ -270,6 +280,11 @@ public class EventDAO {
 				sb.append("SELECT ROWNUM, tb.* FROM (");
 				sb.append("		SELECT eventNum, eventSubject FROM event");
 				sb.append("			WHERE eventNum > ?");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}				
 				sb.append("				ORDER BY eventNum ASC ");
 				sb.append(" ) tb WHERE ROWNUM =1 ");
 				
@@ -293,7 +308,7 @@ public class EventDAO {
 	}
 
 	// 다음글
-	public EventDTO nextReadEvent(int eventNum, String searchKey, String searchValue) {
+	public EventDTO nextReadEvent(int eventNum, String searchKey, String searchValue, String state) {
 		EventDTO dto=null;
 		
 		PreparedStatement pstmt=null;
@@ -311,16 +326,26 @@ public class EventDAO {
 				else
 					sb.append("		WHERE (INSTR(" + searchKey + ", ?) >=1) ");
 				sb.append("			AND (eventNum < ? ) ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append("			ORDER BY eventNum DESC ");
 				sb.append("	) tb WHERE ROWNUM=1 ");
 				
 				pstmt=conn.prepareStatement(sb.toString());
-				pstmt.setString(1, searchValue);;
+				pstmt.setString(1, searchValue);
 				pstmt.setInt(2,  eventNum);
 			} else {
 				sb.append("SELECT ROWNUM, tb.* FROM ( ");
 				sb.append("		SELECT eventNum, eventSubject FROM event ");
 				sb.append(" 	WHERE eventNum < ? ");
+				if(state.equals("y")) {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				} else {
+					sb.append("     AND  TO_CHAR(eventEnd, 'YYYY-MM-DD') < TO_CHAR(SYSDATE, 'YYYY-MM-DD') ");
+				}
 				sb.append(" 		ORDER BY eventNum DESC ");
 				sb.append(" ) tb WHERE ROWNUM =1 ");
 				
