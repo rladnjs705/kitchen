@@ -157,13 +157,13 @@ clear:left;
   </ul>
 </div>
 <br><br>
-<table style="width: 900px; margin: 0px auto; border-spacing: 0">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0">
 <tr height="50">
 <td align="center" width="400">
 <div style="font-size: 30px;">어떻게 도와드릴까요?</div><br>
 
 </table>
-<table style="width: 800px; margin: 30px auto 0px;">
+<table style="width: 1000px; margin: 30px auto 0px;">
 	<tbody>
 		<tr height="30">
 			<td class="title">
@@ -172,7 +172,7 @@ clear:left;
 		</tr>
 	</tbody>
 </table>
-<table style="width: 800px; margin: 10px auto 0px;">
+<table style="width: 1000px; margin: 10px auto 0px;">
 	<tbody>
 		<tr height="100">
 			<td align="center" width="400">
@@ -257,8 +257,8 @@ clear:left;
   <h3 style="text-align: left;"> | 장바구니 사용법을 알려주세요! </h3>
   <div>
     <p style="text-align: left;">
-    장바구니는 주문할 메뉴들을 임시로 보관하는 기능으로 한 업소에서 담은 메뉴들만 보관 가능 합니다.<br>
-     배달업소에서 보여주는 메뉴 목록 화면에서 우측 상단에 장바구니 버튼 선택하면 보관한 메뉴들을 볼 수 있습니다.<br> 
+    - 장바구니는 주문할 메뉴들을 임시로 보관하는 기능으로 한 업소에서 담은 메뉴들만 보관 가능 합니다.<br>
+     배달업소에서 보여주는 메뉴 목록 화면에서 우측 상단에 장바구니 버튼 선택하면 보관한 메뉴들을 볼 수 있습니다. 
 다만, 장바구니에 한 번에 여러 업소의 음식을 주문하고 싶으신 경우 업소 별로 주문을 해주셔야 하니 참고 부탁 드립니다.
     </p>
   </div>
