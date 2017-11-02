@@ -58,43 +58,6 @@ function changes(fr) {
 	
 }
 
-function viewInquiry(){
-	<c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">
-		var url="${articleUrl}&num=${dto.questionNum}";
-		location.href=url;
-	</c:if>
-	
-	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
-    	alert("글보기 권한이 없습니다.");
-	</c:if>
-	
-	<c:if test="${sessionScope.member.userId==null}">
-		alert("글보기 권한이 없습니다.");
-	</c:if>
-	
-}
-
-/*
-function itemChange(){
-	 
-	var periodD = ["전체","1주일","1개월","3개월","6개월"];
-	 
-	var selectItem = $("#select1").val();
-	 
-	var changeItem;
-	  
-	if(selectItem == "등록일"){
-	  changeItem = periodD;
-	}
-	 
-	$('#select2').empty();
-	 
-	for(var count = 0; count < changeItem.size(); count++){                
-	                var option = $("<option>"+changeItem[count]+"</option>");
-	                $('#select2').append(option);
-	}
-}
-*/
 </script>
 </head>
 
@@ -115,8 +78,8 @@ function itemChange(){
        <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -125,8 +88,14 @@ function itemChange(){
 
 <!-- 게시판 리스트폼 넣을 곳 -->
 <div class="containerList">
-
-<table style="width: 700px; margin:auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 30px auto 0px; border-spacing: 0px;">
+<tr height="45">
+	<td align="left" class="title">
+		<h4><span>|</span> 문의하기</h4>
+	</td>
+</tr>
+</table>
+<table style="width: 1000px; margin:auto; border-spacing: 0px;">
    <tr height="35">
       <td align="left" width="50%">
           ${dataCount}개(${page}/${totalPage}페이지)
@@ -137,7 +106,7 @@ function itemChange(){
    </tr>
 </table>
 
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
   <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
       <th width="60" style="color: #787878;">번호</th>
       <th width="100" style="color: #787878;">문의유형</th>
@@ -171,7 +140,7 @@ function itemChange(){
 
 </table>
  
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px;">
    <tr height="35">
 	<td align="center">
         ${paging}
@@ -179,7 +148,7 @@ function itemChange(){
    </tr>
 </table>
 
-<table style="width: 700px; margin: 10px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 10px auto; border-spacing: 0px;">
    <tr height="40">
       <td align="left" width="100">
           <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/bbs/list.do';">새로고침</button>

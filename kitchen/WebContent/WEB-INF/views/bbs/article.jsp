@@ -86,8 +86,8 @@ function reply(){
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -95,7 +95,7 @@ function reply(){
 </div>
 	
 <div class="container">
-    <div class="body-container" style="width: 700px;">
+    <div class="body-container" style="width: 1000px;">
         
         <div>
 			<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
