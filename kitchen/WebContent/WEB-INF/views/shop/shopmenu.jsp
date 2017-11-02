@@ -14,19 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>spring</title>
 
-<link rel="stylesheet"
-	href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet"
-	href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css"
-	type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css" type="text/css" />
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/style.css"
-	type="text/css" />
-<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css"
-	type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css" />
 
 <style type="text/css">
 .imgLayout {
@@ -38,7 +31,7 @@
 }
 
 .subject {
-	font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+	font-family: sans-serif;
 	font-size: 21px;
 	width: 190px;
 	height: 25px;
@@ -50,6 +43,87 @@
 	text-overflow: ellipsis;
 	cursor: pointer;
 	text-align: center;
+}
+.button {
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+.gray {
+	color: #e9e9e9;
+	border: solid 1px #555;
+	background: #6e6e6e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#575757));
+	background: -moz-linear-gradient(top,  #888,  #575757);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#575757');
+}
+.gray:hover {
+	background: #616161;
+	background: -webkit-gradient(linear, left top, left bottom, from(#757575), to(#4b4b4b));
+	background: -moz-linear-gradient(top,  #757575,  #4b4b4b);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#757575', endColorstr='#4b4b4b');
+}
+.gray:active {
+	color: #afafaf;
+	background: -webkit-gradient(linear, left top, left bottom, from(#575757), to(#888));
+	background: -moz-linear-gradient(top,  #575757,  #888);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#575757', endColorstr='#888888');
+}
+
+.bigrounded {
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+.medium {
+	font-size: 12px;
+	padding: .4em 1.5em .42em;
+}
+.small {
+	font-size: 11px;
+	padding: .2em 1em .275em;
+}
+.white {
+	color: #606060;
+	border: solid 1px #b7b7b7;
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+.white:hover {
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+	background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+.white:active {
+	color: #999;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+	background: -moz-linear-gradient(top,  #ededed,  #fff);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
 }
 </style>
 
@@ -101,7 +175,6 @@ function article(shopNum) {
 
 </script>
 
-
 </head>
 <body>
 
@@ -121,10 +194,15 @@ function article(shopNum) {
 				</div>
 				<div style="clear: both; height: 30px; line-height: 30px;">
 
-					<div style="float: left;">전체 선택
+					<div style="float: left;">
 						${dataCount}개(${page}/${total_page} 페이지)</div>
-					&nbsp; <br> <input id="allCheck" type="checkbox"
-						onclick="check();" />
+					&nbsp; <br> 
+					 <c:if test="${roll!='guest'}">
+					<div style="float: left;">
+						<input id="allCheck" type="checkbox" onclick="check();"/>
+						전체선택
+					</div>
+					</c:if>
 					<div style="float: right;">&nbsp;</div>
 				</div>
 				<div style="clear: both;">
@@ -147,18 +225,18 @@ function article(shopNum) {
 												name="checkbox" value="${dto.shopNum}" />
 											<hr>
 										</div>
-										<div align="center"
-											style="font-size: 14px; float: left; margin: 0px 10px;">${dto.content}</div>
+										<div style="font-size: 13px; margin: 0px 0px 0px 50px;">${dto.content}</div>
 										<div style="clear: both;"></div>
 										<div style="float: left; color: #6B66FF; padding: 5px;">${dto.shopZip1}<br>
 											${dto.shopAddr1} - ${dto.shopAddr2}
 										</div>
-										<div align="right" style="font-size: 15px;">배달 소요시간: |
-											${dto.shopTime} 분
-											<button type="button" class="btn btn-primary btn-sm"
+										<div style="font-size: 15px; float: right;">배달 소요시간: | ${dto.shopTime} 분
+											 <c:if test="${roll!='guest'}">
+											<button type="button" class="button gray small"
 											onclick="javascript:location.href='<%=cp%>/shop/update.do?shopNum=${dto.shopNum}&${query}';">
-											수정하기
+											수정
 											</button>
+											</c:if>
 										</div>	
 									</div>
 								</div>
@@ -182,17 +260,19 @@ function article(shopNum) {
 						&nbsp;</div>
 					<div style="float: left; width: 60%; text-align: center;">
 						&nbsp;</div>
+					 <c:if test="${roll!='guest'}">
 					<div
 						style="float: left; width: 20%; min-width: 85px; text-align: right;">
-						<button type="button" class="btn btn-primary btn-sm"
+						<button type="button" class="button white bigrounded"
 							onclick="javascript:location.href='<%=cp%>/shop/created.do';">
-							<span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기
+							<span class="glyphicon glyphicon glyphicon-pencil"></span> 매장등록
 						</button>
-						<button type="button" class="btn btn-primary btn-sm"
+						<button type="button" class="button white bigrounded" style="margin: 5px;"
 							onclick="deleteShop('${dto.shopNum}');">
-						 삭제하기
+						 매장삭제
 						</button>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

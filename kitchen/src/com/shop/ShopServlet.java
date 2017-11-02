@@ -12,7 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.util.FileManager;
@@ -28,14 +30,22 @@ public class ShopServlet extends MyServlet {
 		req.setCharacterEncoding("utf-8");
 
 		String uri = req.getRequestURI();
-
+		
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if (info == null) {
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
+			return;
+		}
+		
 		String pathname = "C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
 		File f = new File(pathname);
 
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-
+		
+		
 		if (uri.indexOf("list.do") != -1) {
 		} else if (uri.indexOf("created.do") != -1) {
 			// 글쓰기 폼
@@ -51,6 +61,7 @@ public class ShopServlet extends MyServlet {
 			updateForm(req, resp);
 		} else if (uri.indexOf("update_ok.do") != -1) {
 			// 글 수정 완료
+			System.out.println("여기");
 			updateSubmit(req, resp, pathname);
 		} else if (uri.indexOf("deleteList.do") != -1) {
 			// 글 삭제
@@ -66,15 +77,20 @@ public class ShopServlet extends MyServlet {
 
 	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname)
 			throws ServletException, IOException {
+		System.out.println("3333333333333");
 		ShopDAO dao = new ShopDAO();
 		String cp = req.getContextPath();
 		ShopDTO dto = new ShopDTO();
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
 		String encType = "utf-8";
 		int maxSize = 5 * 1024 * 1024;
-
 		MultipartRequest mreq = new MultipartRequest(req, pathname, maxSize, encType, new DefaultFileRenamePolicy());
 
+
+		dto.setUserId(info.getUserId());
+		
 		dto.setShopName(mreq.getParameter("shopName"));
 		dto.setContent(mreq.getParameter("content"));
 		dto.setShopZip1(mreq.getParameter("shopZip1"));
@@ -92,10 +108,9 @@ public class ShopServlet extends MyServlet {
 
 		if (mreq.getFile("upload") != null) {
 			String saveFilename = mreq.getFilesystemName("upload");
-
 			dto.setSaveFilename(saveFilename);
 		}
-
+		System.out.println("2222222222");
 		dao.insertShop(dto);
 		resp.sendRedirect(cp + "/shop/shopmenu.do");
 
@@ -104,7 +119,15 @@ public class ShopServlet extends MyServlet {
 	private void shopmenu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		MyUtil util = new MyUtil();
 		ShopDAO dao = new ShopDAO();
-
+				//로그인했는지 안했는지 확인
+				HttpSession session = req.getSession();
+				SessionInfo info = (SessionInfo)session.getAttribute("member");
+				
+				//관리자계정일 경우에만 공지리스트에서 글올리기 버튼을 보여준다.
+				if(info==null||!info.getUserId().equals("admin")) {
+					req.setAttribute("roll", "guest");
+				}
+				
 		String page = req.getParameter("page");
 
 		int currentPage = 1;
@@ -199,6 +222,7 @@ public class ShopServlet extends MyServlet {
 		String encType = "utf-8";
 		int maxFilesize = 20 * 1024 * 1024;
 		MultipartRequest mreq = null;
+		System.out.println("여기123");
 		mreq = new MultipartRequest(req, pathname, maxFilesize, encType, new DefaultFileRenamePolicy());
 
 		dto.setShopNum(Integer.parseInt(mreq.getParameter("shopNum")));
