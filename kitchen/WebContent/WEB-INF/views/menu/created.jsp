@@ -151,7 +151,7 @@
 									<tr>
 										<td class="td1">메뉴이미지</td>
 										<td colspan="3" class="td3"><img
-											src="C:\web\work\kitchen\kitchen\WebContent\WEB-INF\views\menu\image" width="30"
+											src="C:\web\work\kitchen\kitchen\WebContent\resource\images" width="30"
 											height="30" border="0"
 											onclick="imageViewer('<%=cp%>/WEB-INF/resource/images/${dto.savefilename}');"
 											style="cursor: pointer;"></td>
@@ -170,7 +170,8 @@
 										</button>
 										<button type="button" class="btn btn-danger"
 											onclick="javascript:location.href='<%=cp%>/menu/menulist.do';">
-											취소</button> <c:if test="${mode=='update'}">
+											취소</button> 
+										<c:if test="${mode=='update'}">
 											<input type="hidden" name="menunum" value="${dto.menunum}">
 											<input type="hidden" name="userId" value="${dto.userId}">
 											<input type="hidden" name="imageFilename"

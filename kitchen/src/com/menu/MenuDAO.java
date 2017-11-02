@@ -11,6 +11,7 @@ import com.util.DBConn;
 
 public class MenuDAO {
 	Connection conn = DBConn.getConnection();
+	
 	public int insertMenu(MenuDTO dto) {
 		int result = 0;
 		
@@ -44,7 +45,7 @@ public class MenuDAO {
 		String sql;
 		
 		try {
-			sql = "SELECT s.shopnum, m.menuname, m.menucontent, m.menuprice, m.savefilename FROM shopmenu m JOIN shop s ON m.shopnum=s.shopNum WHERE m.shopNum=?";
+			sql = "SELECT s.shopnum, m.menuname, m.menunum,m.menucontent, m.menuprice, m.savefilename FROM shopmenu m JOIN shop s ON m.shopnum=s.shopNum WHERE m.shopNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, shopNum);
@@ -53,8 +54,9 @@ public class MenuDAO {
 			
 			while(rs.next()) {
 				MenuDTO dto = new MenuDTO();
-
+				
 				dto.setMenuname(rs.getString("menuname"));
+				dto.setMenunum(rs.getInt("menunum"));
 				dto.setMenucontent(rs.getString("menucontent"));
 				dto.setMenuprice(rs.getInt("menuprice"));
 				dto.setSavefilename(rs.getString("savefilename"));
@@ -70,6 +72,8 @@ public class MenuDAO {
 		} 
 		return list;
 	}
+	
+	
 	
 	public ShopDTO readMenu(int shopNum) {
 		ShopDTO dto = null;
@@ -105,21 +109,75 @@ public class MenuDAO {
 		return dto;
 	}
 	
-	public int deleteMenu(int shopNum) {
+	public int deleteMenu(int shopNum,int menuNum) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql;
 		
-		sql = "DELETE FROM shop WHERE shopNum=?";
+		sql = "DELETE shopmenu WHERE shopnum=? AND menunum=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, shopNum);
+			pstmt.setInt(2, menuNum);
 			result = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		return result;
+	}
+	
+	public int deletemenu(String[] menunum) {
+	      int result=0;
+	      String sql;
+	      PreparedStatement pstmt =null;
+	      Connection conn =null;
+	      try {
+	         conn=DBConn.getConnection();
+	         sql="DELETE FROM shopmenu WHERE menunum IN ( ";
+	         
+	         for(int i=0;i<menunum.length;i++) {
+	            sql+="?,";
+	         }
+	         sql=sql.substring(0, sql.length()-1);
+	         sql+=")";
+	         pstmt=conn.prepareStatement(sql);
+	         
+	         for(int i=0;i<menunum.length;i++) {
+	            pstmt.setInt(i+1, Integer.parseInt(menunum[i]));
+	         }
+	         result=pstmt.executeUpdate();
+	      
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      return result;
+	   }
+	
+	public int updateMenu(MenuDTO dto) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		sql = "UPDATE shopmenu SET menuname=?, menucontent=?, menuprice=?, savefilename=? WHERE menunum=? AND shopnum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMenuname());
+			pstmt.setString(2, dto.getMenucontent());
+			pstmt.setInt(3, dto.getMenuprice());
+			pstmt.setString(4, dto.getSavefilename());
+			pstmt.setInt(5, dto.getMenunum());
+			pstmt.setInt(6, dto.getShopnum());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+				
 		return result;
 	}
 	

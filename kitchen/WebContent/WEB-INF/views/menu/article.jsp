@@ -108,7 +108,7 @@
 </style>
 
 <script type="text/javascript">
-$(function(){
+$(function(){ // 메뉴 선택 시 사이드바로 메뉴, 가격 넘기기
 	$(document).on("click", ".menuselect", function(){
 		var menuname=$(this).attr("data-menuname");
 		var menuprice=parseInt($(this).attr("data-menuprice"));
@@ -125,7 +125,7 @@ $(function(){
 	});
 });
 
-$(function(){
+$(function(){ // 사이드바에서 메뉴 삭제 시 메뉴, 가격 삭제됨
 	$(document).on("click", ".deleteMenuItem", function(){
 		var menuprice=parseInt($(this).attr("data-menuprice"));
 		var selectTotal=$("#selectTotal").text();
@@ -136,8 +136,7 @@ $(function(){
 	});
 });
 
-function send(){
-	
+function send(){ // 메뉴 페이지에서 결제 페이지로 사이드바 정보 넘기기
 	var form = document.menunameForm;
     var selSize = form.menuname.length;
     var menuname = new Array(selSize);
@@ -157,6 +156,27 @@ function send(){
     form.submit();
 	
 }
+
+
+
+function deletemenu() {
+	
+	var f = document.menuForm;
+	
+	var chkMenu = document.getElementsByName("chkObject");
+	
+	var a=0;
+	for(var i=0;i<chkMenu.length;i++){
+		if(chkMenu[i].checked==true){
+			a++;
+		}
+		
+	}
+	f.action="<%=cp%>/menu/delete.do?page=${page}&state=${state}&shopnum=${dto.shopNum}";
+    f.submit();
+
+}
+
 </script>
 </head>
  
@@ -176,12 +196,14 @@ function send(){
 
 <!-- 메뉴 선택 -->
 <!-- 메뉴 이미지, 내용 클릭하면 사이드바(결제)로 메뉴 추가 --> 
-<form>
+<form name="menuForm" method="post">
 <c:forEach var="dto" items="${list}">
 	<div id="article-content" align="left">
        	<div style="float: left; width: 20%;" align="center"><img src="<%=cp%>/resource/images/${dto.savefilename}" width="130px;" height="90px"></div>
        	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;">
-       	     <span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">메뉴이름 : ${dto.menuname}<br><br>메뉴설명 : ${dto.menucontent}<br><br>가격 : ${dto.menuprice}</span></div>
+       	<div style="width: 500px;"><span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">
+       	메뉴이름 : ${dto.menuname}<br><br>메뉴설명 : ${dto.menucontent}<br>가격 : ${dto.menuprice}</span>
+       	<input type="checkbox" style="margin-left: 310px;" name="chkObject" value="${dto.menunum}"><button type="button" style="background: #efefef; width: 93px; height: 30px;">메뉴수정</button></div></div>
 	</div>
 </c:forEach>
 </form>      
@@ -229,9 +251,8 @@ function send(){
 			
 			<!-- 주소지 -->
       		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br></div>
-    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴등록</button></a>
-    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴수정</button></a>
-    	<a href="#"><button type="button" style="background: #efefef; width: 100px; height: 30px; float: bottom;">메뉴삭제</button></a>
+    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 93px; height: 30px; float: bottom;">메뉴등록</button></a>
+    	<button type="button" style="background: #efefef; width: 93px; height: 30px; float: bottom;" onclick="deletemenu();">메뉴삭제</button>
     </div>
    </form>    
 
