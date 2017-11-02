@@ -94,7 +94,10 @@ function deleteShop() {  //체크한 리스트 삭제
 	   }
 	      
 	}
-
+function article(shopNum) {
+	var url="${articleUrl}&shopNum="+shopNum;
+	location.href=url;
+}
 
 </script>
 
@@ -134,7 +137,7 @@ function deleteShop() {  //체크한 리스트 삭제
 											style="width: 20%; height: 70px; float: left;"> <span
 											class="subject"
 											onclick="javascript:article('${dto.shopNum}');"
-											style="float: left; font-size: 18px; font-weight: bold;">
+											style="float: left; font-size: 18px; font-weight: bold;" onclick="javascript:article('${dto.shopNum}');">
 											${dto.shopName} </span>
 										<div style="float: left; color: #8C8C8C; font-size: 13px;">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.created}
