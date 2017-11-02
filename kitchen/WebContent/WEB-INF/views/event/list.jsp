@@ -151,8 +151,6 @@ clear:left;
   </ul>
 </div>
 </div>
-<br><br>
-
 
 <table style="width: 700px; margin: 30px auto 0px; border-spacing: 0px;">
 <tr height="45">
