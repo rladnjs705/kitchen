@@ -198,7 +198,7 @@ function notHangul(obj) {
 <br><br>
 
 
-<table style="width: 700px; margin: 30px auto 0px; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto 0px; border-spacing: 0px;">
 <tr height="45">
 	<td align="left" class="title">
 		<h3><span>|</span> 이벤트 게시판</h3>
@@ -207,7 +207,7 @@ function notHangul(obj) {
 </table>
 
 <form name="eventForm" method="post">
-	<table style="width: 700px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+	<table style="width: 1000px; margin: 0px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 		<td width="100" bgcolor="#eeeeee" style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 		<td style="padding-left:10px;">
@@ -236,12 +236,12 @@ function notHangul(obj) {
 	<tr align="left" style="border-bottom: 1px solid #cccccc;">
 		<td width="100" bgcolor="#eeeeee" style="text-align: center; padding-top:5px;" valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 		<td valign="top" style="padding:5px 0px 5px 10px;">
-			<textarea name="eventContent" rows="12" class="boxTA" style="width:95%;">${dto.eventContent}</textarea>
+			<textarea name="eventContent" rows="12" class="boxTA" style="width:95%; height:400px">${dto.eventContent}</textarea>
 		</td>
 	</tr>
 	</table>
 	
-	<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+	<table style="width: 1000px; margin: 0px auto; border-spacing: 0px;">
 		<tr height="45">
 			<td align="center">
 				<button type="button" class="btn" onclick="sendEvent();">${mode=='update'?'수정완료':'등록하기'}</button>

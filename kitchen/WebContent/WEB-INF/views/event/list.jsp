@@ -152,7 +152,7 @@ clear:left;
 </div>
 </div>
 
-<table style="width: 700px; margin: 0px auto 0px; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto 0px; border-spacing: 0px;">
 <tr height="45">
 	<td align="left" class="title">
 		<h3><span>|</span> 이벤트 게시판</h3>
@@ -160,7 +160,7 @@ clear:left;
 </tr>
 </table>
 
-<table style="width: 700px; margin: 20px auto 0px; border-spacing: 0px;">
+<table style="width: 1000px; margin: 20px auto 0px; border-spacing: 0px;">
 	<tr height="35">
 		<td align="left" width="50%">
 			${dataCount}개(${page}/${total_page} 페이지)
@@ -171,7 +171,7 @@ clear:left;
 	</tr>
 </table>
 
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
 	<tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 		<th width="100" style="color: #787878;">이벤트 종료일</th>
 		<th width="60" style="color: #787878;">번호</th>
@@ -195,7 +195,7 @@ clear:left;
 </c:forEach>
 </table>
 
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px;">
 	<tr height="35">
 		<td align="center">
 			<c:if test="${dataCount==0 }">
@@ -208,7 +208,7 @@ clear:left;
 	</tr>
 </table>
 
-<table style="width: 700px; margin: 10px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 10px auto; border-spacing: 0px;">
 	<tr height="40">
 		<td align="left" width="100">
 			<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/event/list.do';">새로고침</button>
