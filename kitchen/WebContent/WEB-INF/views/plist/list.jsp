@@ -191,6 +191,8 @@ ul{
 list-style:none;
 }
 .menu{
+	background-color: #ffffff;
+	border: #ffffff;
 	width: 300px;
 }
 
@@ -269,7 +271,55 @@ function dateCheck(){
   		</tr>
 		
 		<tr>
-	<c:forEach var="dto" items="${list}">
+		<tr id="box1" align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #ffffff;">
+		      <td>2017-11-01</td>
+		      <td align="center" style=" padding-left: 10px;">
+		           <a href="<%=cp%>/menu/article.do?page=1&state=한식&shopNum=17">산더미</a>
+		      </td>
+		      <td>39000</td>
+		      <td> 
+					<ul >
+				        <li>
+				            <ul class="hide">
+				                <li>간장게장,갈비살,소갈비</li>
+				            </ul>
+				        </li>
+				    </ul>
+    		</td>
+	  	</tr>
+	  	<tr align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #cccccc;">
+		      <td>2017-10-29</td>
+		      <td align="center" style=" padding-left: 10px;">
+		           <a href="<%=cp%>/menu/article.do?page=1&state=중식&shopNum=13">홍짜장 쌍문점</a>
+		      </td>
+		      <td>8000</td>
+		      <td> 
+					<ul >
+				        <li>
+				            <ul class="hide">
+				                <li>짬뽕</li>
+				            </ul>
+				        </li>
+				    </ul>
+    		</td>
+	  	</tr>
+	  	<tr align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #cccccc;">
+		      <td>2017-10-20</td>
+		      <td align="center" style=" padding-left: 10px;">
+		           <a href="<%=cp%>/menu/article.do?page=1&state=피자&shopNum=19">59쌀피자</a>
+		      </td>
+		      <td>38700</td>
+		      <td> 
+					<ul >
+				        <li>
+				            <ul class="hide">
+				                <li>반미터 피자,씨푸드골드</li>
+				            </ul>
+				        </li>
+				    </ul>
+    		</td>
+	  	</tr>
+<%-- 	<c:forEach var="dto" items="${list}">
 		<tr id="box1" align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #cccccc;">
 		      <td>${dto.purchasedate}</td>
 		      <td align="center" style=" padding-left: 10px;">
@@ -281,19 +331,15 @@ function dateCheck(){
 				        <li class="menu">
 				            <a style="text-align: top;"><img src="" alt="메뉴"/></a>
 				            <ul class="hide">
-				                <li>메뉴1-1</li>
-				                <li>메뉴1-2</li>
-				                <li>메뉴1-3</li>
-				                <li>메뉴1-4</li>
-				                <li>메뉴1-5</li>
-				                <li>메뉴1-6</li>
+				                <li>간장게장</li>
+				                <li>갈비살</li>
+				                <li>소갈비</li>
 				            </ul>
 				        </li>
 				    </ul>
     		</td>
 	  	</tr>
-  	</c:forEach>
-  </tr>
+  	</c:forEach> --%>
 	</tbody>
 	
   

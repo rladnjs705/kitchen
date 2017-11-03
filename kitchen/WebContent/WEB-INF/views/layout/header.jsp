@@ -26,8 +26,6 @@
             <c:if test="${empty sessionScope.member}">
                 <a href="<%=cp%>/member/login.do">로그인</a>
                     &nbsp;&nbsp;&nbsp;
-                <a href="<%=cp%>/">주문내역조회</a>
-                &nbsp;&nbsp;&nbsp;
                 <a href="<%=cp%>/">회원가입</a>
                 &nbsp;&nbsp;&nbsp;
             	<a href="<%=cp%>/notice/list.do">고객센터</a><br>
