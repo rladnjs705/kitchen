@@ -14,33 +14,32 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
-
-	<!-- jQuery 라이브러리가 먼저 읽혀야함 -->
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 <script>
-	$(document).ready(function(){
-        //데이트피커 초기화
-         dateTypeIns();
-    }); // document ready function
-    
-	
-    
-    function dateTypeIns(){
-        $(".datetype").datepicker({
-        dateFormat : "yy-mm-dd",
-        changeYear: true,
-        changeMonth: true,
-        yearRange : 'c-80:c+10',
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-     }); 
-    }
+$(function() {
+  $( "#datepicker1" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    dayNames: ['일','월','화','수','목','금','토'],
+    dayNamesShort: ['일','월','화','수','목','금','토'],
+    dayNamesMin: ['일','월','화','수','목','금','토'],
+    showMonthAfterYear: true,
+    changeMonth: true,
+    changeYear: true,
+    yearSuffix: '년'
+  });
+});
 </script>
+    
 
 
 <style type="text/css">
@@ -185,9 +184,9 @@ function dateCheck(){
 				<div style="font-size: 20px; margin-left: 10px;">
 				&ensp;&ensp;&ensp;&ensp;&ensp;
 				<span style="font-size: 14px;">기간별 조회</span>
-				<input class="datetype" type="text" name="searchDateValue1"/>
+				<input id="datepicker1" type="text" name="searchDateValue1"/>
 				&ensp;~&ensp;<input type="hidden" name="userId" value="${userId}">
-				<input class="datetype" type="text" name="searchDateValue2" />
+				<input id="datepicker1" type="text" name="searchDateValue2" />
 				<input type="button" class="btn" onclick="dateCheck();" value="조회">
 				</div>
 			</td>
