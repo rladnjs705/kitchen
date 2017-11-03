@@ -62,7 +62,6 @@ public class ShopServlet extends MyServlet {
 			updateForm(req, resp);
 		} else if (uri.indexOf("update_ok.do") != -1) {
 			// 글 수정 완료
-			System.out.println("여기");
 			updateSubmit(req, resp, pathname);
 		} else if (uri.indexOf("deleteList.do") != -1) {
 			// 글 삭제
