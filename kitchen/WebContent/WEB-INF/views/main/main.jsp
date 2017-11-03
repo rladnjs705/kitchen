@@ -45,8 +45,8 @@ function result(){
 </head>
 <body onload="result();">
 <div class="main-header">
-	<img src="<%=cp%>/resource/images/main.jpg" width="550px" height="550px"
-	style="margin-left: auto; margin-right: auto; display: block;"/>
+	<a href="<%=cp%>/member/login.do"><img src="<%=cp%>/resource/images/main.jpg" width="550px" height="550px"
+	style="margin-left: auto; margin-right: auto; display: block;"/></a>
 </div><br>
 <div style="height: 200px; width: 100%;">
 <ul class="nav">

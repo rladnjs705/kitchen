@@ -54,6 +54,37 @@ $(function() {
 	    yearSuffix: '년'
 	  });
 	});
+	
+$(document).ready(function(){
+    $(".menu>a").click(function(){
+        var submenu = $(this).next("ul");
+
+        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if( submenu.is(":visible") ){
+            submenu.slideUp();
+        }else{
+            submenu.slideDown();
+        }
+    }).click(function(){
+        $(this).next("ul").slideDown();
+    });
+});
+
+$(document).ready(function(){
+	$('.menu a').click(function(){
+		//엘리먼트 p a에 접근,그리고 클릭시 이벤트 발생 
+		$('#box1').animate( {
+			'height':'200px',opacity:1
+			},1000);
+		
+		//발생하는이벤트.#box 아이디의 엘리먼트의 속성 
+		//가로가 500px 세로는 300px로 늘어나고 투명도는 0.4 
+		// 그리고 1초의속도로 애니메이션이전개된다.	
+			});
+	});
+
+
+
 </script>
     
 
@@ -156,6 +187,21 @@ clear:left;
    width: 60%;
    margin: auto;
 }
+ul{
+list-style:none;
+}
+.menu{
+	width: 300px;
+}
+
+
+.menu a{
+cursor:pointer;
+}
+
+.menu .hide{
+display:none;
+}
 
 input[type=text].datetype{padding:4px 2px 5px 25px; width:95px; border:1px solid #CACACA;
                  font-size:11px; color:#666;
@@ -219,16 +265,32 @@ function dateCheck(){
 	      <th width="300" style="color: #787878;">주문 날짜</th>
 	      <th width="300" style="color: #787878;">지점명(링크)</th>
 	      <th width="300" style="color: #787878;">지불금액</th>
+	      <th width="300" style="color: #787878;">구입메뉴 목록</th>
   		</tr>
 		
 		<tr>
 	<c:forEach var="dto" items="${list}">
-		<tr align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #cccccc;">
+		<tr id="box1" align="center" bgcolor="#ffffff" height="35" style="text-align: center; border-bottom: 1px solid #cccccc;">
 		      <td>${dto.purchasedate}</td>
 		      <td align="center" style=" padding-left: 10px;">
 		           <a href="<%=cp%>/menu/article.do?page=1&state=${dto.categoryname}&shopNum=${dto.shopnum}">${dto.shopname}</a>
 		      </td>
 		      <td>${dto.purchaseprice}</td>
+		      <td> 
+					<ul >
+				        <li class="menu">
+				            <a style="text-align: top;"><img src="" alt="메뉴"/></a>
+				            <ul class="hide">
+				                <li>메뉴1-1</li>
+				                <li>메뉴1-2</li>
+				                <li>메뉴1-3</li>
+				                <li>메뉴1-4</li>
+				                <li>메뉴1-5</li>
+				                <li>메뉴1-6</li>
+				            </ul>
+				        </li>
+				    </ul>
+    		</td>
 	  	</tr>
   	</c:forEach>
   </tr>
