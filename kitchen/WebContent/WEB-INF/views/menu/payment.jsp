@@ -191,13 +191,13 @@
        	<div style="float: left; border-left:1px solid #bcbcbc; height: 100px; padding-left: 5px; width: 520px;">
        		<div id="btn1" style="width: 520px; padding: 2px;">
        			<div>
-       				<h2><input id="payment-button" type="button" style="float: left; margin-top: 3px; background-color: white;" value="현금결제"></h2>
+       				<h2><input id="payment-button" type="button" style="float: left; margin-top: 3px; background-color: white; width: 150px; height: 90px; margin-left: 16px;" value="현금결제"></h2>
        			</div>
        			<div>
-       				<input id="payment-button" type="button" style="float: left; margin-top: 3px; margin-left: 16px; background-color: white;" value="카드결제">
+       				<input id="payment-button" type="button" style="float: left; margin-top: 3px; margin-left: 16px; background-color: white; width: 150px; height: 90px;" value="카드결제">
        			</div>
        			<div>
-       				<input id="payment-button" type="button" style="float: left; margin-top: 3px; margin-left: 16px; background-color: white;"  value="포인트결제">
+       				<input id="payment-button" type="button" style="float: left; margin-top: 3px; margin-left: 16px; background-color: white; width: 150px; height: 90px;"  value="포인트결제">
        			</div>
 			</div>
        	</div>

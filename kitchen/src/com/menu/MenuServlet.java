@@ -177,6 +177,7 @@ public class MenuServlet extends MyServlet{
 		req.setAttribute("mode", "update");
 		req.setAttribute("shopNum", shopNum);
 		req.setAttribute("page", page);
+		req.setAttribute("state", state);
 		req.setAttribute("sdto", sdto);
 		req.setAttribute("list", list);
 		req.setAttribute("dto", dto);
