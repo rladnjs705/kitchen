@@ -9,7 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shop.ShopDTO;
@@ -26,7 +28,10 @@ public class MenuServlet extends MyServlet{
 		
 		String uri=req.getRequestURI();
 	
-		String pathname="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
+		HttpSession session = req.getSession();
+		String root = session.getServletContext().getRealPath("/");
+		//String pathname="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
+		String pathname = root+"uploads"+File.separator+"fbbs";
 		File f=new File(pathname);
 
 		if(! f.exists()) {
@@ -52,6 +57,16 @@ public class MenuServlet extends MyServlet{
 	
 	private void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
+		
+		//로그인했는지 안했는지 확인
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		//관리자계정일 경우에만 공지리스트에서 글올리기 버튼을 보여준다.
+		if(info==null||!info.getUserId().equals("admin")) {
+		req.setAttribute("roll", "guest");
+		}
+					
 		String cp = req.getContextPath();
 		MenuDAO dao = new MenuDAO();
 		

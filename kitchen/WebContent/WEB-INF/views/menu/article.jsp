@@ -139,17 +139,18 @@ $(function(){ // 사이드바에서 메뉴 삭제 시 메뉴, 가격 삭제됨
 function send(){ // 메뉴 페이지에서 결제 페이지로 사이드바 정보 넘기기
 	var form = document.menunameForm;
     var selSize = form.menuname.length;
-    var menuname = new Array(selSize);
-    var menuprice = new Array(selSize);
-   
+	var menuname = new Array(selSize);
+	var menuprice = new Array(selSize);
+
     for (i = 0; i < selSize; i++){
-           var menuname = form.menuname[i].value;
-           var menuprice = form.menuprice[i].value;
+           menuname = form.menuname[i].value;
+           menuprice = form.menuprice[i].value;
           
-           menuname[i] = menuname;
-           menuprice[i] = menuprice;
+          menuname[i] = menuname;
+          menuprice[i] = menuprice;
 
     }
+
     form.menuname.value = menuname;
     form.menuprice.value = menuprice;
     form.action = "<%=cp%>/menu/payment.do";
@@ -168,7 +169,6 @@ function deletemenu() {
 	var a=0;
 	for(var i=0;i<chkMenu.length;i++){
 		if(chkMenu[i].checked==true){
-			a++;
 		}
 		
 	}
@@ -208,10 +208,14 @@ function article(shopNum) {
        	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;">
        	<div style="width: 500px;"><span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">
        	메뉴이름 : ${dto.menuname}<br><br>메뉴설명 : ${dto.menucontent}<br>가격 : ${dto.menuprice}</span>
+       	<c:if test="${roll!='guest'}">
        	<input type="checkbox" style="margin-left: 310px;" name="chkObject" value="${dto.menunum}">
+       	</c:if>
+       		<c:if test="${roll!='guest'}">
        		<button type="button" onclick="javascript:location.href='<%=cp%>/menu/update.do?page=${page}&state=${state}&shopNum=${dto.shopNum}';" style="background: #efefef; width: 93px; height: 30px;">
        		메뉴수정
        		</button>
+      		</c:if>
        	</div>
        </div>
 	</div>
@@ -261,8 +265,14 @@ function article(shopNum) {
 			
 			<!-- 주소지 -->
       		<div id="article-sidebar-foot" style="font-size: 11px;">${dto.shopAddr1}<br>${dto.shopAddr2}<br></div>
-    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}"><button type="button" style="background: #efefef; width: 93px; height: 30px; float: bottom;">메뉴등록</button></a>
+    	<a href="<%=cp%>/menu/created.do?page=${page}&state=${state}&shopNum=${shopNum}">
+    	<c:if test="${roll!='guest'}">
+    	<button type="button" style="background: #efefef; width: 93px; height: 30px; float: bottom;">메뉴등록</button>
+    	</c:if>
+    	</a>
+    	<c:if test="${roll!='guest'}">
     	<button type="button" style="background: #efefef; width: 93px; height: 30px; float: bottom;" onclick="deletemenu();">메뉴삭제</button>
+    	</c:if>
     </div>
    </form>    
 
