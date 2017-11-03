@@ -118,7 +118,7 @@ clear:left;
    <ul>
       <li><a href="<%=cp%>/notice/list.do" style="background: rgb(71,71,71);">공지사항 </a></li>
       <li><a href="#">문의하기</a></li>
-      <li><a href="#">질문과답변</a></li> 
+      <li><a href="#">자주묻는질문</a></li> 
       <li><a href="#" id="current">이벤트</a>
          <ul>
            <li><a href="#">진행중인이벤트</a></li> 
