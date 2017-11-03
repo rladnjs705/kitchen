@@ -28,8 +28,6 @@
                     &nbsp;&nbsp;&nbsp;
                 <a href="<%=cp%>/">주문내역조회</a>
                 &nbsp;&nbsp;&nbsp;
-                <a href="<%=cp%>/">장바구니</a>
-                &nbsp;&nbsp;&nbsp;
                 <a href="<%=cp%>/">회원가입</a>
                 &nbsp;&nbsp;&nbsp;
             	<a href="<%=cp%>/notice/list.do">고객센터</a><br>
@@ -40,8 +38,6 @@
                     <a href="<%=cp%>/member/logout.do">로그아웃</a>
                     &nbsp;&nbsp;&nbsp;
                     <a href="<%=cp%>/member/mypage.do">마이페이지</a>
-                	&nbsp;&nbsp;&nbsp;
-                    <a href="<%=cp%>/">장바구니</a>
                 	&nbsp;&nbsp;&nbsp;
             		<a href="<%=cp%>/notice/list.do">고객센터</a><br>
             </c:if>
