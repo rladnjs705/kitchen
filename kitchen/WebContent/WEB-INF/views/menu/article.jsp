@@ -177,6 +177,11 @@ function deletemenu() {
 
 }
 
+function article(shopNum) {
+	var url="${articleUrl}&shopNum="+shopNum;
+	location.href=url;
+}
+
 </script>
 </head>
  
@@ -203,7 +208,12 @@ function deletemenu() {
        	<div style="float: left; border-left:1px solid #bcbcbc; height: 90px; padding-left: 10px;">
        	<div style="width: 500px;"><span class="menuselect" style="cursor: pointer;" data-menuname="${dto.menuname}" data-menuprice="${dto.menuprice}">
        	메뉴이름 : ${dto.menuname}<br><br>메뉴설명 : ${dto.menucontent}<br>가격 : ${dto.menuprice}</span>
-       	<input type="checkbox" style="margin-left: 310px;" name="chkObject" value="${dto.menunum}"><button type="button" style="background: #efefef; width: 93px; height: 30px;">메뉴수정</button></div></div>
+       	<input type="checkbox" style="margin-left: 310px;" name="chkObject" value="${dto.menunum}">
+       		<button type="button" onclick="javascript:location.href='<%=cp%>/menu/update.do?page=${page}&state=${state}&shopNum=${dto.shopNum}';" style="background: #efefef; width: 93px; height: 30px;">
+       		메뉴수정
+       		</button>
+       	</div>
+       </div>
 	</div>
 </c:forEach>
 </form>      

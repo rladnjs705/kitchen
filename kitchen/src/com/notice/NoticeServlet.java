@@ -235,7 +235,6 @@ public class NoticeServlet extends MyServlet{
 		NoticeDAO dao = new NoticeDAO();
 		NoticeDTO dto = new NoticeDTO();
 		dto = dao.readNotice(num);
-		System.out.println("ºñ¹ø"+dto.getPwd());
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		dao.updateHit(num);
 		

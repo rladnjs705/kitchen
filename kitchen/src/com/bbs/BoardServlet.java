@@ -67,8 +67,38 @@ public class BoardServlet extends MyServlet{
 	protected void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String page = req.getParameter("page");
 		int num = Integer.parseInt(req.getParameter("num"));
+		String cp = req.getContextPath();
+		
 		BoardDAO dao = new BoardDAO();
 		BoardDTO dto = dao.readBoard(num);
+		
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		if(info==null) {
+			resp.setContentType("text/html;charset = utf-8");
+			PrintWriter out = resp.getWriter();
+			String s = "<script>alert('글보기 권한이 없습니다.');";
+			s+="history.back();</script>";
+			out.println(s);
+			return;
+		}
+		
+		if(!info.getUserId().equals(dto.getUserId())) {
+			System.out.println("로그인아이디 : "+info.getUserId());
+			System.out.println("부모값:"+dao.isParent(num));
+			if(info.getUserId().equals("admin")||dao.isParent(num).equals(info.getUserId())) {
+			}
+			else {
+				resp.setContentType("text/html;charset = utf-8");
+				PrintWriter out = resp.getWriter();
+				String s = "<script>alert('글보기 권한이 없습니다.');";
+				s+="history.back();</script>";
+				out.println(s);
+				return;
+			}
+		} 
+		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		dao.updateHitCount(num);
 		
@@ -172,11 +202,6 @@ public class BoardServlet extends MyServlet{
 			articleUrl+="&"+query;
 		}
 		
-///////////////////////////////////////////////
-		
-HttpSession session = req.getSession();
-SessionInfo info = (SessionInfo)session.getAttribute("member");
-//System.out.println("로그인"+info.getUserId());
 
 		String paging = util.paging(currentPage, totalPage, listUrl);
 		
@@ -369,7 +394,7 @@ SessionInfo info = (SessionInfo)session.getAttribute("member");
 		if(!b) {
 			resp.setContentType("text/html;charset = utf-8");
 			PrintWriter out = resp.getWriter();
-			String s = "<script>alertl('파일을 다운로드할 수 없습니다.');";
+			String s = "<script>alert('파일을 다운로드할 수 없습니다.');";
 			s+="history.back();</script>";
 			out.println(s);
 			

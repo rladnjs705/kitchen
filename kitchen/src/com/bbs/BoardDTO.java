@@ -2,7 +2,7 @@ package com.bbs;
 
 public class BoardDTO {
 	private int questionNum, groupNum, depth,orderNo,parent,hitCount,pwd,listNum;
-	private String userId, subject, content, created, tel, userName, viewId;
+	private String userId, subject, content, created, tel, userName, viewId, originalWriter;
 	private String saveFileName, originalFileName, questionType;
 	public int getQuestionNum() {
 		return questionNum;
@@ -111,6 +111,12 @@ public class BoardDTO {
 	}
 	public void setViewId(String viewId) {
 		this.viewId = viewId;
+	}
+	public String getOriginalWriter() {
+		return originalWriter;
+	}
+	public void setOriginalWriter(String originalWriter) {
+		this.originalWriter = originalWriter;
 	}
 	
 }

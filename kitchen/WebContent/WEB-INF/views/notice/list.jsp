@@ -44,8 +44,8 @@ function searchList() {
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li>
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -54,8 +54,14 @@ function searchList() {
 
 <!-- 게시판 리스트폼 넣을 곳 -->
 <div class="containerList">
-
-<table style="width: 700px; margin:auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 30px auto 0px; border-spacing: 0px;">
+<tr height="45">
+	<td align="left" class="title">
+		<h4><span>|</span> 공지사항</h4>
+	</td>
+</tr>
+</table>
+<table style="width: 1000px; margin:auto; border-spacing: 0px;">
    <tr height="35">
       <td align="left" width="50%">
           ${dataCount}개(${page}/${totalPage}페이지)
@@ -66,7 +72,7 @@ function searchList() {
    </tr>
 </table>
 
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
   <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
       <th width="60" style="color: #787878;">번호</th>
       <th style="color: #787878;">제목</th>
@@ -113,7 +119,7 @@ function searchList() {
 
 </table>
  
-<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto; border-spacing: 0px;">
    <tr height="35">
 	<td align="center">
         ${paging}
@@ -121,7 +127,7 @@ function searchList() {
    </tr>
 </table>
 
-<table style="width: 700px; margin: 10px auto; border-spacing: 0px;">
+<table style="width: 1000px; margin: 10px auto; border-spacing: 0px;">
    <tr height="40">
       <td align="left" width="100">
           <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/notice/list.do';">새로고침</button>
@@ -129,7 +135,6 @@ function searchList() {
       <td align="center">
           <form name="searchForm" action="" method="post">
             <select name="searchKey" class="selectField">
-            	<option value="userName">작성자</option>
                 <option value="subject">제목</option>
                 <option value="content">내용</option>
             </select>

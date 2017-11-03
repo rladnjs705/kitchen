@@ -44,7 +44,7 @@ public class MenuServlet extends MyServlet{
 		} else if(uri.indexOf("update.do") != -1) {
 			updateForm(req, resp);
 		} else if(uri.indexOf("update_ok.do") != -1) {
-			updateSubmit(req, resp);
+			updateSubmit(req, resp, pathname);
 		} else if(uri.indexOf("delete.do") != -1) {
 			deleteList(req, resp);
 		}
@@ -76,8 +76,27 @@ public class MenuServlet extends MyServlet{
 		forward(req, resp, "/WEB-INF/views/menu/article.jsp");
 		
 	}
+	private void payment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		String[] menuname = req.getParameterValues("menuname");
+		
+		String[] menuprice = req.getParameterValues("menuprice");
+		
+		List<MenuDTO> list=new ArrayList<>();
+		MenuDTO dto=new MenuDTO();
+		for (int i = 0; i < menuprice.length; i++) {
+			dto.setMenuname(menuname[i]);
+			dto.setMenuprice(Integer.parseInt(menuprice[i]));
+			list.add(dto);
+		}
+		
+		
+		
+		req.setAttribute("list", list);
+		forward(req, resp, "/WEB-INF/views/menu/payment.jsp");
+	}
 	
 	private void createdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("UTF-8");
 		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
 		String page = req.getParameter("page");
 		String state = req.getParameter("state");
@@ -91,6 +110,7 @@ public class MenuServlet extends MyServlet{
 	}
 	
 	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname) throws ServletException, IOException{
+		req.setCharacterEncoding("UTF-8");
 		MenuDAO dao = new MenuDAO();
 		String cp = req.getContextPath();
 		MenuDTO dto = new MenuDTO();
@@ -124,50 +144,56 @@ public class MenuServlet extends MyServlet{
 		
 	}
 	
-	private void payment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		String[] menuname = req.getParameterValues("menuname");
-		
-		String[] menuprice = req.getParameterValues("menuprice");
-		
-		List<MenuDTO> list=new ArrayList<>();
-		MenuDTO dto=new MenuDTO();
-		for (int i = 0; i < menuprice.length; i++) {
-			dto.setMenuname(menuname[i]);
-			dto.setMenuprice(Integer.parseInt(menuprice[i]));
-			list.add(dto);
-		}
-		
-		
-		
-		req.setAttribute("list", list);
-		forward(req, resp, "/WEB-INF/views/menu/payment.jsp");
-	}
 
 	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		req.setCharacterEncoding("UTF-8");
 		MenuDAO dao = new MenuDAO();
+		MenuDTO dto=new MenuDTO();
 		
-		int Menunum = Integer.parseInt(req.getParameter("menunum"));
-		List<MenuDTO> dto = dao.listMenu(Menunum);
 		
-		req.setAttribute("dto", dto);
+		
+		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
+		ShopDTO sdto = dao.readMenu(shopNum);
+		List<MenuDTO> list = dao.listMenu(shopNum);
+		
+		String page = req.getParameter("page");
+		String state = req.getParameter("state");
+		
 		req.setAttribute("mode", "update");
+		req.setAttribute("shopNum", shopNum);
+		req.setAttribute("page", page);
+		req.setAttribute("sdto", sdto);
+		req.setAttribute("list", list);
+		req.setAttribute("dto", dto);
 		
 		forward(req, resp, "/WEB-INF/views/menu/created.jsp");
 		
 	}
 	
-	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		MenuDAO dao = new MenuDAO();
 		String cp = req.getContextPath();
 		MenuDTO dto = new MenuDTO();
+		
+		String encType="utf-8";
+		int maxSize=5*1024*1024;
+		
+		MultipartRequest mreq=new MultipartRequest(req, pathname, maxSize, encType,new DefaultFileRenamePolicy());
 		
 		dto.setMenunum(Integer.parseInt(req.getParameter("menunum")));
 		dto.setMenuname(req.getParameter("menuname"));
 		dto.setMenucontent(req.getParameter("menucontent"));
 		
-		dao.updateMenu(dto);
+		int shopNum = Integer.parseInt(mreq.getParameter("shopNum"));
+		String page = mreq.getParameter("page");
+		String state = mreq.getParameter("state");
 		
+		req.setAttribute("shopNum", shopNum);
+		req.setAttribute("page", page);
+		req.setAttribute("state", state);
+		
+		dao.updateMenu(dto);
 		resp.sendRedirect(cp+"/main.do");
 	}
 	

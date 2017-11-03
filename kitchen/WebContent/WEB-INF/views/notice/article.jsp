@@ -72,8 +72,8 @@ function updateNotice() {
       <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li> 
       <li><a href="<%=cp%>/event/list.do" id="current">이벤트</a>
          <ul>
-           <li><a href="#">진행중인이벤트</a></li> 
-           <li><a href="#">지난이벤트</a></li>
+           <li><a href="<%=cp%>/event/list.do?state=y">진행중인이벤트</a></li> 
+           <li><a href="<%=cp%>/event/list.do?state=n">지난이벤트</a></li>
          </ul>
       </li>
   </ul>
@@ -81,7 +81,7 @@ function updateNotice() {
 </div>
 
 <div class="containerList">
-<table style="width: 700px; margin:auto; border-spacing: 0px;">
+<table style="width: 1000px; margin:auto; border-spacing: 0px;">
 <tr height="40"> 
 	<td align="left" class="title">
 		<h3><span>|</span> 게시판</h3>
@@ -89,7 +89,7 @@ function updateNotice() {
 </tr>
 </table>
 
-<table style="width: 700px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+<table style="width: 1000px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 <tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
     <td colspan="2" align="center">
 	   ${dto.subject}
@@ -141,7 +141,7 @@ function updateNotice() {
 </tr>
 </table>
 
-<table style="width: 700px; margin: 0px auto 20px; border-spacing: 0px;">
+<table style="width: 1000px; margin: 0px auto 20px; border-spacing: 0px;">
 <tr height="45">
 <c:if test="${roll!='guest'}">
     <td width="300" align="left">

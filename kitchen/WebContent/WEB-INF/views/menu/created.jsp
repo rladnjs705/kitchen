@@ -68,9 +68,7 @@
   			return;
   		}
   	  }
-    //  var page = "${page}";
-     // var state = "${state}";
-     // var shopNum = "${shopNum}";
+
   	  if(mode=="created")
   		f.action="<%=cp%>/menu/created_ok.do";
   	  else if(mode=="update")
@@ -169,14 +167,20 @@
 											등록 <span class="glyphicon glyphicon-ok"></span>
 										</button>
 										<button type="button" class="btn btn-danger"
-											onclick="javascript:location.href='<%=cp%>/menu/menulist.do';">
+											onclick="javascript:location.href='<%=cp%>/shop/shopmenu.do';">
 											취소</button> 
 										<c:if test="${mode=='update'}">
-											<input type="hidden" name="menunum" value="${dto.menunum}">
-											<input type="hidden" name="userId" value="${dto.userId}">
-											<input type="hidden" name="imageFilename"
-												value="${dto.savefileame}">
+											<input type="hidden" name="state" value="${dto.state}">
 											<input type="hidden" name="page" value="${page}">
+											<input type="hidden" name="shopNum" value="${dto.shopNum}">
+											<input type="hidden" name="menunum" value="${dto.menunum}">
+											<input type="hidden" name="menuname" value="${dto.menuname}">
+											<input type="hidden" name="menucontent" value="${dto.menucontent}">
+											<input type="hidden" name="menuprice" value="${dto.menuprice}">
+											<input type="hidden" name="shopNum" value="${dto.shopNum}">
+											<input type="hidden" name="imageFilename" value="${dto.savefilename}">
+											<input type="hidden" name="page" value="${page}">
+											<input type="hidden" name="state" value="${dto.state}">
 										</c:if>
 										
 									</td>

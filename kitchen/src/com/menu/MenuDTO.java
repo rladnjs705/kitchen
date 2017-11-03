@@ -1,16 +1,16 @@
 package com.menu;
 
 public class MenuDTO {
-	int menunum, menuprice, shopnum;
-	public int getShopnum() {
-		return shopnum;
-	}
-	public void setShopnum(int shopnum) {
-		this.shopnum = shopnum;
-	}
+	int menunum, menuprice, shopNum;
+	
 	String menuname, menucontent, savefilename, originalfilename;
 	
-
+	public int getShopNum() {
+		return shopNum;
+	}
+	public void setShopnum(int shopNum) {
+		this.shopNum = shopNum;
+	}
 	public int getMenunum() {
 		return menunum;
 	}

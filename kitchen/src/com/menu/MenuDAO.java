@@ -18,7 +18,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		String sql;
 		
-		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename, shopnum) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO shopmenu(menunum, menuname, menuprice, menucontent, savefilename, shopNum) VALUES(shopmenu_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 
 		try {
 			conn = DBConn.getConnection();
@@ -28,7 +28,7 @@ public class MenuDAO {
 			pstmt.setInt(2, dto.getMenuprice());
 			pstmt.setString(3, dto.getMenucontent());
 			pstmt.setString(4, dto.getSavefilename());
-			pstmt.setInt(5, dto.getShopnum());
+			pstmt.setInt(5, dto.getShopNum());
 			result = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class MenuDAO {
 		String sql;
 		
 		try {
-			sql = "SELECT s.shopnum, m.menuname, m.menunum,m.menucontent, m.menuprice, m.savefilename FROM shopmenu m JOIN shop s ON m.shopnum=s.shopNum WHERE m.shopNum=?";
+			sql = "SELECT s.shopnum, m.menuname, m.menunum, m.menucontent, m.menuprice, m.savefilename FROM shopmenu m JOIN shop s ON m.shopnum=s.shopNum WHERE m.shopNum=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, shopNum);
@@ -55,6 +55,7 @@ public class MenuDAO {
 			while(rs.next()) {
 				MenuDTO dto = new MenuDTO();
 				
+				dto.setShopnum(rs.getInt("shopNum"));
 				dto.setMenuname(rs.getString("menuname"));
 				dto.setMenunum(rs.getInt("menunum"));
 				dto.setMenucontent(rs.getString("menucontent"));
@@ -100,6 +101,36 @@ public class MenuDAO {
 				dto.setLatitude(rs.getString("latitude"));
 				dto.setLongitude(rs.getString("longitude"));
 				dto.setSaveFilename(rs.getString("saveFilename"));
+			}
+				rs.close();
+				pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+	
+	public MenuDTO readMenu2(int menunum) {
+		MenuDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		sql="SELECT shopNum, menunum, menuname, menuprice, menucontent, savefilename FROM shopmenu WHERE menuNum=?";
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, menunum);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new MenuDTO();
+				dto.setShopnum(rs.getInt("shopNum"));
+				dto.setMenunum(rs.getInt("manunum"));
+				dto.setMenuname(rs.getString("menuname"));
+				dto.setMenuprice(rs.getInt("menuprice"));
+				dto.setMenucontent(rs.getString("menucontent"));
+				dto.setSavefilename(rs.getString("savefilename"));
 			}
 				rs.close();
 				pstmt.close();
@@ -161,7 +192,7 @@ public class MenuDAO {
 		PreparedStatement pstmt = null;
 		String sql;
 		
-		sql = "UPDATE shopmenu SET menuname=?, menucontent=?, menuprice=?, savefilename=? WHERE menunum=? AND shopnum=?";
+		sql = "UPDATE shopmenu SET menuname=?, menucontent=?, menuprice=?, savefilename=? WHERE menunum=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -170,9 +201,10 @@ public class MenuDAO {
 			pstmt.setInt(3, dto.getMenuprice());
 			pstmt.setString(4, dto.getSavefilename());
 			pstmt.setInt(5, dto.getMenunum());
-			pstmt.setInt(6, dto.getShopnum());
+			pstmt.setInt(6, dto.getShopNum());
 			
 			result = pstmt.executeUpdate();
+			pstmt.close();
 			
 		} catch (Exception e) {
 			System.out.println(e.toString());

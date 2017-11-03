@@ -155,8 +155,8 @@ public class BoardDAO {
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("         SELECT questionNum, q.userId, userName,");
 			sb.append("               subject, content, groupNum, orderNo, depth, hitCount,");
-			sb.append("				  tel, saveFileName, originalFileName, created, questionType");
-			//sb.append("               TO_CHAR(created, 'YYYY-MM-DD') created");
+			sb.append("				  tel, saveFileName, originalFileName, questionType,");
+			sb.append("               TO_CHAR(created, 'YYYY-MM-DD') created");
 			sb.append("               FROM question q");
 			sb.append("               JOIN member m ON q.userId=m.userId");
 			sb.append("               ORDER BY groupNum DESC, orderNo ASC ");
@@ -226,8 +226,8 @@ public class BoardDAO {
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("         SELECT questionNum, q.userId, userName,");
 			sb.append("               subject, content, groupNum, orderNo, depth, hitCount,");
-			sb.append("				  tel, saveFileName, originalFileName, created, questionType");
-			//sb.append("               TO_CHAR(created, 'YYYY-MM-DD') created");
+			sb.append("				  tel, saveFileName, originalFileName, questionType,");
+			sb.append("               TO_CHAR(created, 'YYYY-MM-DD') created");
 			sb.append("               FROM question q");
 			sb.append("               JOIN member m ON q.userId=m.userId");
 			if(searchKey.equals("created")) {
@@ -506,6 +506,40 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public String isParent(int questionNum) {
+		String originalWriter = null;
+		int parent = 0;
+		String userId=null;
+		
+		try {
+			sql = "SELECT userId,parent FROM question WHERE questionNum=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, questionNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				parent = rs.getInt("parent");
+				userId = rs.getString("userId");
+			}
+			pstmt = null;
+			rs = null;
+			
+			sql = "SELECT userId FROM question WHERE groupNum=? AND depth=0";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, parent);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				originalWriter = rs.getString("userId");
+				
+			if(originalWriter==null)
+				originalWriter = userId;
+			pstmt.close();
+			rs.close();
+		} catch (Exception e) {
+		}
+		return originalWriter;
 	}
 }
 
