@@ -38,7 +38,8 @@ public class ShopServlet extends MyServlet {
 			return;
 		}
 		
-		String pathname = "C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images";
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"uploads"+File.separator+"shop";
 		File f = new File(pathname);
 
 		if (!f.exists()) {
@@ -77,20 +78,20 @@ public class ShopServlet extends MyServlet {
 
 	private void createdSubmit(HttpServletRequest req, HttpServletResponse resp, String pathname)
 			throws ServletException, IOException {
-		System.out.println("3333333333333");
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if (info == null) {
+			forward(req, resp, "/WEB-INF/views/member/login.jsp");
+			return;
+		}
 		ShopDAO dao = new ShopDAO();
 		String cp = req.getContextPath();
 		ShopDTO dto = new ShopDTO();
-		HttpSession session = req.getSession();
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
 		String encType = "utf-8";
 		int maxSize = 5 * 1024 * 1024;
 		MultipartRequest mreq = new MultipartRequest(req, pathname, maxSize, encType, new DefaultFileRenamePolicy());
 
-
-		dto.setUserId(info.getUserId());
-		
 		dto.setShopName(mreq.getParameter("shopName"));
 		dto.setContent(mreq.getParameter("content"));
 		dto.setShopZip1(mreq.getParameter("shopZip1"));
@@ -110,7 +111,6 @@ public class ShopServlet extends MyServlet {
 			String saveFilename = mreq.getFilesystemName("upload");
 			dto.setSaveFilename(saveFilename);
 		}
-		System.out.println("2222222222");
 		dao.insertShop(dto);
 		resp.sendRedirect(cp + "/shop/shopmenu.do");
 
@@ -192,9 +192,7 @@ public class ShopServlet extends MyServlet {
 	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ShopDAO dao = new ShopDAO();
 		String cp = req.getContextPath();
-		
-		
-		
+
 		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
 		String page = req.getParameter("page");
 
@@ -222,7 +220,7 @@ public class ShopServlet extends MyServlet {
 		String encType = "utf-8";
 		int maxFilesize = 20 * 1024 * 1024;
 		MultipartRequest mreq = null;
-		System.out.println("¿©±â123");
+		
 		mreq = new MultipartRequest(req, pathname, maxFilesize, encType, new DefaultFileRenamePolicy());
 
 		dto.setShopNum(Integer.parseInt(mreq.getParameter("shopNum")));

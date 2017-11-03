@@ -47,6 +47,7 @@
     	  f.shopPrice.focus();
     	  return false;
       }
+      
       str = f.shopTime.value;
       if(!str){
     	  alert('배달 최소시간을 입력하세요 !!!');
@@ -365,7 +366,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close" onclick="check();">
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="imageViewModalLabel"

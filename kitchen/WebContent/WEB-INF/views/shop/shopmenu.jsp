@@ -211,7 +211,7 @@ function article(shopNum) {
 							<div class="col-sm-6">
 								<div class="imgLayout">
 									<div style="white-space: nowrap; overflow: auto;" class="inner">
-										<img src="C:\\web\\work\\kitchen\\kitchen\\WebContent\\resource\\images\\${dto.saveFilename}"
+										<img src="<%=cp%>/resource/images/${dto.saveFilename}"										
 											style="width: 20%; height: 70px; float: left;"> <span
 											class="subject"
 											onclick="javascript:article('${dto.shopNum}');"
